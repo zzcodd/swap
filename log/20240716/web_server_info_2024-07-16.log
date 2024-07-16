@@ -1,0 +1,24 @@
+[I 07/16/24 10:27:25.843 30489 30489 main.cc 79] web_server version ba9b014
+[I 07/16/24 10:27:25.843 30489 30489 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/16/24 10:27:25.843 30489 30489 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/16/24 10:27:25.843 30489 30489 base_db.cc 52] Host: localhost
+[I 07/16/24 10:27:25.843 30489 30489 base_db.cc 53] Port: 3306
+[I 07/16/24 10:27:25.843 30489 30489 base_db.cc 54] Username: root
+[I 07/16/24 10:27:25.843 30489 30489 base_db.cc 55] Password: zy1029343447
+[I 07/16/24 10:27:25.843 30489 30489 base_db.cc 56] Database Name: web_server_info
+[I 07/16/24 10:27:25.846 30489 30489 base_db.cc 62] Connect user root connect state 0
+
+[I 07/16/24 10:54:52.342 14870 14870 main.cc 79] web_server version ba9b014
+[I 07/16/24 10:54:52.342 14870 14870 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/16/24 16:00:05.852 10949 10949 main.cc 79] web_server version ba9b014
+[I 07/16/24 16:00:05.852 10949 10949 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/16/24 16:00:05.852 10949 10949 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/16/24 16:00:05.852 10949 10949 base_db.cc 52] Host: localhost
+[I 07/16/24 16:00:05.852 10949 10949 base_db.cc 53] Port: 3306
+[I 07/16/24 16:00:05.852 10949 10949 base_db.cc 54] Username: root
+[I 07/16/24 16:00:05.852 10949 10949 base_db.cc 55] Password: zy1029343447
+[I 07/16/24 16:00:05.852 10949 10949 base_db.cc 56] Database Name: web_server_info
+[I 07/16/24 16:00:05.855 10949 10949 base_db.cc 62] Connect user root connect state 0
+
+[I 07/16/24 16:05:25.307 8844 8844 main.cc 79] web_server version ba9b014
+[I 07/16/24 16:05:25.307 8844 8844 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024

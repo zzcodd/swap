@@ -1,0 +1,12 @@
+{
+  "app_name": "remote_control",
+  "listen_port": 41007,
+  "method_name": "GET",
+  "app_path": "/apiserver/cmd",
+  "mysql_host": "127.0.0.1",
+  "mysql_port": 3306,
+  "mysql_username": "ipu",
+  "mysql_password": "345e163033cba3c9a9343357e9be0bb0",
+  "mysql_db_name": "remote_control",
+  "log_path": "./log/"
+}

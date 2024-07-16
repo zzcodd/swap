@@ -1,0 +1,14 @@
+{
+  "app_name": "subway",
+  "listen_port": 8081,
+  "method_name": "POST",
+  "app_path": "/apiserver/cmd",
+  "record_path": "/media/cidi/data/record/",
+  "log_path": "./log/",
+
+  "mysql_host": "localhost",
+  "mysql_port": 3306,
+  "mysql_username": "root",
+  "mysql_password": "0d491c76a252976c955c1374a33ef910",      
+  "mysql_db_name": "web_server_info"
+}

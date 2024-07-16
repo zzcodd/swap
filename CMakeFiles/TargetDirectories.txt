@@ -1,0 +1,3 @@
+/home/cidi/vscodeWorkspace/ipu_wbserver/ipu_web_server/CMakeFiles/subway_app.dir
+/home/cidi/vscodeWorkspace/ipu_wbserver/ipu_web_server/CMakeFiles/edit_cache.dir
+/home/cidi/vscodeWorkspace/ipu_wbserver/ipu_web_server/CMakeFiles/rebuild_cache.dir

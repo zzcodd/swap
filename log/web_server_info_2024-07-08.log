@@ -1,0 +1,11 @@
+[I 07/08/24 17:27:15.190 14688 14688 main.cc 79] web_server version b30e9d6
+[I 07/08/24 17:27:15.190 14688 14688 main.cc 80] web_server date Mon Jul  8 17:10:11 CST 2024
+[I 07/08/24 17:28:24.727 14688 14692 request_handler.cc 15] ---------incoming-------------
+[I 07/08/24 17:28:24.727 14688 14692 request_handler.cc 17] key cmd_type value login
+[I 07/08/24 17:28:24.727 14688 14692 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/08/24 17:28:24.727 14688 14692 request_handler.cc 17] key username value cidi
+[I 07/08/24 17:28:24.727 14688 14692 subway_app.cc 186] Login enter
+
+[I 07/08/24 17:28:24.727 14688 14692 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+

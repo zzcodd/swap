@@ -1,0 +1,258 @@
+[I 07/09/24 08:27:37.636 12888 12888 main.cc 79] web_server version b30e9d6
+[I 07/09/24 08:27:37.636 12888 12888 main.cc 80] web_server date Mon Jul  8 17:10:11 CST 2024
+[I 07/09/24 08:43:09.402 12888 12892 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 08:43:09.402 12888 12892 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 08:43:09.402 12888 12892 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 08:43:09.402 12888 12892 request_handler.cc 17] key username value cidi
+[I 07/09/24 08:43:09.573 12888 12892 request_handler.cc 34] ----------Rely------------
+send ok
+[I 07/09/24 08:43:31.674 19183 19183 main.cc 79] web_server version b30e9d6
+[I 07/09/24 08:43:31.674 19183 19183 main.cc 80] web_server date Mon Jul  8 17:10:11 CST 2024
+[I 07/09/24 08:43:53.643 19183 19187 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 08:43:53.643 19183 19187 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 08:43:53.643 19183 19187 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 08:43:53.643 19183 19187 request_handler.cc 17] key username value cidi
+[I 07/09/24 08:43:53.799 19183 19187 request_handler.cc 34] ----------Rely------------
+send ok
+[I 07/09/24 08:44:12.602 19183 19187 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 08:44:12.602 19183 19187 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 08:44:12.602 19183 19187 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 08:44:12.602 19183 19187 request_handler.cc 17] key username value cidi
+[I 07/09/24 08:44:12.761 19183 19187 request_handler.cc 34] ----------Rely------------
+send ok
+[I 07/09/24 08:45:42.976 23731 23731 main.cc 79] web_server version b30e9d6
+[I 07/09/24 08:45:42.976 23731 23731 main.cc 80] web_server date Mon Jul  8 17:10:11 CST 2024
+[I 07/09/24 08:45:46.707 23731 23735 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 08:45:46.707 23731 23735 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 08:45:46.707 23731 23735 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 08:45:46.707 23731 23735 request_handler.cc 17] key username value cidi
+[I 07/09/24 08:45:46.864 23731 23735 request_handler.cc 34] ----------Rely------------
+send ok
+[I 07/09/24 08:46:17.707 23842 23842 main.cc 79] web_server version b30e9d6
+[I 07/09/24 08:46:17.707 23842 23842 main.cc 80] web_server date Mon Jul  8 17:10:11 CST 2024
+[I 07/09/24 08:46:20.186 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 08:46:20.187 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 08:46:20.187 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 08:46:20.187 23842 23846 request_handler.cc 17] key username value cidi
+[I 07/09/24 08:46:20.187 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 08:46:20.187 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 08:48:41.229 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 08:48:41.229 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 08:48:41.229 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 08:48:41.229 23842 23846 request_handler.cc 17] key username value cidi
+[I 07/09/24 08:48:41.229 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 08:48:41.229 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 08:49:23.645 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 08:49:23.645 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 08:49:23.645 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 08:49:23.645 23842 23846 request_handler.cc 17] key username value cidi
+[I 07/09/24 08:49:23.645 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 08:49:23.645 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 09:02:09.282 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 09:02:09.282 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 09:02:09.282 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 09:02:09.282 23842 23846 request_handler.cc 17] key username value cidi
+[I 07/09/24 09:02:09.282 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 09:02:09.282 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 09:05:06.860 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 09:05:06.860 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 09:05:06.860 23842 23846 request_handler.cc 17] key password value 123
+[I 07/09/24 09:05:06.860 23842 23846 request_handler.cc 17] key username value cidi
+[I 07/09/24 09:05:06.860 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":1,"result_msg":"失败"}
+
+[I 07/09/24 09:06:44.301 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 09:06:44.301 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 09:06:44.301 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 09:06:44.301 23842 23846 request_handler.cc 17] key username value admin
+[I 07/09/24 09:06:44.301 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 09:06:44.301 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 09:07:49.198 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 09:07:49.198 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 09:07:49.198 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 09:07:49.198 23842 23846 request_handler.cc 17] key username value admin
+[I 07/09/24 09:07:49.198 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 09:07:49.198 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 09:10:08.972 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 09:10:08.972 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 09:10:08.972 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 09:10:08.972 23842 23846 request_handler.cc 17] key username value admin
+[I 07/09/24 09:10:08.972 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 09:10:08.973 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 10:19:01.862 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 10:19:01.862 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 10:19:01.862 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 10:19:01.862 23842 23846 request_handler.cc 17] key username value admin
+[I 07/09/24 10:19:01.862 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 10:19:01.862 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 10:19:14.677 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 10:19:14.677 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 10:19:14.677 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 10:19:14.677 23842 23846 request_handler.cc 17] key username value admin
+[I 07/09/24 10:19:14.677 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 10:19:14.677 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 10:19:35.237 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 10:19:35.237 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 10:19:35.237 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 10:19:35.237 23842 23846 request_handler.cc 17] key username value admin
+[I 07/09/24 10:19:35.237 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 10:19:35.237 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 10:19:47.718 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 10:19:47.718 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 10:19:47.718 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 10:19:47.718 23842 23846 request_handler.cc 17] key username value admin
+[I 07/09/24 10:19:47.718 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 10:19:47.718 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 10:22:29.918 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 10:22:29.918 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 10:22:29.918 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 10:22:29.918 23842 23846 request_handler.cc 17] key username value admin
+[I 07/09/24 10:22:29.918 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 10:22:29.918 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 10:22:55.757 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 10:22:55.757 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 10:22:55.757 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 10:22:55.757 23842 23846 request_handler.cc 17] key username value admin
+[I 07/09/24 10:22:55.757 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 10:22:55.757 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 10:36:50.702 23842 23846 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 10:36:50.702 23842 23846 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 10:36:50.702 23842 23846 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 10:36:50.702 23842 23846 request_handler.cc 17] key username value admin
+[I 07/09/24 10:36:50.702 23842 23846 subway_app.cc 186] Login enter
+
+[I 07/09/24 10:36:50.702 23842 23846 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 10:51:50.464 32491 32491 main.cc 79] web_server version b30e9d6
+[I 07/09/24 10:51:50.464 32491 32491 main.cc 80] web_server date Mon Jul  8 17:10:11 CST 2024
+[I 07/09/24 10:52:00.637 32491 32495 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 10:52:00.637 32491 32495 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 10:52:00.637 32491 32495 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 10:52:00.637 32491 32495 request_handler.cc 17] key username value admin
+[I 07/09/24 10:52:00.637 32491 32495 subway_app.cc 186] Login enter
+
+[I 07/09/24 10:52:00.637 32491 32495 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 14:02:20.942 27171 27171 main.cc 79] web_server version b30e9d6
+[I 07/09/24 14:02:20.942 27171 27171 main.cc 80] web_server date Tue Jul  9 13:58:59 CST 2024
+[I 07/09/24 15:56:18.320 20363 20363 main.cc 79] web_server version b30e9d6
+[I 07/09/24 15:56:18.320 20363 20363 main.cc 80] web_server date Tue Jul  9 13:58:59 CST 2024
+[I 07/09/24 15:59:42.914 16412 16412 main.cc 79] web_server version ba9b014
+[I 07/09/24 15:59:42.914 16412 16412 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/09/24 16:00:16.442 16412 18517 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 16:00:16.442 16412 18517 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 16:00:16.442 16412 18517 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 16:00:16.442 16412 18517 request_handler.cc 17] key username value cidi
+[I 07/09/24 16:00:16.442 16412 18517 subway_app.cc 186] Login enter
+
+[I 07/09/24 16:00:16.442 16412 18517 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 16:06:31.716 16412 18517 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 16:06:31.716 16412 18517 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 16:06:31.716 16412 18517 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 16:06:31.716 16412 18517 request_handler.cc 17] key username value cidi
+[I 07/09/24 16:06:31.716 16412 18517 subway_app.cc 186] Login enter
+
+[I 07/09/24 16:06:31.716 16412 18517 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/09/24 16:07:03.240 6740 6740 main.cc 79] web_server version ba9b014
+[I 07/09/24 16:07:03.240 6740 6740 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/09/24 16:07:11.341 6740 8710 request_handler.cc 15] ---------incoming-------------
+[I 07/09/24 16:07:11.341 6740 8710 request_handler.cc 17] key cmd_type value login
+[I 07/09/24 16:07:11.341 6740 8710 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/09/24 16:07:11.341 6740 8710 request_handler.cc 17] key username value cidi
+[I 07/09/24 16:07:11.341 6740 8710 subway_app.cc 186] Login enter
+
+[I 07/09/24 16:07:11.341 6740 8710 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功!"}
+
+[I 07/09/24 16:08:29.028 8220 8220 main.cc 79] web_server version ba9b014
+[I 07/09/24 16:08:29.029 8220 8220 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/09/24 16:08:29.029 8220 8220 base_db.cc 49] Attempting to connect to MySQL databases:
+[I 07/09/24 16:08:29.029 8220 8220 base_db.cc 50] Host: localhost
+[I 07/09/24 16:08:29.029 8220 8220 base_db.cc 51] Port: 3306
+[I 07/09/24 16:08:29.029 8220 8220 base_db.cc 52] Username: root
+[I 07/09/24 16:08:29.029 8220 8220 base_db.cc 53] Database Name: web_server_info
+[I 07/09/24 16:08:29.037 8220 8220 base_db.cc 60] Connect user root connect state -1
+
+[I 07/09/24 16:10:14.700 20859 20859 main.cc 79] web_server version ba9b014
+[I 07/09/24 16:10:14.700 20859 20859 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/09/24 16:10:14.700 20859 20859 base_db.cc 49] Attempting to connect to MySQL databases:
+[I 07/09/24 16:10:14.700 20859 20859 base_db.cc 50] Host: localhost
+[I 07/09/24 16:10:14.700 20859 20859 base_db.cc 51] Port: 3306
+[I 07/09/24 16:10:14.700 20859 20859 base_db.cc 52] Username: root
+[I 07/09/24 16:10:14.700 20859 20859 base_db.cc 53] Database Name: web_server_info
+[I 07/09/24 16:10:14.703 20859 20859 base_db.cc 60] Connect user root connect state -1
+
+[I 07/09/24 16:11:49.093 425 425 main.cc 79] web_server version ba9b014
+[I 07/09/24 16:11:49.093 425 425 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/09/24 16:11:49.093 425 425 base_db.cc 49] Attempting to connect to MySQL databases:
+[I 07/09/24 16:11:49.093 425 425 base_db.cc 50] Host: 127.0.0.1
+[I 07/09/24 16:11:49.093 425 425 base_db.cc 51] Port: 3306
+[I 07/09/24 16:11:49.093 425 425 base_db.cc 52] Username: root
+[I 07/09/24 16:11:49.093 425 425 base_db.cc 53] Database Name: web_server_info
+[I 07/09/24 16:11:49.096 425 425 base_db.cc 60] Connect user root connect state -1
+
+[I 07/09/24 16:15:03.715 19731 19731 main.cc 79] web_server version ba9b014
+[I 07/09/24 16:15:03.715 19731 19731 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/09/24 16:15:03.715 19731 19731 base_db.cc 50] Attempting to connect to MySQL databases:
+[I 07/09/24 16:15:03.715 19731 19731 base_db.cc 51] Host: 127.0.0.1
+[I 07/09/24 16:15:03.715 19731 19731 base_db.cc 52] Port: 3306
+[I 07/09/24 16:15:03.715 19731 19731 base_db.cc 53] Username: root
+[I 07/09/24 16:15:03.715 19731 19731 base_db.cc 54] Password: 12341234
+[I 07/09/24 16:15:03.715 19731 19731 base_db.cc 55] Database Name: web_server_info
+[I 07/09/24 16:15:03.719 19731 19731 base_db.cc 61] Connect user root connect state -1
+
+[I 07/09/24 16:25:13.906 12252 12252 main.cc 79] web_server version ba9b014
+[I 07/09/24 16:25:13.906 12252 12252 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/09/24 16:25:13.907 12252 12252 base_db.cc 50] Attempting to connect to MySQL databases:
+[I 07/09/24 16:25:13.907 12252 12252 base_db.cc 51] Host: localhost
+[I 07/09/24 16:25:13.907 12252 12252 base_db.cc 52] Port: 3306
+[I 07/09/24 16:25:13.907 12252 12252 base_db.cc 53] Username: root
+[I 07/09/24 16:25:13.907 12252 12252 base_db.cc 54] Password: zy1029343447
+[I 07/09/24 16:25:13.907 12252 12252 base_db.cc 55] Database Name: web_server_info
+[I 07/09/24 16:25:13.911 12252 12252 base_db.cc 61] Connect user root connect state 0
+

@@ -1,0 +1,3 @@
+curl 'http://127.0.0.1:8081/apiserver/cmd?cmd_type=query_copy_progress&username=cidi&password=c4ca4238a0b923820dcc509a6f75849b&date=20210120|20210121'
+
+curl 'http://127.0.0.1:8081/apiserver/cmd?cmd_type=date_copy&username=cidi&password=c4ca4238a0b923820dcc509a6f75849b&date=20210120|20210121'

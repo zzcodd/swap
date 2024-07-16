@@ -1,0 +1,903 @@
+[I 07/11/24 08:21:26.054 28299 28299 main.cc 79] web_server version ba9b014
+[I 07/11/24 08:21:26.054 28299 28299 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 08:21:26.054 28299 28299 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 08:21:26.054 28299 28299 base_db.cc 52] Host: localhost
+[I 07/11/24 08:21:26.054 28299 28299 base_db.cc 53] Port: 3306
+[I 07/11/24 08:21:26.054 28299 28299 base_db.cc 54] Username: root
+[I 07/11/24 08:21:26.054 28299 28299 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 08:21:26.054 28299 28299 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 08:21:26.060 28299 28299 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 08:21:59.190 28299 30465 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 08:21:59.190 28299 30465 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 08:21:59.190 28299 30465 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 08:21:59.190 28299 30465 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 08:21:59.190 28299 30465 request_handler.cc 17] key username value cidi
+[I 07/11/24 08:21:59.190 28299 30465 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 08:21:59.190 28299 30465 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/11/24 08:21:59.190 28299 30465 subway_app.cc 246] Login enter 
+
+[I 07/11/24 08:21:59.190 28299 30465 svm_db.cc 34] Login success.
+
+[I 07/11/24 08:21:59.194 28299 30465 subway_app.cc 297] Login successful for user: cidi
+
+[I 07/11/24 08:21:59.194 28299 30465 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"cidi","session_id":"ihj2nA3Hf4r0O0OU","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/11/24 08:22:26.117 28299 30465 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 08:22:26.117 28299 30465 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 08:22:26.117 28299 30465 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 08:22:26.117 28299 30465 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 08:22:26.117 28299 30465 request_handler.cc 17] key username value cidi
+[I 07/11/24 08:22:26.117 28299 30465 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 08:22:26.117 28299 30465 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/11/24 08:22:26.118 28299 30465 subway_app.cc 246] Login enter 
+
+[I 07/11/24 08:22:26.118 28299 30465 svm_db.cc 34] Login success.
+
+[I 07/11/24 08:22:26.120 28299 30465 subway_app.cc 297] Login successful for user: cidi
+
+[I 07/11/24 08:22:26.120 28299 30465 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"cidi","session_id":"uTVvP633phFy164F","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/11/24 08:28:28.461 4472 4472 main.cc 79] web_server version ba9b014
+[I 07/11/24 08:28:28.461 4472 4472 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 08:28:28.461 4472 4472 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 08:28:28.461 4472 4472 base_db.cc 52] Host: localhost
+[I 07/11/24 08:28:28.461 4472 4472 base_db.cc 53] Port: 3306
+[I 07/11/24 08:28:28.461 4472 4472 base_db.cc 54] Username: root
+[I 07/11/24 08:28:28.461 4472 4472 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 08:28:28.461 4472 4472 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 08:28:28.464 4472 4472 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 08:28:43.643 4472 6610 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 08:28:43.643 4472 6610 request_handler.cc 17] key cmd_type value cat
+[I 07/11/24 08:28:43.643 4472 6610 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 08:28:43.643 4472 6610 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 08:28:43.643 4472 6610 request_handler.cc 17] key username value cidi
+[I 07/11/24 08:28:43.643 4472 6610 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 08:28:43.643 4472 6610 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/11/24 08:28:43.643 4472 6610 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":404,"result_msg":"失败"}
+
+[I 07/11/24 08:39:08.276 3794 3794 main.cc 79] web_server version ba9b014
+[I 07/11/24 08:39:08.276 3794 3794 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 08:39:08.277 3794 3794 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 08:39:08.277 3794 3794 base_db.cc 52] Host: localhost
+[I 07/11/24 08:39:08.277 3794 3794 base_db.cc 53] Port: 3306
+[I 07/11/24 08:39:08.277 3794 3794 base_db.cc 54] Username: root
+[I 07/11/24 08:39:08.277 3794 3794 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 08:39:08.277 3794 3794 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 08:39:08.282 3794 3794 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 08:39:23.254 3794 5809 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 08:39:23.254 3794 5809 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 08:39:23.254 3794 5809 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 08:39:23.254 3794 5809 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 08:39:23.254 3794 5809 request_handler.cc 17] key username value cidi
+[I 07/11/24 08:39:23.254 3794 5809 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 08:39:23.254 3794 5809 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/11/24 08:39:23.254 3794 5809 subway_app.cc 246] Login enter 
+
+[I 07/11/24 08:39:23.255 3794 5809 svm_db.cc 34] Login success.
+
+[I 07/11/24 08:39:23.258 3794 5809 subway_app.cc 297] Login successful for user: cidi
+
+[I 07/11/24 08:39:23.258 3794 5809 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"cidi","session_id":"3y65N7XzW2cw5971","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/11/24 08:39:33.486 3794 5809 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 08:39:33.486 3794 5809 request_handler.cc 17] key cmd_type value cat
+[I 07/11/24 08:39:33.486 3794 5809 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 08:39:33.486 3794 5809 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 08:39:33.486 3794 5809 request_handler.cc 17] key username value cidi
+[I 07/11/24 08:39:33.486 3794 5809 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 08:39:33.486 3794 5809 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/11/24 08:39:33.486 3794 5809 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":404,"result_msg":"失败"}
+
+[I 07/11/24 08:39:41.225 3794 5809 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 08:39:41.225 3794 5809 request_handler.cc 17] key cmd_type value register
+[I 07/11/24 08:39:41.225 3794 5809 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 08:39:41.225 3794 5809 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 08:39:41.225 3794 5809 request_handler.cc 17] key username value cidi
+[I 07/11/24 08:39:41.225 3794 5809 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 08:39:41.225 3794 5809 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/11/24 08:39:41.225 3794 5809 subway_app.cc 304] Registerenter
+
+[I 07/11/24 08:39:41.225 3794 5809 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/11/24 08:41:20.100 7893 7893 main.cc 79] web_server version ba9b014
+[I 07/11/24 08:41:20.100 7893 7893 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 08:41:20.100 7893 7893 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 08:41:20.100 7893 7893 base_db.cc 52] Host: localhost
+[I 07/11/24 08:41:20.100 7893 7893 base_db.cc 53] Port: 3306
+[I 07/11/24 08:41:20.100 7893 7893 base_db.cc 54] Username: root
+[I 07/11/24 08:41:20.100 7893 7893 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 08:41:20.100 7893 7893 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 08:41:20.104 7893 7893 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 08:41:24.495 7893 10142 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 08:41:24.495 7893 10142 request_handler.cc 17] key cmd_type value register
+[I 07/11/24 08:41:24.495 7893 10142 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 08:41:24.495 7893 10142 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 08:41:24.495 7893 10142 request_handler.cc 17] key username value cidi
+[I 07/11/24 08:41:24.495 7893 10142 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 08:41:24.495 7893 10142 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/11/24 08:41:24.496 7893 10142 subway_app.cc 304] Registerenter
+
+[I 07/11/24 08:41:24.496 7893 10142 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/11/24 08:42:23.633 6114 6114 main.cc 79] web_server version ba9b014
+[I 07/11/24 08:42:23.633 6114 6114 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 08:42:23.633 6114 6114 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 08:42:23.633 6114 6114 base_db.cc 52] Host: localhost
+[I 07/11/24 08:42:23.633 6114 6114 base_db.cc 53] Port: 3306
+[I 07/11/24 08:42:23.633 6114 6114 base_db.cc 54] Username: root
+[I 07/11/24 08:42:23.633 6114 6114 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 08:42:23.633 6114 6114 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 08:42:23.638 6114 6114 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 08:43:25.129 21587 21587 main.cc 79] web_server version ba9b014
+[I 07/11/24 08:43:25.129 21587 21587 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 08:43:25.129 21587 21587 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 08:43:25.129 21587 21587 base_db.cc 52] Host: localhost
+[I 07/11/24 08:43:25.129 21587 21587 base_db.cc 53] Port: 3306
+[I 07/11/24 08:43:25.129 21587 21587 base_db.cc 54] Username: root
+[I 07/11/24 08:43:25.129 21587 21587 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 08:43:25.129 21587 21587 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 08:43:25.134 21587 21587 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 08:45:27.583 1654 1654 main.cc 79] web_server version ba9b014
+[I 07/11/24 08:45:27.583 1654 1654 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 08:45:27.584 1654 1654 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 08:45:27.584 1654 1654 base_db.cc 52] Host: localhost
+[I 07/11/24 08:45:27.584 1654 1654 base_db.cc 53] Port: 3306
+[I 07/11/24 08:45:27.584 1654 1654 base_db.cc 54] Username: root
+[I 07/11/24 08:45:27.584 1654 1654 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 08:45:27.584 1654 1654 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 08:45:27.586 1654 1654 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 08:45:49.888 17280 17280 main.cc 79] web_server version ba9b014
+[I 07/11/24 08:45:49.888 17280 17280 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 08:45:49.888 17280 17280 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 08:45:49.888 17280 17280 base_db.cc 52] Host: localhost
+[I 07/11/24 08:45:49.888 17280 17280 base_db.cc 53] Port: 3306
+[I 07/11/24 08:45:49.888 17280 17280 base_db.cc 54] Username: root
+[I 07/11/24 08:45:49.888 17280 17280 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 08:45:49.888 17280 17280 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 08:45:49.893 17280 17280 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 08:48:12.151 24656 24656 main.cc 79] web_server version ba9b014
+[I 07/11/24 08:48:12.151 24656 24656 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 08:48:12.151 24656 24656 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 08:48:12.151 24656 24656 base_db.cc 52] Host: localhost
+[I 07/11/24 08:48:12.151 24656 24656 base_db.cc 53] Port: 3306
+[I 07/11/24 08:48:12.151 24656 24656 base_db.cc 54] Username: root
+[I 07/11/24 08:48:12.151 24656 24656 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 08:48:12.151 24656 24656 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 08:48:12.156 24656 24656 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 08:56:40.332 14856 14856 main.cc 79] web_server version ba9b014
+[I 07/11/24 08:56:40.332 14856 14856 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 08:56:40.332 14856 14856 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 08:56:40.332 14856 14856 base_db.cc 52] Host: localhost
+[I 07/11/24 08:56:40.332 14856 14856 base_db.cc 53] Port: 3306
+[I 07/11/24 08:56:40.332 14856 14856 base_db.cc 54] Username: root
+[I 07/11/24 08:56:40.332 14856 14856 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 08:56:40.332 14856 14856 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 08:56:40.337 14856 14856 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 08:56:44.000 14856 16978 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 08:56:44.000 14856 16978 request_handler.cc 17] key cmd_type value register
+[I 07/11/24 08:56:44.000 14856 16978 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 08:56:44.000 14856 16978 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 08:56:44.000 14856 16978 request_handler.cc 17] key username value cidi
+[I 07/11/24 08:56:44.000 14856 16978 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 08:56:44.000 14856 16978 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/11/24 08:56:44.000 14856 16978 subway_app.cc 304] Registerenter
+
+[I 07/11/24 08:56:44.000 14856 16978 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"成功"}
+
+[I 07/11/24 08:58:34.717 26782 26782 main.cc 79] web_server version ba9b014
+[I 07/11/24 08:58:34.717 26782 26782 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 08:58:34.717 26782 26782 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 08:58:34.717 26782 26782 base_db.cc 52] Host: localhost
+[I 07/11/24 08:58:34.717 26782 26782 base_db.cc 53] Port: 3306
+[I 07/11/24 08:58:34.717 26782 26782 base_db.cc 54] Username: root
+[I 07/11/24 08:58:34.717 26782 26782 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 08:58:34.717 26782 26782 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 08:58:34.722 26782 26782 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 08:58:40.178 26782 29196 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 08:58:40.178 26782 29196 request_handler.cc 17] key cmd_type value register
+[I 07/11/24 08:58:40.178 26782 29196 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 08:58:40.178 26782 29196 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 08:58:40.178 26782 29196 request_handler.cc 17] key username value cidi
+[I 07/11/24 08:58:40.178 26782 29196 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 08:58:40.178 26782 29196 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/11/24 08:58:40.178 26782 29196 subway_app.cc 304] Registerenter
+
+[I 07/11/24 08:58:40.178 26782 29196 svm_db.cc 133] IsPasswordComplex enter 
+
+[I 07/11/24 08:58:40.178 26782 29196 svm_db.cc 109] IsUsernameExist enter 
+
+[I 07/11/24 08:58:40.178 26782 29196 subway_app.cc 337] Registration failed.Username already exists.
+[I 07/11/24 08:58:40.179 26782 29196 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-1,"result_msg":"Username already exists."}
+
+[I 07/11/24 09:09:51.684 26782 29196 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 09:09:51.684 26782 29196 request_handler.cc 17] key cmd_type value register
+[I 07/11/24 09:09:51.684 26782 29196 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 09:09:51.684 26782 29196 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 09:09:51.684 26782 29196 request_handler.cc 17] key username value test
+[I 07/11/24 09:09:51.684 26782 29196 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 09:09:51.684 26782 29196 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/11/24 09:09:51.685 26782 29196 subway_app.cc 304] Registerenter
+
+[I 07/11/24 09:09:51.685 26782 29196 svm_db.cc 133] IsPasswordComplex enter 
+
+[I 07/11/24 09:09:51.685 26782 29196 svm_db.cc 109] IsUsernameExist enter 
+
+[I 07/11/24 09:09:51.685 26782 29196 svm_db.cc 90] Register enter 
+
+[I 07/11/24 09:09:51.688 26782 29196 svm_db.cc 103] Registersuccess.
+
+[I 07/11/24 09:09:51.688 26782 29196 subway_app.cc 360] Registration successful for user:test
+
+[I 07/11/24 09:09:51.688 26782 29196 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"Registration successful."}
+
+[I 07/11/24 10:33:31.223 29080 29080 main.cc 79] web_server version ba9b014
+[I 07/11/24 10:33:31.223 29080 29080 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 10:33:31.223 29080 29080 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 10:33:31.223 29080 29080 base_db.cc 52] Host: localhost
+[I 07/11/24 10:33:31.223 29080 29080 base_db.cc 53] Port: 3306
+[I 07/11/24 10:33:31.223 29080 29080 base_db.cc 54] Username: root
+[I 07/11/24 10:33:31.223 29080 29080 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 10:33:31.223 29080 29080 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 10:33:31.227 29080 29080 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 10:34:46.404 29080 31225 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:34:46.404 29080 31225 request_handler.cc 17] key cmd_type value set_password
+[I 07/11/24 10:34:46.404 29080 31225 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 10:34:46.404 29080 31225 request_handler.cc 17] key new_password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:34:46.404 29080 31225 request_handler.cc 17] key old_password value kevin
+[I 07/11/24 10:34:46.404 29080 31225 request_handler.cc 17] key username value test
+[I 07/11/24 10:34:46.404 29080 31225 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:34:46.404 29080 31225 subway_app.cc 182] IdentifyClient enter 
+
+[I 07/11/24 10:34:46.404 29080 31225 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":809054752,"result_msg":"失败"}
+
+[I 07/11/24 10:35:30.076 29080 31225 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:35:30.076 29080 31225 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:35:30.076 29080 31225 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 10:35:30.076 29080 31225 request_handler.cc 17] key new_password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:35:30.076 29080 31225 request_handler.cc 17] key old_password value kevin
+[I 07/11/24 10:35:30.076 29080 31225 request_handler.cc 17] key username value test
+[I 07/11/24 10:35:30.076 29080 31225 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:35:30.076 29080 31225 subway_app.cc 182] IdentifyClient enter 
+
+[I 07/11/24 10:35:30.077 29080 31225 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":809054752,"result_msg":"失败"}
+
+[I 07/11/24 10:36:11.653 29080 31225 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:36:11.653 29080 31225 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:36:11.653 29080 31225 request_handler.cc 17] key email value 
+[I 07/11/24 10:36:11.653 29080 31225 request_handler.cc 17] key new_password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:36:11.653 29080 31225 request_handler.cc 17] key old_password value kevin
+[I 07/11/24 10:36:11.653 29080 31225 request_handler.cc 17] key username value test
+[I 07/11/24 10:36:11.653 29080 31225 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:36:11.653 29080 31225 subway_app.cc 182] IdentifyClient enter 
+
+[I 07/11/24 10:36:11.653 29080 31225 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":809054752,"result_msg":"失败"}
+
+[I 07/11/24 10:36:21.430 29080 31225 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:36:21.430 29080 31225 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:36:21.430 29080 31225 request_handler.cc 17] key new_password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:36:21.430 29080 31225 request_handler.cc 17] key old_password value kevin
+[I 07/11/24 10:36:21.430 29080 31225 request_handler.cc 17] key username value test
+[I 07/11/24 10:36:21.430 29080 31225 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:36:21.430 29080 31225 subway_app.cc 182] IdentifyClient enter 
+
+[I 07/11/24 10:36:21.430 29080 31225 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":809054752,"result_msg":"失败"}
+
+[I 07/11/24 10:36:57.100 29080 31225 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:36:57.100 29080 31225 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:36:57.100 29080 31225 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 10:36:57.100 29080 31225 request_handler.cc 17] key new_password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:36:57.100 29080 31225 request_handler.cc 17] key old_password value kevin
+[I 07/11/24 10:36:57.100 29080 31225 request_handler.cc 17] key username value test
+[I 07/11/24 10:36:57.100 29080 31225 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:36:57.100 29080 31225 subway_app.cc 182] IdentifyClient enter 
+
+[I 07/11/24 10:36:57.101 29080 31225 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":809054752,"result_msg":"失败"}
+
+[I 07/11/24 10:38:08.294 29080 31225 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:38:08.294 29080 31225 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:38:08.294 29080 31225 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 10:38:08.294 29080 31225 request_handler.cc 17] key new_password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:38:08.294 29080 31225 request_handler.cc 17] key old_password value kevin
+[I 07/11/24 10:38:08.294 29080 31225 request_handler.cc 17] key username value cidi
+[I 07/11/24 10:38:08.294 29080 31225 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:38:08.294 29080 31225 subway_app.cc 182] IdentifyClient enter 
+
+[I 07/11/24 10:38:08.294 29080 31225 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":809054752,"result_msg":"失败"}
+
+[I 07/11/24 10:39:48.470 29080 31225 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:39:48.470 29080 31225 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:39:48.470 29080 31225 request_handler.cc 17] key email value 12345678@qq.com
+[I 07/11/24 10:39:48.470 29080 31225 request_handler.cc 17] key new_password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:39:48.470 29080 31225 request_handler.cc 17] key old_password value kevin
+[I 07/11/24 10:39:48.470 29080 31225 request_handler.cc 17] key username value cidi
+[I 07/11/24 10:39:48.470 29080 31225 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:39:48.470 29080 31225 subway_app.cc 182] IdentifyClient enter 
+
+[I 07/11/24 10:39:48.470 29080 31225 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":809054752,"result_msg":"失败"}
+
+[I 07/11/24 10:40:28.558 29080 31225 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:40:28.558 29080 31225 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:40:28.558 29080 31225 request_handler.cc 17] key email value 12345678@qq.com
+[I 07/11/24 10:40:28.558 29080 31225 request_handler.cc 17] key new_password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:40:28.558 29080 31225 request_handler.cc 17] key old_password value kevin
+[I 07/11/24 10:40:28.558 29080 31225 request_handler.cc 17] key username value cidi
+[I 07/11/24 10:40:28.558 29080 31225 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:40:28.558 29080 31225 subway_app.cc 182] IdentifyClient enter 
+
+[I 07/11/24 10:40:28.558 29080 31225 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":809054752,"result_msg":"失败"}
+
+[I 07/11/24 10:41:50.264 29080 31225 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:41:50.264 29080 31225 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:41:50.264 29080 31225 request_handler.cc 17] key email value 12345678@qq.com
+[I 07/11/24 10:41:50.264 29080 31225 request_handler.cc 17] key new_password value 
+[I 07/11/24 10:41:50.264 29080 31225 request_handler.cc 17] key old_password value kevin
+[I 07/11/24 10:41:50.264 29080 31225 request_handler.cc 17] key username value cidi
+[I 07/11/24 10:41:50.264 29080 31225 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:41:50.264 29080 31225 subway_app.cc 182] IdentifyClient enter 
+
+[I 07/11/24 10:41:50.265 29080 31225 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":809054752,"result_msg":"失败"}
+
+[I 07/11/24 10:50:56.266 29942 29942 main.cc 79] web_server version ba9b014
+[I 07/11/24 10:50:56.266 29942 29942 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 10:50:56.266 29942 29942 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 10:50:56.266 29942 29942 base_db.cc 52] Host: localhost
+[I 07/11/24 10:50:56.266 29942 29942 base_db.cc 53] Port: 3306
+[I 07/11/24 10:50:56.266 29942 29942 base_db.cc 54] Username: root
+[I 07/11/24 10:50:56.266 29942 29942 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 10:50:56.266 29942 29942 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 10:50:56.271 29942 29942 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 10:51:03.476 29942 32100 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:51:03.476 29942 32100 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:51:03.476 29942 32100 request_handler.cc 17] key email value 12345678@qq.com
+[I 07/11/24 10:51:03.476 29942 32100 request_handler.cc 17] key new_password value 
+[I 07/11/24 10:51:03.476 29942 32100 request_handler.cc 17] key old_password value kevin
+[I 07/11/24 10:51:03.476 29942 32100 request_handler.cc 17] key username value cidi
+[I 07/11/24 10:51:03.476 29942 32100 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:51:03.476 29942 32100 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 10:51:03.476 29942 32100 subway_app.cc 78] type: 2
+[I 07/11/24 10:51:03.476 29942 32100 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":8,"result_msg":"失败"}
+
+[I 07/11/24 10:53:47.096 22828 22828 main.cc 79] web_server version ba9b014
+[I 07/11/24 10:53:47.096 22828 22828 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 10:53:47.096 22828 22828 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 10:53:47.096 22828 22828 base_db.cc 52] Host: localhost
+[I 07/11/24 10:53:47.096 22828 22828 base_db.cc 53] Port: 3306
+[I 07/11/24 10:53:47.096 22828 22828 base_db.cc 54] Username: root
+[I 07/11/24 10:53:47.096 22828 22828 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 10:53:47.096 22828 22828 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 10:53:47.100 22828 22828 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 10:53:51.412 22828 24998 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:53:51.412 22828 24998 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:53:51.412 22828 24998 request_handler.cc 17] key email value 12345678@qq.com
+[I 07/11/24 10:53:51.412 22828 24998 request_handler.cc 17] key new_password value 
+[I 07/11/24 10:53:51.412 22828 24998 request_handler.cc 17] key old_password value kevin
+[I 07/11/24 10:53:51.412 22828 24998 request_handler.cc 17] key username value cidi
+[I 07/11/24 10:53:51.412 22828 24998 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:53:51.412 22828 24998 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 10:53:51.412 22828 24998 subway_app.cc 78] type: 2
+[I 07/11/24 10:53:51.412 22828 24998 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":8,"result_msg":"失败"}
+
+[I 07/11/24 10:54:03.131 22828 24998 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:54:03.131 22828 24998 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:54:03.131 22828 24998 request_handler.cc 17] key email value 12345678@qq.com
+[I 07/11/24 10:54:03.131 22828 24998 request_handler.cc 17] key new_password value 
+[I 07/11/24 10:54:03.131 22828 24998 request_handler.cc 17] key password value kevin
+[I 07/11/24 10:54:03.131 22828 24998 request_handler.cc 17] key username value cidi
+[I 07/11/24 10:54:03.131 22828 24998 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:54:03.131 22828 24998 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 10:54:03.131 22828 24998 subway_app.cc 78] type: 0
+[I 07/11/24 10:54:03.131 22828 24998 subway_app.cc 376] Password reset failed. Email, old_password, and new_password cannot be empty.
+[I 07/11/24 10:54:03.131 22828 24998 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-1,"result_msg":"Email, old_password, and new_password cannot be empty."}
+
+[I 07/11/24 10:54:25.395 22828 24998 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:54:25.395 22828 24998 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:54:25.395 22828 24998 request_handler.cc 17] key email value 12345678@qq.com
+[I 07/11/24 10:54:25.395 22828 24998 request_handler.cc 17] key new_password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:54:25.395 22828 24998 request_handler.cc 17] key password value kevin
+[I 07/11/24 10:54:25.395 22828 24998 request_handler.cc 17] key username value cidi
+[I 07/11/24 10:54:25.395 22828 24998 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:54:25.395 22828 24998 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 10:54:25.395 22828 24998 subway_app.cc 78] type: 0
+[I 07/11/24 10:54:25.396 22828 24998 svm_db.cc 34] Login success.
+
+[I 07/11/24 10:54:25.396 22828 24998 subway_app.cc 385] Password reset failed. Old password is incorrect.
+[I 07/11/24 10:54:25.396 22828 24998 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-1,"result_msg":"Old password is incorrect."}
+
+[I 07/11/24 10:55:57.909 22828 24998 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:55:57.909 22828 24998 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:55:57.909 22828 24998 request_handler.cc 17] key email value 12345678@qq.com
+[I 07/11/24 10:55:57.909 22828 24998 request_handler.cc 17] key new_password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:55:57.909 22828 24998 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:55:57.909 22828 24998 request_handler.cc 17] key username value cidi
+[I 07/11/24 10:55:57.909 22828 24998 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:55:57.909 22828 24998 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 10:55:57.909 22828 24998 subway_app.cc 78] type: 0
+[I 07/11/24 10:55:57.909 22828 24998 svm_db.cc 34] Login success.
+
+[I 07/11/24 10:55:57.909 22828 24998 subway_app.cc 385] Password reset failed. Old password is incorrect.
+[I 07/11/24 10:55:57.909 22828 24998 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-1,"result_msg":"Old password is incorrect."}
+
+[I 07/11/24 10:56:49.244 31742 31742 main.cc 79] web_server version ba9b014
+[I 07/11/24 10:56:49.244 31742 31742 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 10:56:49.244 31742 31742 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 10:56:49.244 31742 31742 base_db.cc 52] Host: localhost
+[I 07/11/24 10:56:49.244 31742 31742 base_db.cc 53] Port: 3306
+[I 07/11/24 10:56:49.244 31742 31742 base_db.cc 54] Username: root
+[I 07/11/24 10:56:49.244 31742 31742 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 10:56:49.244 31742 31742 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 10:56:49.249 31742 31742 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 10:56:55.517 31742 1772 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 10:56:55.517 31742 1772 request_handler.cc 17] key cmd_type value reset_password
+[I 07/11/24 10:56:55.517 31742 1772 request_handler.cc 17] key email value 12345678@qq.com
+[I 07/11/24 10:56:55.517 31742 1772 request_handler.cc 17] key new_password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 10:56:55.517 31742 1772 request_handler.cc 17] key password value kevin
+[I 07/11/24 10:56:55.517 31742 1772 request_handler.cc 17] key username value cidi
+[I 07/11/24 10:56:55.517 31742 1772 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 10:56:55.517 31742 1772 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 10:56:55.518 31742 1772 subway_app.cc 78] type: 0
+[I 07/11/24 10:56:55.518 31742 1772 svm_db.cc 34] Login success.
+
+[I 07/11/24 10:56:55.518 31742 1772 svm_db.cc 151] IsPasswordComplex enter 
+
+[I 07/11/24 10:56:55.522 31742 1772 svm_db.cc 120] Password updated successfully for user: cidi
+[I 07/11/24 10:56:55.522 31742 1772 subway_app.cc 412] Password has been reset successfully.
+[I 07/11/24 10:56:55.522 31742 1772 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":0,"result_msg":"Password has been reset successfully."}
+
+[I 07/11/24 11:08:29.050 18202 18202 main.cc 79] web_server version ba9b014
+[I 07/11/24 11:08:29.050 18202 18202 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 11:08:29.050 18202 18202 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 11:08:29.050 18202 18202 base_db.cc 52] Host: localhost
+[I 07/11/24 11:08:29.050 18202 18202 base_db.cc 53] Port: 3306
+[I 07/11/24 11:08:29.050 18202 18202 base_db.cc 54] Username: root
+[I 07/11/24 11:08:29.050 18202 18202 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 11:08:29.050 18202 18202 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 11:08:29.056 18202 18202 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 11:08:42.546 18202 20367 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 11:08:42.546 18202 20367 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 11:08:42.547 18202 20367 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 11:08:42.547 18202 20367 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 11:08:42.547 18202 20367 request_handler.cc 17] key username value cidi
+[I 07/11/24 11:08:42.547 18202 20367 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 11:08:42.547 18202 20367 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 11:08:42.547 18202 20367 subway_app.cc 78] type: 0
+[I 07/11/24 11:08:42.547 18202 20367 subway_app.cc 250] Login enter 
+
+[I 07/11/24 11:08:42.547 18202 20367 svm_db.cc 34] Login success.
+
+[I 07/11/24 11:08:42.551 18202 20367 subway_app.cc 301] Login successful for user: cidi
+
+[I 07/11/24 11:08:42.551 18202 20367 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"cidi","session_id":"Uml4DcYaVANQ4LIe","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/11/24 11:12:11.874 20635 20635 main.cc 79] web_server version ba9b014
+[I 07/11/24 11:12:11.874 20635 20635 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 11:12:11.874 20635 20635 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 11:12:11.874 20635 20635 base_db.cc 52] Host: localhost
+[I 07/11/24 11:12:11.874 20635 20635 base_db.cc 53] Port: 3306
+[I 07/11/24 11:12:11.874 20635 20635 base_db.cc 54] Username: root
+[I 07/11/24 11:12:11.874 20635 20635 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 11:12:11.874 20635 20635 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 11:12:11.879 20635 20635 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 11:12:18.970 20635 23044 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 11:12:18.970 20635 23044 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 11:12:18.970 20635 23044 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 11:12:18.970 20635 23044 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 11:12:18.970 20635 23044 request_handler.cc 17] key username value cidi
+[I 07/11/24 11:12:18.970 20635 23044 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 11:12:18.970 20635 23044 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 11:12:18.970 20635 23044 subway_app.cc 78] type: 0
+[I 07/11/24 11:12:18.970 20635 23044 subway_app.cc 250] Login enter 
+
+[I 07/11/24 11:12:18.970 20635 23044 svm_db.cc 34] Login success.
+
+[I 07/11/24 11:12:18.974 20635 23044 subway_app.cc 303] Login successful for user: cidi
+
+[I 07/11/24 11:12:18.974 20635 23044 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"CLIENT_CIDI","session_id":"hW6XvF1C48k4T8zg","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/11/24 11:13:28.808 24781 24781 main.cc 79] web_server version ba9b014
+[I 07/11/24 11:13:28.808 24781 24781 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 11:13:28.808 24781 24781 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 11:13:28.808 24781 24781 base_db.cc 52] Host: localhost
+[I 07/11/24 11:13:28.808 24781 24781 base_db.cc 53] Port: 3306
+[I 07/11/24 11:13:28.808 24781 24781 base_db.cc 54] Username: root
+[I 07/11/24 11:13:28.808 24781 24781 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 11:13:28.808 24781 24781 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 11:13:28.813 24781 24781 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 11:13:32.202 24781 26908 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 11:13:32.202 24781 26908 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 11:13:32.202 24781 26908 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 11:13:32.202 24781 26908 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 11:13:32.202 24781 26908 request_handler.cc 17] key username value cidi
+[I 07/11/24 11:13:32.202 24781 26908 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 11:13:32.202 24781 26908 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 11:13:32.202 24781 26908 subway_app.cc 78] type: 0
+[I 07/11/24 11:13:32.202 24781 26908 subway_app.cc 250] Login enter 
+
+[I 07/11/24 11:13:32.203 24781 26908 svm_db.cc 34] Login success.
+
+[I 07/11/24 11:13:32.206 24781 26908 subway_app.cc 303] Login successful for user: cidi
+
+[I 07/11/24 11:13:32.206 24781 26908 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"CLIENT_CIDI","session_id":"R17000x8B2DQA5my","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/11/24 11:19:49.044 24184 24184 main.cc 79] web_server version ba9b014
+[I 07/11/24 11:19:49.044 24184 24184 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 11:19:49.044 24184 24184 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 11:19:49.044 24184 24184 base_db.cc 52] Host: localhost
+[I 07/11/24 11:19:49.044 24184 24184 base_db.cc 53] Port: 3306
+[I 07/11/24 11:19:49.044 24184 24184 base_db.cc 54] Username: root
+[I 07/11/24 11:19:49.044 24184 24184 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 11:19:49.044 24184 24184 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 11:19:49.048 24184 24184 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 11:19:52.798 24184 26352 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 11:19:52.798 24184 26352 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 11:19:52.798 24184 26352 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 11:19:52.798 24184 26352 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 11:19:52.798 24184 26352 request_handler.cc 17] key username value cidi
+[I 07/11/24 11:19:52.798 24184 26352 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 11:19:52.798 24184 26352 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 11:19:52.798 24184 26352 subway_app.cc 78] type: 0
+[I 07/11/24 11:19:52.798 24184 26352 subway_app.cc 250] Login enter 
+
+[I 07/11/24 11:19:52.798 24184 26352 svm_db.cc 34] Login success.
+
+[I 07/11/24 11:19:52.798 24184 26352 svm_db.cc 62] UpdateToken error, sql INSERT INTO sessions (session_id, user_id, session_token, created_at, expires_at) VALUES ('8ehTK431eZTF7t5g', 1, '8ehTK431eZTF7t5g', NOW(), NOW() + INTERVAL 1 HOUR) ON DUPLICATE KEY UPDATE session_token='8ehTK431eZTF7t5g', created_at=NOW(), expires_at=NOW
+
+[I 07/11/24 11:19:52.799 24184 26352 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-2,"result_msg":"Failed to update session token."}
+
+[I 07/11/24 11:20:12.533 24184 26352 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 11:20:12.533 24184 26352 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 11:20:12.533 24184 26352 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 11:20:12.533 24184 26352 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 11:20:12.533 24184 26352 request_handler.cc 17] key username value cidi
+[I 07/11/24 11:20:12.533 24184 26352 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 11:20:12.533 24184 26352 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 11:20:12.533 24184 26352 subway_app.cc 78] type: 0
+[I 07/11/24 11:20:12.533 24184 26352 subway_app.cc 250] Login enter 
+
+[I 07/11/24 11:20:12.534 24184 26352 svm_db.cc 34] Login success.
+
+[I 07/11/24 11:20:12.536 24184 26352 svm_db.cc 62] UpdateToken error, sql INSERT INTO sessions (session_id, user_id, session_token, created_at, expires_at) VALUES ('hABeJC8BtDp8fX00', 1, 'hABeJC8BtDp8fX00', NOW(), NOW() + INTERVAL 1 HOUR) ON DUPLICATE KEY UPDATE session_token='hABeJC8BtDp8fX00', created_at=NOW(), expires_at=NOW
+
+[I 07/11/24 11:20:12.536 24184 26352 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-2,"result_msg":"Failed to update session token."}
+
+[I 07/11/24 14:11:25.256 7981 7981 main.cc 79] web_server version ba9b014
+[I 07/11/24 14:11:25.256 7981 7981 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 14:11:25.256 7981 7981 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 14:11:25.256 7981 7981 base_db.cc 52] Host: localhost
+[I 07/11/24 14:11:25.256 7981 7981 base_db.cc 53] Port: 3306
+[I 07/11/24 14:11:25.256 7981 7981 base_db.cc 54] Username: root
+[I 07/11/24 14:11:25.256 7981 7981 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 14:11:25.256 7981 7981 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 14:11:25.260 7981 7981 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 14:11:35.505 7981 10097 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 14:11:35.505 7981 10097 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 14:11:35.505 7981 10097 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 14:11:35.505 7981 10097 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 14:11:35.505 7981 10097 request_handler.cc 17] key username value cidi
+[I 07/11/24 14:11:35.505 7981 10097 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 14:11:35.505 7981 10097 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 14:11:35.505 7981 10097 subway_app.cc 78] type: 0
+[I 07/11/24 14:11:35.505 7981 10097 subway_app.cc 250] Login enter 
+
+[I 07/11/24 14:11:35.505 7981 10097 svm_db.cc 27] Login success.
+
+[I 07/11/24 14:11:35.505 7981 10097 svm_db.cc 81] UpdateToken error, sql INSERT INTO sessions (session_token, user_id, created_at, expires_at) VALUES ('7yjz8og851uJ0EiHz06PbL472eBIVS6K', 1, NOW(), NOW() + INTERVAL 1 HOUR) ON DUPLICATE KEY UPDATE session_token='7yjz8og851uJ0EiHz06PbL472eBIVS6K', created_at=NOW(), expires_at=NOW
+
+[I 07/11/24 14:11:35.505 7981 10097 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-2,"result_msg":"Failed to update session token."}
+
+[I 07/11/24 14:21:53.308 7981 10097 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 14:21:53.308 7981 10097 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 14:21:53.308 7981 10097 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 14:21:53.308 7981 10097 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 14:21:53.308 7981 10097 request_handler.cc 17] key username value cidi
+[I 07/11/24 14:21:53.308 7981 10097 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 14:21:53.308 7981 10097 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 14:21:53.308 7981 10097 subway_app.cc 78] type: 0
+[I 07/11/24 14:21:53.308 7981 10097 subway_app.cc 250] Login enter 
+
+[I 07/11/24 14:21:53.310 7981 10097 svm_db.cc 27] Login success.
+
+[I 07/11/24 14:21:53.310 7981 10097 svm_db.cc 81] UpdateToken error, sql INSERT INTO sessions (session_token, user_id, created_at, expires_at) VALUES ('Zt6q8x8Xie9333Rua8a949Dj0YF0uX82', 1, NOW(), NOW() + INTERVAL 1 HOUR) ON DUPLICATE KEY UPDATE session_token='Zt6q8x8Xie9333Rua8a949Dj0YF0uX82', created_at=NOW(), expires_at=NOW
+
+[I 07/11/24 14:21:53.310 7981 10097 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-2,"result_msg":"Failed to update session token."}
+
+[I 07/11/24 14:32:38.264 29170 29170 main.cc 79] web_server version ba9b014
+[I 07/11/24 14:32:38.264 29170 29170 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 14:32:38.264 29170 29170 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 14:32:38.264 29170 29170 base_db.cc 52] Host: localhost
+[I 07/11/24 14:32:38.264 29170 29170 base_db.cc 53] Port: 3306
+[I 07/11/24 14:32:38.264 29170 29170 base_db.cc 54] Username: root
+[I 07/11/24 14:32:38.264 29170 29170 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 14:32:38.264 29170 29170 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 14:32:38.269 29170 29170 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 14:33:32.808 29170 31352 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 14:33:32.808 29170 31352 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 14:33:32.808 29170 31352 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 14:33:32.808 29170 31352 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 14:33:32.808 29170 31352 request_handler.cc 17] key username value cidi
+[I 07/11/24 14:33:32.808 29170 31352 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 14:33:32.808 29170 31352 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 14:33:32.808 29170 31352 subway_app.cc 78] type: 0
+[I 07/11/24 14:33:32.808 29170 31352 subway_app.cc 250] Login enter 
+
+[I 07/11/24 14:33:32.808 29170 31352 svm_db.cc 27] Login success.
+
+[I 07/11/24 14:33:32.808 29170 31352 svm_db.cc 81] UpdateToken error, sql INSERT INTO sessions (session_token, user_id, created_at, expires_at) VALUES ('sxZKgcRBpT9TOdgdsSivid6g9SixRTLc', 1, NOW(), NOW() + INTERVAL 1 HOUR) ON DUPLICATE KEY UPDATE session_token='sxZKgcRBpT9TOdgdsSivid6g9SixRTLc', created_at=NOW(), expires_at=NOW
+
+[I 07/11/24 14:33:32.808 29170 31352 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-2,"result_msg":"Failed to update session token."}
+
+[I 07/11/24 14:36:23.677 23345 23345 main.cc 79] web_server version ba9b014
+[I 07/11/24 14:36:23.677 23345 23345 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 14:36:23.677 23345 23345 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 14:36:23.677 23345 23345 base_db.cc 52] Host: localhost
+[I 07/11/24 14:36:23.677 23345 23345 base_db.cc 53] Port: 3306
+[I 07/11/24 14:36:23.677 23345 23345 base_db.cc 54] Username: root
+[I 07/11/24 14:36:23.677 23345 23345 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 14:36:23.677 23345 23345 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 14:36:23.683 23345 23345 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 14:36:27.994 23345 25422 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 14:36:27.994 23345 25422 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 14:36:27.994 23345 25422 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 14:36:27.994 23345 25422 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 14:36:27.994 23345 25422 request_handler.cc 17] key username value cidi
+[I 07/11/24 14:36:27.994 23345 25422 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 14:36:27.994 23345 25422 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 14:36:27.994 23345 25422 subway_app.cc 78] type: 0
+[I 07/11/24 14:36:27.994 23345 25422 subway_app.cc 250] Login enter 
+
+[I 07/11/24 14:36:27.994 23345 25422 svm_db.cc 27] Login success.
+
+[I 07/11/24 14:36:27.994 23345 25422 svm_db.cc 81] UpdateToken error, sql INSERT INTO sessions (session_token, user_id, created_at, expires_at) VALUES ('krPRqcn7TD7P4N3AZ70RJl9916J2L8Az', 1, NOW(), NOW() + INTERVAL 1 HOUR) ON DUPLICATE KEY UPDATE session_token='krPRqcn7TD7P4N3AZ70RJl9916J2L8Az', created_at=NOW(), expires_at=NOW
+
+[I 07/11/24 14:36:27.994 23345 25422 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-2,"result_msg":"Failed to update session token."}
+
+[I 07/11/24 14:37:15.850 17272 17272 main.cc 79] web_server version ba9b014
+[I 07/11/24 14:37:15.850 17272 17272 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 14:37:15.850 17272 17272 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 14:37:15.850 17272 17272 base_db.cc 52] Host: localhost
+[I 07/11/24 14:37:15.850 17272 17272 base_db.cc 53] Port: 3306
+[I 07/11/24 14:37:15.850 17272 17272 base_db.cc 54] Username: root
+[I 07/11/24 14:37:15.850 17272 17272 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 14:37:15.850 17272 17272 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 14:37:15.854 17272 17272 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 14:37:18.683 17272 19353 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 14:37:18.683 17272 19353 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 14:37:18.683 17272 19353 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 14:37:18.683 17272 19353 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 14:37:18.683 17272 19353 request_handler.cc 17] key username value cidi
+[I 07/11/24 14:37:18.683 17272 19353 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 14:37:18.683 17272 19353 subway_app.cc 183] IdentifyClient enter 
+
+[I 07/11/24 14:37:18.683 17272 19353 subway_app.cc 78] type: 0
+[I 07/11/24 14:37:18.683 17272 19353 subway_app.cc 250] Login enter 
+
+[I 07/11/24 14:37:18.683 17272 19353 svm_db.cc 27] Login success.
+
+[I 07/11/24 14:37:18.688 17272 19353 subway_app.cc 298] Login successful for user: cidi
+
+[I 07/11/24 14:37:18.688 17272 19353 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"CLIENT_CIDI","session_token":"79ZT62h9uTv81k5036hWdftPRNS95tyW","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/11/24 15:54:25.801 24285 24285 main.cc 79] web_server version ba9b014
+[I 07/11/24 15:54:25.801 24285 24285 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 15:54:25.801 24285 24285 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 15:54:25.801 24285 24285 base_db.cc 52] Host: localhost
+[I 07/11/24 15:54:25.801 24285 24285 base_db.cc 53] Port: 3306
+[I 07/11/24 15:54:25.801 24285 24285 base_db.cc 54] Username: root
+[I 07/11/24 15:54:25.801 24285 24285 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 15:54:25.801 24285 24285 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 15:54:25.804 24285 24285 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 15:55:44.217 24285 26518 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 15:55:44.217 24285 26518 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 15:55:44.217 24285 26518 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 15:55:44.217 24285 26518 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 15:55:44.217 24285 26518 request_handler.cc 17] key username value cidi
+[I 07/11/24 15:55:44.217 24285 26518 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 15:55:44.217 24285 26518 subway_app.cc 217] IdentifyClient enter 
+
+[I 07/11/24 15:55:44.218 24285 26518 subway_app.cc 79] type: 0
+[I 07/11/24 15:55:44.218 24285 26518 subway_app.cc 108] Session token invalid, trying to login
+
+[I 07/11/24 15:55:44.218 24285 26518 subway_app.cc 284] Login enter 
+
+[I 07/11/24 15:55:44.218 24285 26518 svm_db.cc 27] Login success.
+
+[I 07/11/24 15:55:44.222 24285 26518 subway_app.cc 334] Login successful for user: cidi
+
+[I 07/11/24 15:55:44.222 24285 26518 subway_app.cc 118] Login successful, new session token: 7U71L7Lq7xXDxvVwYn7HPvgddGM80M7b
+
+[I 07/11/24 15:55:44.222 24285 26518 subway_app.cc 284] Login enter 
+
+[I 07/11/24 15:55:44.222 24285 26518 svm_db.cc 27] Login success.
+
+[I 07/11/24 15:55:44.226 24285 26518 subway_app.cc 334] Login successful for user: cidi
+
+[I 07/11/24 15:55:44.226 24285 26518 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"CLIENT_CIDI","session_token":"3eB6jBrBg3BTA1ko3K9j6GtbN50qfNo3","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/11/24 15:57:17.760 24285 26518 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 15:57:17.760 24285 26518 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 15:57:17.760 24285 26518 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 15:57:17.760 24285 26518 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 15:57:17.760 24285 26518 request_handler.cc 17] key username value cidi
+[I 07/11/24 15:57:17.760 24285 26518 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 15:57:17.760 24285 26518 subway_app.cc 217] IdentifyClient enter 
+
+[I 07/11/24 15:57:17.760 24285 26518 subway_app.cc 79] type: 0
+[I 07/11/24 15:57:17.760 24285 26518 subway_app.cc 108] Session token invalid, trying to login
+
+[I 07/11/24 15:57:17.760 24285 26518 subway_app.cc 284] Login enter 
+
+[I 07/11/24 15:57:17.761 24285 26518 svm_db.cc 27] Login success.
+
+[I 07/11/24 15:57:17.764 24285 26518 subway_app.cc 334] Login successful for user: cidi
+
+[I 07/11/24 15:57:17.764 24285 26518 subway_app.cc 118] Login successful, new session token: N3EHQS72Em9ZiqO45g01y5mSjqDSnxF7
+
+[I 07/11/24 15:57:17.764 24285 26518 subway_app.cc 284] Login enter 
+
+[I 07/11/24 15:57:17.764 24285 26518 svm_db.cc 27] Login success.
+
+[I 07/11/24 15:57:17.768 24285 26518 subway_app.cc 334] Login successful for user: cidi
+
+[I 07/11/24 15:57:17.768 24285 26518 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"CLIENT_CIDI","session_token":"IieQgX2iCPdUbb29mP8Db85kx13Yc1wn","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/11/24 17:20:41.804 339 339 main.cc 79] web_server version ba9b014
+[I 07/11/24 17:20:41.804 339 339 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/11/24 17:20:41.804 339 339 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/11/24 17:20:41.804 339 339 base_db.cc 52] Host: localhost
+[I 07/11/24 17:20:41.804 339 339 base_db.cc 53] Port: 3306
+[I 07/11/24 17:20:41.804 339 339 base_db.cc 54] Username: root
+[I 07/11/24 17:20:41.804 339 339 base_db.cc 55] Password: zy1029343447
+[I 07/11/24 17:20:41.804 339 339 base_db.cc 56] Database Name: web_server_info
+[I 07/11/24 17:20:41.808 339 339 base_db.cc 62] Connect user root connect state 0
+
+[I 07/11/24 17:26:57.673 339 2957 request_handler.cc 15] ---------incoming-------------
+[I 07/11/24 17:26:57.673 339 2957 request_handler.cc 17] key cmd_type value login
+[I 07/11/24 17:26:57.673 339 2957 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/11/24 17:26:57.673 339 2957 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/11/24 17:26:57.673 339 2957 request_handler.cc 17] key username value cidi
+[I 07/11/24 17:26:57.673 339 2957 subway_app.cc 70] Handle enter 
+
+[I 07/11/24 17:26:57.673 339 2957 subway_app.cc 217] IdentifyClient enter 
+
+[I 07/11/24 17:26:57.673 339 2957 subway_app.cc 79] type: 0
+[I 07/11/24 17:26:57.675 339 2957 subway_app.cc 108] Session token invalid, trying to login
+
+[I 07/11/24 17:26:57.675 339 2957 subway_app.cc 284] Login enter 
+
+[I 07/11/24 17:26:57.675 339 2957 svm_db.cc 27] Login success.
+
+[I 07/11/24 17:26:57.678 339 2957 subway_app.cc 334] Login successful for user: cidi
+
+[I 07/11/24 17:26:57.678 339 2957 subway_app.cc 118] Login successful, new session token: c2OI8oy2gw7X4jW625Xq9MuvfYuUuU9r
+
+[I 07/11/24 17:26:57.678 339 2957 subway_app.cc 284] Login enter 
+
+[I 07/11/24 17:26:57.679 339 2957 svm_db.cc 27] Login success.
+
+[I 07/11/24 17:26:57.681 339 2957 subway_app.cc 334] Login successful for user: cidi
+
+[I 07/11/24 17:26:57.681 339 2957 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"CLIENT_CIDI","session_token":"R3i7XkD2RZ53HjkT5TF4jIosVSvk1XWK","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+

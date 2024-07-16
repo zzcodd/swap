@@ -1,0 +1,9 @@
+{
+  "app_name": "wechat_notify",
+  "client_name": "subway",
+  "listen_port": 8081,
+  "method_name": "POST",
+  "app_path": "/apiserver/cmd",
+  "record_path": "/media/cidi/data/record/",
+  "log_path": "./log/"
+}

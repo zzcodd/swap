@@ -1,0 +1,645 @@
+[I 07/10/24 10:31:51.852 26789 26789 main.cc 79] web_server version ba9b014
+[I 07/10/24 10:31:51.852 26789 26789 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 10:31:51.852 26789 26789 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 10:31:51.852 26789 26789 base_db.cc 52] Host: localhost
+[I 07/10/24 10:31:51.852 26789 26789 base_db.cc 53] Port: 3306
+[I 07/10/24 10:31:51.852 26789 26789 base_db.cc 54] Username: root
+[I 07/10/24 10:31:51.852 26789 26789 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 10:31:51.852 26789 26789 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 10:31:51.857 26789 26789 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 10:32:49.054 26789 29639 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 10:32:49.054 26789 29639 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 10:32:49.054 26789 29639 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 10:32:49.054 26789 29639 request_handler.cc 17] key username value cidi
+[I 07/10/24 10:32:49.054 26789 29639 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":1,"result_msg":"失败"}
+
+[I 07/10/24 15:13:40.407 16297 16297 main.cc 79] web_server version ba9b014
+[I 07/10/24 15:13:40.407 16297 16297 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 15:13:40.407 16297 16297 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 15:13:40.407 16297 16297 base_db.cc 52] Host: localhost
+[I 07/10/24 15:13:40.407 16297 16297 base_db.cc 53] Port: 3306
+[I 07/10/24 15:13:40.407 16297 16297 base_db.cc 54] Username: root
+[I 07/10/24 15:13:40.407 16297 16297 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 15:13:40.407 16297 16297 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 15:13:40.413 16297 16297 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 15:14:28.557 16297 18643 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 15:14:28.557 16297 18643 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 15:14:28.557 16297 18643 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 15:14:28.557 16297 18643 request_handler.cc 17] key username value cidi
+[I 07/10/24 15:14:28.557 16297 18643 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":1,"result_msg":"失败"}
+
+[I 07/10/24 15:14:57.177 16297 18643 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 15:14:57.177 16297 18643 request_handler.cc 17] key cmd_type value register
+[I 07/10/24 15:14:57.177 16297 18643 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 15:14:57.177 16297 18643 request_handler.cc 17] key username value cidi
+[I 07/10/24 15:16:04.510 21799 21799 main.cc 79] web_server version ba9b014
+[I 07/10/24 15:16:04.510 21799 21799 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 15:16:04.510 21799 21799 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 15:16:04.510 21799 21799 base_db.cc 52] Host: localhost
+[I 07/10/24 15:16:04.510 21799 21799 base_db.cc 53] Port: 3306
+[I 07/10/24 15:16:04.510 21799 21799 base_db.cc 54] Username: root
+[I 07/10/24 15:16:04.510 21799 21799 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 15:16:04.510 21799 21799 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 15:16:04.516 21799 21799 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 15:16:09.079 21799 24470 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 15:16:09.079 21799 24470 request_handler.cc 17] key cmd_type value register
+[I 07/10/24 15:16:09.080 21799 24470 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/10/24 15:16:09.080 21799 24470 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 15:16:09.080 21799 24470 request_handler.cc 17] key username value cidi
+[I 07/10/24 15:16:09.080 21799 24470 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":1,"result_msg":"失败"}
+
+[I 07/10/24 15:23:02.456 25709 25709 main.cc 79] web_server version ba9b014
+[I 07/10/24 15:23:02.456 25709 25709 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 15:23:02.456 25709 25709 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 15:23:02.456 25709 25709 base_db.cc 52] Host: localhost
+[I 07/10/24 15:23:02.456 25709 25709 base_db.cc 53] Port: 3306
+[I 07/10/24 15:23:02.456 25709 25709 base_db.cc 54] Username: root
+[I 07/10/24 15:23:02.456 25709 25709 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 15:23:02.456 25709 25709 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 15:23:02.461 25709 25709 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 15:34:54.426 12202 12202 main.cc 79] web_server version ba9b014
+[I 07/10/24 15:34:54.426 12202 12202 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 15:34:54.426 12202 12202 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 15:34:54.426 12202 12202 base_db.cc 52] Host: localhost
+[I 07/10/24 15:34:54.426 12202 12202 base_db.cc 53] Port: 3306
+[I 07/10/24 15:34:54.426 12202 12202 base_db.cc 54] Username: root
+[I 07/10/24 15:34:54.426 12202 12202 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 15:34:54.426 12202 12202 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 15:34:54.430 12202 12202 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 15:35:00.957 12202 14496 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 15:35:00.957 12202 14496 request_handler.cc 17] key cmd_type value register
+[I 07/10/24 15:35:00.957 12202 14496 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/10/24 15:35:00.957 12202 14496 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 15:35:00.957 12202 14496 request_handler.cc 17] key username value cidi
+[I 07/10/24 15:37:26.846 26964 26964 main.cc 79] web_server version ba9b014
+[I 07/10/24 15:37:26.846 26964 26964 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 15:37:26.846 26964 26964 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 15:37:26.846 26964 26964 base_db.cc 52] Host: localhost
+[I 07/10/24 15:37:26.846 26964 26964 base_db.cc 53] Port: 3306
+[I 07/10/24 15:37:26.846 26964 26964 base_db.cc 54] Username: root
+[I 07/10/24 15:37:26.846 26964 26964 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 15:37:26.846 26964 26964 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 15:37:26.851 26964 26964 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 15:37:30.660 26964 29608 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 15:37:30.660 26964 29608 request_handler.cc 17] key cmd_type value register
+[I 07/10/24 15:37:30.660 26964 29608 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/10/24 15:37:30.660 26964 29608 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 15:37:30.660 26964 29608 request_handler.cc 17] key username value cidi
+[I 07/10/24 15:42:31.951 10730 10730 main.cc 79] web_server version ba9b014
+[I 07/10/24 15:42:31.951 10730 10730 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 15:42:31.951 10730 10730 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 15:42:31.951 10730 10730 base_db.cc 52] Host: localhost
+[I 07/10/24 15:42:31.951 10730 10730 base_db.cc 53] Port: 3306
+[I 07/10/24 15:42:31.951 10730 10730 base_db.cc 54] Username: root
+[I 07/10/24 15:42:31.951 10730 10730 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 15:42:31.951 10730 10730 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 15:42:31.957 10730 10730 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 15:42:35.220 10730 13320 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 15:42:35.221 10730 13320 request_handler.cc 17] key cmd_type value register
+[I 07/10/24 15:42:35.221 10730 13320 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/10/24 15:42:35.221 10730 13320 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 15:42:35.221 10730 13320 request_handler.cc 17] key username value cidi
+[I 07/10/24 15:46:58.015 15676 15676 main.cc 79] web_server version ba9b014
+[I 07/10/24 15:46:58.015 15676 15676 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 15:46:58.015 15676 15676 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 15:46:58.015 15676 15676 base_db.cc 52] Host: localhost
+[I 07/10/24 15:46:58.015 15676 15676 base_db.cc 53] Port: 3306
+[I 07/10/24 15:46:58.015 15676 15676 base_db.cc 54] Username: root
+[I 07/10/24 15:46:58.015 15676 15676 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 15:46:58.015 15676 15676 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 15:46:58.020 15676 15676 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 15:47:03.646 15676 17780 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 15:47:03.646 15676 17780 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 15:47:03.646 15676 17780 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 15:47:03.646 15676 17780 request_handler.cc 17] key username value cidi
+[I 07/10/24 15:47:03.646 15676 17780 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":6,"result_msg":"失败"}
+
+[I 07/10/24 15:47:44.599 15676 17780 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 15:47:44.599 15676 17780 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 15:47:44.599 15676 17780 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 15:47:44.599 15676 17780 request_handler.cc 17] key username value cidi
+[I 07/10/24 15:48:09.589 6420 6420 main.cc 79] web_server version ba9b014
+[I 07/10/24 15:48:09.589 6420 6420 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 15:48:09.589 6420 6420 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 15:48:09.589 6420 6420 base_db.cc 52] Host: localhost
+[I 07/10/24 15:48:09.589 6420 6420 base_db.cc 53] Port: 3306
+[I 07/10/24 15:48:09.589 6420 6420 base_db.cc 54] Username: root
+[I 07/10/24 15:48:09.589 6420 6420 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 15:48:09.589 6420 6420 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 15:48:09.594 6420 6420 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 15:48:12.126 6420 8567 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 15:48:12.126 6420 8567 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 15:48:12.126 6420 8567 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 15:48:12.126 6420 8567 request_handler.cc 17] key username value cidi
+[I 07/10/24 15:53:41.226 18398 18398 main.cc 79] web_server version ba9b014
+[I 07/10/24 15:53:41.226 18398 18398 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 15:53:52.079 18398 25524 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 15:53:52.079 18398 25524 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 15:53:52.079 18398 25524 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 15:53:52.079 18398 25524 request_handler.cc 17] key username value cidi
+[I 07/10/24 15:53:52.307 18398 25524 request_handler.cc 34] ----------Rely------------
+send ok
+[I 07/10/24 15:59:17.952 12802 12802 main.cc 79] web_server version ba9b014
+[I 07/10/24 15:59:17.953 12802 12802 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 15:59:17.953 12802 12802 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 15:59:17.953 12802 12802 base_db.cc 52] Host: localhost
+[I 07/10/24 15:59:17.953 12802 12802 base_db.cc 53] Port: 3306
+[I 07/10/24 15:59:17.953 12802 12802 base_db.cc 54] Username: root
+[I 07/10/24 15:59:17.953 12802 12802 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 15:59:17.953 12802 12802 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 15:59:17.958 12802 12802 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 16:26:42.445 6001 6001 main.cc 79] web_server version ba9b014
+[I 07/10/24 16:26:42.445 6001 6001 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 16:26:42.445 6001 6001 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 16:26:42.445 6001 6001 base_db.cc 52] Host: localhost
+[I 07/10/24 16:26:42.445 6001 6001 base_db.cc 53] Port: 3306
+[I 07/10/24 16:26:42.445 6001 6001 base_db.cc 54] Username: root
+[I 07/10/24 16:26:42.445 6001 6001 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 16:26:42.446 6001 6001 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 16:26:42.448 6001 6001 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 16:26:51.491 6001 8304 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 16:26:51.491 6001 8304 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 16:26:51.491 6001 8304 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 16:26:51.491 6001 8304 request_handler.cc 17] key username value cidi
+[I 07/10/24 16:26:51.491 6001 8304 svm_db.cc 34] Login success.
+
+[I 07/10/24 16:26:51.491 6001 8304 svm_db.cc 51] UpdateToken error, sql UPDATE users SET access_token='cidi', update_timestamp='1720600011' WHERE username='5P08RXk3Di18R7Ru'
+
+[I 07/10/24 16:26:51.491 6001 8304 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-2,"result_msg":"Failed to update session token."}
+
+[I 07/10/24 16:46:47.634 10530 10530 main.cc 79] web_server version ba9b014
+[I 07/10/24 16:46:47.634 10530 10530 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 16:46:47.634 10530 10530 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 16:46:47.634 10530 10530 base_db.cc 52] Host: localhost
+[I 07/10/24 16:46:47.634 10530 10530 base_db.cc 53] Port: 3306
+[I 07/10/24 16:46:47.634 10530 10530 base_db.cc 54] Username: root
+[I 07/10/24 16:46:47.634 10530 10530 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 16:46:47.634 10530 10530 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 16:46:47.639 10530 10530 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 16:46:54.828 10530 13114 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 16:46:54.829 10530 13114 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 16:46:54.829 10530 13114 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 16:46:54.829 10530 13114 request_handler.cc 17] key username value cidi
+[I 07/10/24 16:46:54.829 10530 13114 svm_db.cc 34] Login success.
+
+[I 07/10/24 16:46:54.829 10530 13114 svm_db.cc 50] UpdateTokenerror , sql SELECT user_id FROM users WHERE username=OQuqrjMjSnH44nF4
+
+[I 07/10/24 16:46:54.829 10530 13114 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-1,"result_msg":"Failed to update session token."}
+
+[I 07/10/24 16:50:03.989 19192 19192 main.cc 79] web_server version ba9b014
+[I 07/10/24 16:50:03.989 19192 19192 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 16:50:03.990 19192 19192 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 16:50:03.990 19192 19192 base_db.cc 52] Host: localhost
+[I 07/10/24 16:50:03.990 19192 19192 base_db.cc 53] Port: 3306
+[I 07/10/24 16:50:03.990 19192 19192 base_db.cc 54] Username: root
+[I 07/10/24 16:50:03.990 19192 19192 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 16:50:03.990 19192 19192 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 16:50:03.994 19192 19192 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 16:50:06.290 19192 21459 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 16:50:06.290 19192 21459 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 16:50:06.290 19192 21459 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 16:50:06.290 19192 21459 request_handler.cc 17] key username value cidi
+[I 07/10/24 16:50:06.291 19192 21459 svm_db.cc 34] Login success.
+
+[I 07/10/24 16:50:06.291 19192 21459 svm_db.cc 50] UpdateTokenerror , sql SELECT user_id FROM users WHERE username='kw5ybRh83235sy5N'
+
+[I 07/10/24 16:50:06.291 19192 21459 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-1,"result_msg":"Failed to update session token."}
+
+[I 07/10/24 17:03:37.623 31975 31975 main.cc 79] web_server version ba9b014
+[I 07/10/24 17:03:37.623 31975 31975 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 17:03:37.623 31975 31975 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 17:03:37.623 31975 31975 base_db.cc 52] Host: localhost
+[I 07/10/24 17:03:37.623 31975 31975 base_db.cc 53] Port: 3306
+[I 07/10/24 17:03:37.623 31975 31975 base_db.cc 54] Username: root
+[I 07/10/24 17:03:37.623 31975 31975 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 17:03:37.623 31975 31975 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 17:03:37.628 31975 31975 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 17:03:50.926 31975 1926 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 17:03:50.926 31975 1926 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 17:03:50.926 31975 1926 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 17:03:50.926 31975 1926 request_handler.cc 17] key username value cidi
+[I 07/10/24 17:03:50.926 31975 1926 svm_db.cc 34] Login success.
+
+[I 07/10/24 17:03:50.928 31975 1926 svm_db.cc 50] UpdateToken error , sql SELECT user_id FROM users WHERE username='QLxK0H2REf51LZvi'
+
+[I 07/10/24 17:03:50.928 31975 1926 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-1,"result_msg":"Failed to update session token."}
+
+[I 07/10/24 17:10:17.332 2653 2653 main.cc 79] web_server version ba9b014
+[I 07/10/24 17:10:17.332 2653 2653 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 17:10:17.332 2653 2653 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 17:10:17.332 2653 2653 base_db.cc 52] Host: localhost
+[I 07/10/24 17:10:17.332 2653 2653 base_db.cc 53] Port: 3306
+[I 07/10/24 17:10:17.332 2653 2653 base_db.cc 54] Username: root
+[I 07/10/24 17:10:17.332 2653 2653 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 17:10:17.332 2653 2653 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 17:10:17.335 2653 2653 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 17:10:23.409 2653 4808 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 17:10:23.409 2653 4808 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 17:10:23.409 2653 4808 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 17:10:23.409 2653 4808 request_handler.cc 17] key username value cidi
+[I 07/10/24 17:10:23.409 2653 4808 svm_db.cc 34] Login success.
+
+[I 07/10/24 17:10:23.409 2653 4808 svm_db.cc 50] UpdateToken error , sql SELECT user_id FROM users WHERE username='QB8lSaj18ta2ors6'
+
+[I 07/10/24 17:10:23.409 2653 4808 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-1,"result_msg":"Failed to update session token."}
+
+[I 07/10/24 17:12:43.191 9838 9838 main.cc 79] web_server version ba9b014
+[I 07/10/24 17:12:43.191 9838 9838 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 17:12:43.191 9838 9838 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 17:12:43.191 9838 9838 base_db.cc 52] Host: localhost
+[I 07/10/24 17:12:43.191 9838 9838 base_db.cc 53] Port: 3306
+[I 07/10/24 17:12:43.191 9838 9838 base_db.cc 54] Username: root
+[I 07/10/24 17:12:43.191 9838 9838 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 17:12:43.191 9838 9838 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 17:12:43.197 9838 9838 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 17:12:46.802 9838 12392 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 17:12:46.802 9838 12392 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 17:12:46.802 9838 12392 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 17:12:46.802 9838 12392 request_handler.cc 17] key username value cidi
+[I 07/10/24 17:12:46.803 9838 12392 svm_db.cc 34] Login success.
+
+[I 07/10/24 17:13:11.799 28271 28271 main.cc 79] web_server version ba9b014
+[I 07/10/24 17:13:11.799 28271 28271 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 17:13:11.799 28271 28271 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 17:13:11.800 28271 28271 base_db.cc 52] Host: localhost
+[I 07/10/24 17:13:11.800 28271 28271 base_db.cc 53] Port: 3306
+[I 07/10/24 17:13:11.800 28271 28271 base_db.cc 54] Username: root
+[I 07/10/24 17:13:11.800 28271 28271 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 17:13:11.800 28271 28271 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 17:13:11.805 28271 28271 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 17:13:15.635 28271 30791 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 17:13:15.635 28271 30791 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 17:13:15.635 28271 30791 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 17:13:15.635 28271 30791 request_handler.cc 17] key username value cidi
+[I 07/10/24 17:17:32.659 15991 15991 main.cc 79] web_server version ba9b014
+[I 07/10/24 17:17:32.659 15991 15991 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 17:17:32.660 15991 15991 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 17:17:32.660 15991 15991 base_db.cc 52] Host: localhost
+[I 07/10/24 17:17:32.660 15991 15991 base_db.cc 53] Port: 3306
+[I 07/10/24 17:17:32.660 15991 15991 base_db.cc 54] Username: root
+[I 07/10/24 17:17:32.660 15991 15991 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 17:17:32.660 15991 15991 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 17:17:32.664 15991 15991 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 17:17:37.324 15991 18112 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 17:17:37.324 15991 18112 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 17:17:37.324 15991 18112 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 17:17:37.324 15991 18112 request_handler.cc 17] key username value cidi
+[I 07/10/24 17:17:37.325 15991 18112 svm_db.cc 34] Login success.
+
+[I 07/10/24 17:17:37.327 15991 18112 svm_db.cc 59] UpdateToken error, sql INSERT INTO sessions (user_id, session_token, created_at) VALUES (1, 'dFWkM2n3n32v1h81', NOW())
+
+[I 07/10/24 17:17:37.327 15991 18112 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-2,"result_msg":"Failed to update session token."}
+
+[I 07/10/24 17:23:22.566 13035 13035 main.cc 79] web_server version ba9b014
+[I 07/10/24 17:23:22.566 13035 13035 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 17:23:22.566 13035 13035 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 17:23:22.566 13035 13035 base_db.cc 52] Host: localhost
+[I 07/10/24 17:23:22.566 13035 13035 base_db.cc 53] Port: 3306
+[I 07/10/24 17:23:22.566 13035 13035 base_db.cc 54] Username: root
+[I 07/10/24 17:23:22.566 13035 13035 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 17:23:22.566 13035 13035 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 17:23:22.571 13035 13035 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 17:23:27.238 13035 15275 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 17:23:27.238 13035 15275 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 17:23:27.238 13035 15275 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 17:23:27.238 13035 15275 request_handler.cc 17] key username value cidi
+[I 07/10/24 17:23:27.238 13035 15275 svm_db.cc 34] Login success.
+
+[I 07/10/24 17:23:27.242 13035 15275 subway_app.cc 293] Login successful for user: cidi
+
+[I 07/10/24 17:23:27.242 13035 15275 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"cidi","session_id":"zz4OhyO04d57G8w3","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/10/24 17:32:37.674 13035 15275 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 17:32:37.674 13035 15275 request_handler.cc 17] key cmd_type value register
+[I 07/10/24 17:32:37.674 13035 15275 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 17:32:37.674 13035 15275 request_handler.cc 17] key username value test
+[I 07/10/24 17:32:37.674 13035 15275 subway_app.cc 309] Registration failed.Username, Password, and Email can not be empty. 
+[I 07/10/24 17:32:37.674 13035 15275 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":-1,"result_msg":"Username, Password, and Email can not be empty. "}
+
+[I 07/10/24 17:44:07.292 22176 22176 main.cc 79] web_server version ba9b014
+[I 07/10/24 17:44:07.292 22176 22176 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 17:44:07.292 22176 22176 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 17:44:07.292 22176 22176 base_db.cc 52] Host: localhost
+[I 07/10/24 17:44:07.292 22176 22176 base_db.cc 53] Port: 3306
+[I 07/10/24 17:44:07.292 22176 22176 base_db.cc 54] Username: root
+[I 07/10/24 17:44:07.292 22176 22176 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 17:44:07.292 22176 22176 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 17:44:07.297 22176 22176 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 17:44:12.089 22176 24696 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 17:44:12.089 22176 24696 request_handler.cc 17] key cmd_type value register
+[I 07/10/24 17:44:12.089 22176 24696 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/10/24 17:44:12.089 22176 24696 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 17:44:12.089 22176 24696 request_handler.cc 17] key username value test
+[I 07/10/24 17:57:21.393 28369 28369 main.cc 79] web_server version ba9b014
+[I 07/10/24 17:57:21.393 28369 28369 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 17:57:21.394 28369 28369 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 17:57:21.394 28369 28369 base_db.cc 52] Host: localhost
+[I 07/10/24 17:57:21.394 28369 28369 base_db.cc 53] Port: 3306
+[I 07/10/24 17:57:21.394 28369 28369 base_db.cc 54] Username: root
+[I 07/10/24 17:57:21.394 28369 28369 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 17:57:21.394 28369 28369 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 17:57:21.399 28369 28369 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 18:19:13.848 22012 22012 main.cc 79] web_server version ba9b014
+[I 07/10/24 18:19:13.848 22012 22012 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 18:19:13.848 22012 22012 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 18:19:13.848 22012 22012 base_db.cc 52] Host: localhost
+[I 07/10/24 18:19:13.848 22012 22012 base_db.cc 53] Port: 3306
+[I 07/10/24 18:19:13.848 22012 22012 base_db.cc 54] Username: root
+[I 07/10/24 18:19:13.848 22012 22012 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 18:19:13.848 22012 22012 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 18:19:13.853 22012 22012 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 18:19:26.092 22012 24524 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 18:19:26.092 22012 24524 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 18:19:26.092 22012 24524 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 18:19:26.092 22012 24524 request_handler.cc 17] key username value cidi
+[I 07/10/24 18:19:26.092 22012 24524 svm_db.cc 34] Login success.
+
+[I 07/10/24 18:19:26.096 22012 24524 subway_app.cc 293] Login successful for user: cidi
+
+[I 07/10/24 18:19:26.096 22012 24524 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"cidi","session_id":"HYGGWV770WRmk986","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/10/24 18:29:53.251 24726 24726 main.cc 79] web_server version ba9b014
+[I 07/10/24 18:29:53.251 24726 24726 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 18:29:53.251 24726 24726 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 18:29:53.251 24726 24726 base_db.cc 52] Host: localhost
+[I 07/10/24 18:29:53.251 24726 24726 base_db.cc 53] Port: 3306
+[I 07/10/24 18:29:53.251 24726 24726 base_db.cc 54] Username: root
+[I 07/10/24 18:29:53.251 24726 24726 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 18:29:53.251 24726 24726 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 18:29:53.254 24726 24726 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 18:31:08.180 5850 5850 main.cc 79] web_server version ba9b014
+[I 07/10/24 18:31:08.180 5850 5850 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 18:31:08.180 5850 5850 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 18:31:08.180 5850 5850 base_db.cc 52] Host: localhost
+[I 07/10/24 18:31:08.180 5850 5850 base_db.cc 53] Port: 3306
+[I 07/10/24 18:31:08.180 5850 5850 base_db.cc 54] Username: root
+[I 07/10/24 18:31:08.180 5850 5850 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 18:31:08.180 5850 5850 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 18:31:08.185 5850 5850 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 18:42:10.621 15096 15096 main.cc 79] web_server version ba9b014
+[I 07/10/24 18:42:10.621 15096 15096 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 18:42:10.621 15096 15096 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 18:42:10.621 15096 15096 base_db.cc 52] Host: localhost
+[I 07/10/24 18:42:10.621 15096 15096 base_db.cc 53] Port: 3306
+[I 07/10/24 18:42:10.621 15096 15096 base_db.cc 54] Username: root
+[I 07/10/24 18:42:10.621 15096 15096 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 18:42:10.621 15096 15096 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 18:42:10.624 15096 15096 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 18:42:17.582 15096 17393 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 18:42:17.582 15096 17393 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 18:42:17.582 15096 17393 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 18:42:17.582 15096 17393 request_handler.cc 17] key username value cidi
+[I 07/10/24 18:42:17.582 15096 17393 svm_db.cc 34] Login success.
+
+[I 07/10/24 18:42:17.585 15096 17393 subway_app.cc 293] Login successful for user: cidi
+
+[I 07/10/24 18:42:17.585 15096 17393 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"cidi","session_id":"Lugev156z4Q0lwXu","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/10/24 18:46:57.141 30668 30668 main.cc 79] web_server version ba9b014
+[I 07/10/24 18:46:57.141 30668 30668 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 18:46:57.141 30668 30668 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 18:46:57.141 30668 30668 base_db.cc 52] Host: localhost
+[I 07/10/24 18:46:57.141 30668 30668 base_db.cc 53] Port: 3306
+[I 07/10/24 18:46:57.141 30668 30668 base_db.cc 54] Username: root
+[I 07/10/24 18:46:57.141 30668 30668 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 18:46:57.141 30668 30668 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 18:46:57.146 30668 30668 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 18:46:58.992 30668 510 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 18:46:58.992 30668 510 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 18:46:58.992 30668 510 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 18:46:58.992 30668 510 request_handler.cc 17] key username value cidi
+[I 07/10/24 18:46:58.992 30668 510 subway_app.cc 70] Handle enter 
+
+[I 07/10/24 18:46:58.992 30668 510 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/10/24 18:46:58.992 30668 510 subway_app.cc 246] Login enter 
+
+[I 07/10/24 18:46:58.992 30668 510 svm_db.cc 34] Login success.
+
+[I 07/10/24 18:46:58.996 30668 510 subway_app.cc 297] Login successful for user: cidi
+
+[I 07/10/24 18:46:58.996 30668 510 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"cidi","session_id":"nNUOYdG1q85OkqCu","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/10/24 18:47:59.338 23990 23990 main.cc 79] web_server version ba9b014
+[I 07/10/24 18:47:59.338 23990 23990 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 18:47:59.338 23990 23990 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 18:47:59.338 23990 23990 base_db.cc 52] Host: localhost
+[I 07/10/24 18:47:59.338 23990 23990 base_db.cc 53] Port: 3306
+[I 07/10/24 18:47:59.338 23990 23990 base_db.cc 54] Username: root
+[I 07/10/24 18:47:59.338 23990 23990 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 18:47:59.338 23990 23990 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 18:47:59.344 23990 23990 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 18:48:04.441 23990 26234 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 18:48:04.441 23990 26234 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 18:48:04.441 23990 26234 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 18:48:04.441 23990 26234 request_handler.cc 17] key username value cidi
+[I 07/10/24 18:48:04.441 23990 26234 subway_app.cc 70] Handle enter 
+
+[I 07/10/24 18:48:04.441 23990 26234 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/10/24 18:48:04.441 23990 26234 subway_app.cc 246] Login enter 
+
+[I 07/10/24 18:48:04.441 23990 26234 svm_db.cc 34] Login success.
+
+[I 07/10/24 18:48:04.445 23990 26234 subway_app.cc 297] Login successful for user: cidi
+
+[I 07/10/24 18:48:04.445 23990 26234 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"cidi","session_id":"GDJyCo0Th8Z257Zc","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/10/24 18:48:07.863 23990 26234 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 18:48:07.863 23990 26234 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 18:48:07.863 23990 26234 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 18:48:07.863 23990 26234 request_handler.cc 17] key username value cidi
+[I 07/10/24 18:48:07.863 23990 26234 subway_app.cc 70] Handle enter 
+
+[I 07/10/24 18:48:07.863 23990 26234 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/10/24 18:48:07.864 23990 26234 subway_app.cc 246] Login enter 
+
+[I 07/10/24 18:48:07.864 23990 26234 svm_db.cc 34] Login success.
+
+[I 07/10/24 18:48:07.867 23990 26234 subway_app.cc 297] Login successful for user: cidi
+
+[I 07/10/24 18:48:07.867 23990 26234 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"cidi","session_id":"o0cc6Bc8i85SgmF5","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/10/24 18:48:13.520 23990 26234 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 18:48:13.520 23990 26234 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 18:48:13.520 23990 26234 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 18:48:13.520 23990 26234 request_handler.cc 17] key username value cidi
+[I 07/10/24 18:48:13.520 23990 26234 subway_app.cc 70] Handle enter 
+
+[I 07/10/24 18:48:13.520 23990 26234 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/10/24 18:48:13.521 23990 26234 subway_app.cc 246] Login enter 
+
+[I 07/10/24 18:48:13.521 23990 26234 svm_db.cc 34] Login success.
+
+[I 07/10/24 18:48:13.524 23990 26234 subway_app.cc 297] Login successful for user: cidi
+
+[I 07/10/24 18:48:13.524 23990 26234 request_handler.cc 34] ----------Rely------------
+{"data_map":{"role":"cidi","session_id":"i9wcL9tA7QR3226W","stream_url":"ws://svm.pingtai.cidiserver.com:41001"},"result_code":0,"result_msg":"Login successful."}
+
+[I 07/10/24 18:49:29.959 16264 16264 main.cc 79] web_server version ba9b014
+[I 07/10/24 18:49:29.959 16264 16264 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 18:49:29.959 16264 16264 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 18:49:29.959 16264 16264 base_db.cc 52] Host: localhost
+[I 07/10/24 18:49:29.959 16264 16264 base_db.cc 53] Port: 3306
+[I 07/10/24 18:49:29.959 16264 16264 base_db.cc 54] Username: root
+[I 07/10/24 18:49:29.959 16264 16264 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 18:49:29.959 16264 16264 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 18:49:29.964 16264 16264 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 18:56:54.948 10507 10507 main.cc 79] web_server version ba9b014
+[I 07/10/24 18:56:54.948 10507 10507 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 18:56:54.948 10507 10507 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 18:56:54.948 10507 10507 base_db.cc 52] Host: localhost
+[I 07/10/24 18:56:54.948 10507 10507 base_db.cc 53] Port: 3306
+[I 07/10/24 18:56:54.948 10507 10507 base_db.cc 54] Username: root
+[I 07/10/24 18:56:54.948 10507 10507 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 18:56:54.948 10507 10507 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 18:56:54.952 10507 10507 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 18:57:09.241 10507 12956 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 18:57:09.241 10507 12956 request_handler.cc 17] key cmd_type value login
+[I 07/10/24 18:57:09.241 10507 12956 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/10/24 18:57:09.241 10507 12956 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 18:57:09.241 10507 12956 request_handler.cc 17] key username value test
+[I 07/10/24 18:57:09.241 10507 12956 subway_app.cc 70] Handle enter 
+
+[I 07/10/24 18:57:09.241 10507 12956 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/10/24 18:57:09.242 10507 12956 request_handler.cc 34] ----------Rely------------
+{"data_map":"{}","result_code":892350752,"result_msg":"失败"}
+
+[I 07/10/24 19:00:44.082 15448 15448 main.cc 79] web_server version ba9b014
+[I 07/10/24 19:00:44.082 15448 15448 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 19:00:44.082 15448 15448 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 19:00:44.082 15448 15448 base_db.cc 52] Host: localhost
+[I 07/10/24 19:00:44.082 15448 15448 base_db.cc 53] Port: 3306
+[I 07/10/24 19:00:44.082 15448 15448 base_db.cc 54] Username: root
+[I 07/10/24 19:00:44.082 15448 15448 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 19:00:44.082 15448 15448 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 19:00:44.087 15448 15448 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 19:00:46.554 15448 17691 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 19:00:46.554 15448 17691 request_handler.cc 17] key cmd_type value register
+[I 07/10/24 19:00:46.554 15448 17691 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/10/24 19:00:46.554 15448 17691 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 19:00:46.554 15448 17691 request_handler.cc 17] key username value test
+[I 07/10/24 19:00:46.554 15448 17691 subway_app.cc 70] Handle enter 
+
+[I 07/10/24 19:00:46.554 15448 17691 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/10/24 19:00:46.554 15448 17691 subway_app.cc 306] Register enter 
+
+[I 07/10/24 19:02:53.045 11250 11250 main.cc 79] web_server version ba9b014
+[I 07/10/24 19:02:53.045 11250 11250 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 19:02:53.045 11250 11250 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 19:02:53.045 11250 11250 base_db.cc 52] Host: localhost
+[I 07/10/24 19:02:53.045 11250 11250 base_db.cc 53] Port: 3306
+[I 07/10/24 19:02:53.045 11250 11250 base_db.cc 54] Username: root
+[I 07/10/24 19:02:53.045 11250 11250 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 19:02:53.045 11250 11250 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 19:02:53.050 11250 11250 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 19:03:31.890 342 342 main.cc 79] web_server version ba9b014
+[I 07/10/24 19:03:31.890 342 342 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 19:03:31.891 342 342 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 19:03:31.891 342 342 base_db.cc 52] Host: localhost
+[I 07/10/24 19:03:31.891 342 342 base_db.cc 53] Port: 3306
+[I 07/10/24 19:03:31.891 342 342 base_db.cc 54] Username: root
+[I 07/10/24 19:03:31.891 342 342 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 19:03:31.891 342 342 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 19:03:31.896 342 342 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 19:03:55.861 9338 9338 main.cc 79] web_server version ba9b014
+[I 07/10/24 19:03:55.862 9338 9338 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 19:03:55.862 9338 9338 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 19:03:55.862 9338 9338 base_db.cc 52] Host: localhost
+[I 07/10/24 19:03:55.862 9338 9338 base_db.cc 53] Port: 3306
+[I 07/10/24 19:03:55.862 9338 9338 base_db.cc 54] Username: root
+[I 07/10/24 19:03:55.862 9338 9338 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 19:03:55.862 9338 9338 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 19:03:55.866 9338 9338 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 19:04:02.916 9338 11562 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 19:04:02.916 9338 11562 request_handler.cc 17] key cmd_type value register
+[I 07/10/24 19:04:02.916 9338 11562 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/10/24 19:04:02.916 9338 11562 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 19:04:02.916 9338 11562 request_handler.cc 17] key username value test
+[I 07/10/24 19:04:02.916 9338 11562 subway_app.cc 70] Handle enter 
+
+[I 07/10/24 19:04:02.916 9338 11562 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/10/24 19:07:29.102 31210 31210 main.cc 79] web_server version ba9b014
+[I 07/10/24 19:07:29.102 31210 31210 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 19:07:29.102 31210 31210 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 19:07:29.102 31210 31210 base_db.cc 52] Host: localhost
+[I 07/10/24 19:07:29.102 31210 31210 base_db.cc 53] Port: 3306
+[I 07/10/24 19:07:29.102 31210 31210 base_db.cc 54] Username: root
+[I 07/10/24 19:07:29.102 31210 31210 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 19:07:29.102 31210 31210 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 19:07:29.107 31210 31210 base_db.cc 62] Connect user root connect state 0
+
+[I 07/10/24 19:07:32.164 31210 1236 request_handler.cc 15] ---------incoming-------------
+[I 07/10/24 19:07:32.164 31210 1236 request_handler.cc 17] key cmd_type value register
+[I 07/10/24 19:07:32.164 31210 1236 request_handler.cc 17] key email value 1029343447@qq.com
+[I 07/10/24 19:07:32.164 31210 1236 request_handler.cc 17] key password value c4ca4238a0b923820dcc509a6f75849b
+[I 07/10/24 19:07:32.164 31210 1236 request_handler.cc 17] key username value test
+[I 07/10/24 19:07:32.164 31210 1236 subway_app.cc 70] Handle enter 
+
+[I 07/10/24 19:07:32.164 31210 1236 subway_app.cc 179] IdentifyClient enter 
+
+[I 07/10/24 19:07:51.529 27563 27563 main.cc 79] web_server version ba9b014
+[I 07/10/24 19:07:51.529 27563 27563 main.cc 80] web_server date Tue Jul  9 15:58:44 CST 2024
+[I 07/10/24 19:07:51.529 27563 27563 base_db.cc 51] Attempting to connect to MySQL databases:
+[I 07/10/24 19:07:51.529 27563 27563 base_db.cc 52] Host: localhost
+[I 07/10/24 19:07:51.529 27563 27563 base_db.cc 53] Port: 3306
+[I 07/10/24 19:07:51.529 27563 27563 base_db.cc 54] Username: root
+[I 07/10/24 19:07:51.529 27563 27563 base_db.cc 55] Password: zy1029343447
+[I 07/10/24 19:07:51.529 27563 27563 base_db.cc 56] Database Name: web_server_info
+[I 07/10/24 19:07:51.534 27563 27563 base_db.cc 62] Connect user root connect state 0
+
