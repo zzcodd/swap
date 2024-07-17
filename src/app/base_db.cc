@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: zy
  * @Date: 2024-06-18 15:48:44
- * @LastEditTime: 2024-07-09 16:14:32
+ * @LastEditTime: 2024-07-17 09:05:58
  * @LastEditors: zy
  */
 #include "base_db.h"
@@ -45,8 +45,7 @@ int base_db::Connect(char *config_file)
   else strcpy(password, "");
   strcpy(db_name, root["mysql_db_name"].asCString());
 
-  //12341234 -- 685b276b007d40a1241e7f4e80f0a40c
-  //zy1029343447 -- 0d491c76a252976c955c1374a33ef910
+
   //log the connection information
   AINFO << "Attempting to connect to MySQL databases:";
   AINFO << "Host: " << host;

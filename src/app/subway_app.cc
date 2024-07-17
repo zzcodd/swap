@@ -77,7 +77,6 @@ curl -d '{ "cmd_type": "reset_password", "username": "zy", "password": "7096574c
 curl -d '{ "cmd_type": "logout", "session_token":""}' http://127.0.0.1:8081/apiserver/cmd
 
 */
-
 std::string subway_app::Handle(Command &cmd)
 {
   AINFO << __func__ << " enter " ;
@@ -93,16 +92,20 @@ std::string subway_app::Handle(Command &cmd)
 
   //获取会话令牌
   std::string session_token = BufferParser::Instance()->FindValueByKey(cmd, "session_token");
+  AINFO << "session_token: " << session_token;
 
   if(!svm_db::Instance()->ValidateSession(session_token.c_str())) 
   {
     AINFO << "Session token invalid, checking user registration ";
 
     std::string input_username = BufferParser::Instance()->FindValueByKey(cmd, "username");
+    AINFO << "input_username: " << input_username;
+
     if(!svm_db::Instance()->IsUsernameExist(input_username.c_str())) {
       AINFO << "User not registered, requesting registration";
-      if(BufferParser::Instance()->FindValueByKey(cmd, "cmd_type") != "register") {     
-      //用户不存在且不是注册指令：提示用户进行注册 
+      if(BufferParser::Instance()->FindValueByKey(cmd, "cmd_type") != "register") {
+        //用户不存在且不是注册指令：提示用户进行注册 
+        AINFO << "Not a register command, prompting registration";
         root["result_code"] = -1;
         root["result_msg"] = "User not registered, please register.";
         root["data_map"] = map.empty()? "{}" : map;
@@ -110,13 +113,7 @@ std::string subway_app::Handle(Command &cmd)
         return writer.write(root);
       } else {
         code = Register(cmd, map, out_msg);
-        if(code != 0) {
-          root["result_code"] = code;
-          root["result_msg"] = out_msg;
-          root["data_map"] = map.empty()? "{}" : map;
-          Json::FastWriter writer;
-          return writer.write(root);
-        }
+        AINFO << "Register command result: " << code << ", message: " << out_msg;
         root["result_code"] = code;
         root["result_msg"] = out_msg;
         root["data_map"] = map.empty()? "{}" : map;
@@ -130,6 +127,7 @@ std::string subway_app::Handle(Command &cmd)
     if(BufferParser::Instance()->FindValueByKey(cmd, "cmd_type") == "login") 
     {
       code = Login(cmd, map, out_msg);
+      AINFO << "Login command result: " << code << ", message: " << out_msg;
       if(code != 0) 
       {
         root["result_code"] = code;
@@ -137,19 +135,20 @@ std::string subway_app::Handle(Command &cmd)
         root["data_map"] = map.empty()? "{}" : map;
         Json::FastWriter writer;
         return writer.write(root);
-      }        
+      }
       
       root["result_code"] = code;
       root["result_msg"] = out_msg;
       root["data_map"] = map.empty()? "{}" : map;
       //生成新令牌
       session_token = map["session_token"].asString();
-      AINFO << "Login successful, new session token: " << session_token ;
+      AINFO << "Login successful, new session token: " << session_token;
       
       Json::FastWriter writer;
       return writer.write(root);
     } else 
     {
+      AINFO << "Invalid session token, prompting login";
       root["result_code"] = -1;
       root["result_msg"] = "Session token invalid, please login.";
       Json::FastWriter writer;
@@ -158,21 +157,22 @@ std::string subway_app::Handle(Command &cmd)
   }
   else 
   {
-    AINFO << "Session token valid. ";
+    AINFO << "Session token valid.";
     //处理命令
     if(CLIENT_UNKNOWN == type) {
-      AINFO << "Handling as  CLIENT_UNKNOWN." ;
+      AINFO << "Handling as CLIENT_UNKNOWN.";
       code = PickHandle(cmd, map, out_msg);
     } else if(CLIENT_ADMIN == type) {
-      AINFO << "Handling as  CLIENT_ADMIN." ;
+      AINFO << "Handling as CLIENT_ADMIN.";
       //TODO
       code = PickHandle(cmd, map, out_msg);
     } else if(CLIENT_CIDI == type) {
-      AINFO << "Handling as  CLIENT_ADMIN." ;
+      AINFO << "Handling as CLIENT_CIDI.";
       //TODO
       code = PickHandle(cmd, map, out_msg);
     }
   
+    AINFO << "Command handling result: " << code << ", message: " << out_msg;
     root["result_code"] = code;
     root["result_msg"] = out_msg != "" ? out_msg : msg;
     root["data_map"] = map.empty() ? "{}" : map;
@@ -181,6 +181,7 @@ std::string subway_app::Handle(Command &cmd)
     return writer.write(root);
   }
 }
+
 
 int subway_app::PickHandle(Command &cmd, Json::Value &map,
     std::string &out_msg)
