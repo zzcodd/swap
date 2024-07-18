@@ -22,10 +22,8 @@ int svm_db::Login(const char *username, const char *passwd)
       "SELECT user_id,role FROM users WHERE username='%s' AND password_hash='%s'",
       username, passwd);
   result.clear();
-  AINFO << __func__ << "enter here1" ;
 
   int rc = MysqlAccess::Instance()->QuerySQL(sql_string, result, NULL);
-  AINFO << __func__ << "enter here2" ;
 
   if (rc != 0) return -2;
   if (result.size() > 0) {
@@ -219,7 +217,7 @@ bool svm_db::ValidateSession(const char *token)
   // int rc = MysqlAccess::Instance()-> QuerySQL(sql_string, result, nullptr);
   
   // return (rc == 0 && !result.empty());
-  return 1;
+  return true;
 }
 
 int svm_db::Logout(const char *token)

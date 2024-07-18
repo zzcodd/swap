@@ -289,7 +289,6 @@ int subway_app::Login(Command &cmd, Json::Value &map, std::string &out_msg)
   std::string input_password = BufferParser::Instance()->FindValueByKey(cmd,"password");
  
   //哈希密码
-
   int rc = svm_db::Instance()->Login((char*)input_username.c_str(),
       (char*)input_password.c_str());
  
@@ -353,23 +352,6 @@ int subway_app::Register(Command &cmd, Json::Value &map, std::string &out_msg)
     return -1;
   }
   
-  int size = 0;
-  char* decoded_password = data_decode(&size,(char*)input_password.c_str(), input_password.length());
-
-  if(!decoded_password) {
-    out_msg = "Failed to decode password.";
-    AINFO << "Registration failed: " << out_msg;
-    return -1;
-  }
-  
-  if(!svm_db::Instance()->IsPasswordComplex(decoded_password)) {
-    out_msg = "Password does not meet complexity requirement.";
-    AINFO << "Registration failed." << out_msg ;
-    return -1;   
-  }
-  free(decoded_password);
-
-  
   //用户名和邮箱唯一
   if(svm_db::Instance()->IsUsernameExist(input_username.c_str())) {
     out_msg = "Username already exists.";
@@ -382,9 +364,6 @@ int subway_app::Register(Command &cmd, Json::Value &map, std::string &out_msg)
     AINFO << "Registration failed." << out_msg;
     return -1;
   }
-
-  //对密码进行哈希处理
-  //此处直接假定传输过来的数据是加密的
 
   //保存信息到数据库
   int rc = svm_db::Instance()->Register(input_username.c_str(), input_password.c_str(), input_email.c_str());
@@ -422,15 +401,7 @@ int subway_app::ResetPassword(Command &cmd, Json::Value &map, std::string &out_m
     AINFO << "Password reset failed. " << out_msg;
     return -1;
   }
-  //新密码复杂度
-  int size = 0;
-  char * decode_new_passwd = data_decode(&size, new_password.c_str(), new_password.length());
 
-  if(!svm_db::Instance()->IsPasswordComplex(decode_new_passwd)) {
-    out_msg = "Failed to reset password.";
-    AINFO << "Password reset failed. " << out_msg;
-    return -1;
-  }
   //验证邮箱是否存在
   if(!svm_db::Instance()->IsEmailExist(input_email.c_str())) {
     out_msg = "Email dose not exist.";

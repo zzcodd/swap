@@ -9,6 +9,6 @@
   "mysql_host": "172.16.133.63",
   "mysql_port": 3306,
   "mysql_username": "nvidia",
-  "mysql_password": "202cb962ac59075b964b07152d234b70", 
-  "mysql_db_name": "web_server_info"
+  "mysql_password": "dc93619b243f722c3f6cd87cf2fd829e", 
+  "mysql_db_name": "web_user_info"
 }
