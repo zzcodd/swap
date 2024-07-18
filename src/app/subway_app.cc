@@ -88,7 +88,7 @@ std::string subway_app::Handle(Command &cmd)
 
   //识别客户端类型
   int type = IdentifyClient(cmd);
-  AINFO << "type: " << type;
+  AINFO << "type: " << type << "test";
 
   //获取会话令牌
   std::string session_token = BufferParser::Instance()->FindValueByKey(cmd, "session_token");

@@ -6,9 +6,9 @@
   "record_path": "/media/cidi/data/record/",
   "log_path": "./log/",
 
-  "mysql_host": "localhost",
+  "mysql_host": "172.16.133.63",
   "mysql_port": 3306,
-  "mysql_username": "root",
-  "mysql_password": "0d491c76a252976c955c1374a33ef910",      
+  "mysql_username": "nvidia",
+  "mysql_password": "202cb962ac59075b964b07152d234b70", 
   "mysql_db_name": "web_server_info"
 }

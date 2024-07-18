@@ -12,6 +12,7 @@ svm_db *svm_db::p_instance = nullptr;
 // Login
 int svm_db::Login(const char *username, const char *passwd)
 {
+  AINFO << " log enter test " ;
 	char sql_string[256] = {0};
   std::vector<std::vector<std::string> > result;
   if (!username || strlen(username) < 1 || !passwd || strlen(passwd) < 1)
@@ -21,7 +22,11 @@ int svm_db::Login(const char *username, const char *passwd)
       "SELECT user_id,role FROM users WHERE username='%s' AND password_hash='%s'",
       username, passwd);
   result.clear();
+  AINFO << __func__ << "enter here1" ;
+
   int rc = MysqlAccess::Instance()->QuerySQL(sql_string, result, NULL);
+  AINFO << __func__ << "enter here2" ;
+
   if (rc != 0) return -2;
   if (result.size() > 0) {
     AINFO << __func__ << " success.";
