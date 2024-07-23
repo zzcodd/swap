@@ -12,7 +12,6 @@ svm_db *svm_db::p_instance = nullptr;
 // Login
 int svm_db::Login(const char *username, const char *passwd)
 {
-  AINFO << " log enter test " ;
 	char sql_string[256] = {0};
   std::vector<std::vector<std::string> > result;
   if (!username || strlen(username) < 1 || !passwd || strlen(passwd) < 1)

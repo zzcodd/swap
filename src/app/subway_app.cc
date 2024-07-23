@@ -88,7 +88,7 @@ std::string subway_app::Handle(Command &cmd)
 
   //识别客户端类型
   int type = IdentifyClient(cmd);
-  AINFO << "type: " << type << "test";
+  AINFO << "type: " << type ;
 
   //获取会话令牌
   std::string session_token = BufferParser::Instance()->FindValueByKey(cmd, "session_token");
@@ -276,8 +276,8 @@ int subway_app::IdentifyClient(Command &cmd)
   if (usrname_admin == input_usrname && password_admin == input_password)
     return CLIENT_ADMIN;
   else if (username_cidi == input_usrname && password_cidi == input_password)
-    return CLIENT_CIDI;
-  return CLIENT_UNKNOWN;
+    return CLIENT_ADMIN;
+  return CLIENT_CIDI;
 }
 
 
