@@ -698,7 +698,6 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
 
   //20221215
   std::string date = BufferParser::Instance()->FindValueByKey(cmd, date);
-  AINFO << "date = " << date;
   std::vector<std::string> vec;
   vec.clear();
   std::string root_path;
@@ -718,9 +717,6 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   iter = std::unique(vec.begin(), vec.end());
   if(iter != vec.end()) {
     vec.erase(iter, vec.end());
-  }
-  for(int i=0;i<vec.size();i++) {
-    AINFO << vec[i] ;
   }
 
   for(int i=0 ; i<vec.size(); i++) {
