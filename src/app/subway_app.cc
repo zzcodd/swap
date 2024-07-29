@@ -736,9 +736,10 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   return 0;
 }
 
-void subway_app::ListDate(int type, std::string &root_path, long &size, long &free_size, std::vector<std::string> &vec, int flag, std::string &date)
+bool subway_app::ListDate(int type, std::string &root_path, long &size, long &free_size, std::vector<std::string> &vec, int flag, std::string &date)
 {
   bool rec = false; 
+  bool success = true;
 
   //record
   if(0 == type) {
@@ -747,10 +748,10 @@ void subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
     rec = GetRecordPathAndSize(LOCAL_RECORD_PATH, root_path, size, free_size);
     if(rec) {
       if(flag == 1){
-        ShowCopyDateList(root_path + "/bag/" + date, vec);
+        success = ShowCopyDateList(root_path + "/bag/" + date, vec);
       }
-      ShowCopyDateList(root_path + "/camera/full/" + date, vec);
-      ShowCopyDateList(root_path + "/camera/key/" + date, vec);
+      success = ShowCopyDateList(root_path + "/camera/full/" + date, vec);
+      success = ShowCopyDateList(root_path + "/camera/key/" + date, vec);
     }
   }
   //log
@@ -759,10 +760,12 @@ void subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
     size = free_size = 0L;
     rec = GetRecordPathAndSize(LOCAL_LOG_PATH, root_path, size, free_size);
     if(rec) {
-      ShowCopyDateList(root_path + "/ips/" + date, vec);
-      ShowCopyDateList(root_path + "/lte/" + date, vec);
+      success = ShowCopyDateList(root_path + "/ips/" + date, vec);
+      success = ShowCopyDateList(root_path + "/lte/" + date, vec);
     }
   }
+
+  return success;
 }
 
 
