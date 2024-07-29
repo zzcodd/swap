@@ -760,8 +760,8 @@ bool subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
     size = free_size = 0L;
     rec = GetRecordPathAndSize(LOCAL_LOG_PATH, root_path, size, free_size);
     if(rec) {
-      success = ShowCopyDateList(root_path + "/ips/" + date, vec);
-      success = ShowCopyDateList(root_path + "/lte/" + date, vec);
+      success = ShowCopyDateList(root_path + "/ips/" + date + "/", vec);
+      success = ShowCopyDateList(root_path + "/lte/" + date + "/", vec);
     }
   }
 
