@@ -208,6 +208,10 @@ int subway_app::PickHandle(Command &cmd, Json::Value &map,
 
   HANDLE_CMD("get_log_date_list", GetLogDateList);
 
+  HANDLE_CMD("show_record_date_list", ShowRecordDateList);
+
+  HANDLE_CMD("show_log_date_list", ShowLogDateList);
+
   HANDLE_CMD("record_range_copy", RecordDateCopy);
 
   HANDLE_CMD("log_date_copy", LogDateCopy);
@@ -658,6 +662,99 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
     }
   }
 }
+
+//新增：查询录像、日志列表 cmd-携带数据 date: 20221215
+int subway_app::ShowRecordDateList(Command &cmd, Json::Value & map, std::string &out_msg)
+{
+  AINFO << __func__ << " enter " << std::endl;
+  return ShowDateList(cmd, 0, map, out_msg);
+}
+
+int subway_app::ShowLogDateList(Command &cmd, Json::Value & map, std::string &out_msg)
+{
+  AINFO << __func__ << " enter " << std::endl;
+  return ShowDateList(cmd, 1, map, out_msg);
+}
+
+int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::string &out_msg)
+{
+  AINFO << __func__ << " enter " << std::endl;
+
+  //20221215
+  std::string date = BufferParser::Instance()->FindValueByKey(cmd, date);
+  std::vector<std::string> vec;
+  vec.clear();
+  std::string root_path;
+  long size = 0L;
+  long free_size = 0L;
+  int client_type = IdentifyClient(cmd);
+
+  ListDate(type, root_path, size, free_size, vec, 0, date);
+
+  if(client_type == CLIENT_ADMIN) {
+    ListDate(type, root_path, size, free_size, vec, 1, date);
+  }
+
+  //remove duplicates
+  std::vector<std::string>::iterator iter;
+  std::sort(vec.begin(), vec.end());
+  iter = std::unique(vec.begin(), vec.end())
+  if(iter != vec.end()) {
+    vec.erase(iter, vec.end());
+  }
+
+  for(int i=0 ; i<vec.size(); i++) {
+    map.append(Json::value(vec[i]));
+  }
+
+  return 0;
+}
+
+void subway_app::ListDate(int type, std::string &root_path, long &size, long &free_size, std::vector<std::string> &vec, int flag, std::string &date)
+{
+  bool rec = false; 
+
+  //record
+  if(0 == type) {
+    root_path = "";
+    size = free_size = 0L;
+    rec = GetRecordPathAndSize(LOCAL_RECORD_PATH, root_path, size, free_size);
+    if(rec) {
+      if(flag == 1){
+        ShowCopyDateList(root_path + "/bag/" + date, vec);
+      }
+      ShowCopyDateList(root_path + "/camera/full/" + date, vec);
+      ShowCopyDateList(root_path + "/camera/key/" + date, vec);
+    }
+  }
+  //log
+  else if (1==type) {
+    root_path = "";
+    size = free_size = 0L;
+    rec = GetRecordPathAndSize(LOCAL_LOG_PATH, root_path, size, free_size);
+    if(rec) {
+      ShowCopyDateList(root_path + "/ips/" + date, vec);
+      ShowCopyDateList(root_path + "/lte/" + date, vec);
+    }
+  }
+}
+
+static void ShowCopyDateList(std::string xx, std::vector<std::string> &vec)
+{
+  DIR *pdir = opendir(xx.data());
+  struct dirent *pent;
+  if(pdir) {
+    while((pent = readdir(pdir)) != NULL) {
+      if(pent->d_type == DT_REG) {
+        vec.push_back(pent->d_name);
+      }
+    }
+    close(pdir);
+  } else {
+    AERROR << "Failed to open directory: " << xx ;
+  }
+}
+
 
 int subway_app::RecordDateCopy(Command &cmd, Json::Value &map,
     std::string &out_msg)
