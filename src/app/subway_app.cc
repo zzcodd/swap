@@ -630,6 +630,7 @@ int subway_app::GetDateList(Command &cmd, int type, Json::Value &map,
     item["type"] = vec[i].type;
     map.append(item);
   }
+  out_msg = "successful" ;
   return 0;
 }
 
@@ -719,10 +720,15 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
     vec.erase(iter, vec.end());
   }
 
+  Json::Value file_list(Json::arrayValue);
   for(int i=0 ; i<vec.size(); i++) {
-    map.append(Json::Value(vec[i]));
+    file_list.append(Json::Value(vec[i]));
   }
+  
+  map["file_list"] = file_list;
+  map["file_count"] = static_cast<int>(vec.size());
 
+  out_msg = "Query success"; 
   return 0;
 }
 
