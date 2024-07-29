@@ -665,7 +665,7 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
 }
 
 //新增：查询录像、日志列表 cmd-携带数据 date: 20221215
-static void ShowCopyDateList(std::string xx, std::vector<std::string> &vec)
+static bool ShowCopyDateList(std::string xx, std::vector<std::string> &vec)
 {
   DIR *pdir = opendir(xx.data());
   struct dirent *pent;
@@ -676,8 +676,10 @@ static void ShowCopyDateList(std::string xx, std::vector<std::string> &vec)
       }
     }
     closedir(pdir);
+    return true;
   } else {
     AERROR << "Failed to open directory: " << xx ;
+    return false;
   }
 }
 
@@ -706,23 +708,25 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   long free_size = 0L;
   int client_type = IdentifyClient(cmd);
 
-  ListDate(type, root_path, size, free_size, vec, 0, date);
+  bool rc = ListDate(type, root_path, size, free_size, vec, 0, date);
 
   if(client_type == CLIENT_ADMIN) {
-    ListDate(type, root_path, size, free_size, vec, 1, date);
+    rc = ListDate(type, root_path, size, free_size, vec, 1, date);
+  }
+
+  if(!rc) {
+    out_msg = "Failed to list date";
+    return -1;
   }
 
   //remove duplicates
-  std::vector<std::string>::iterator iter;
   std::sort(vec.begin(), vec.end());
-  iter = std::unique(vec.begin(), vec.end());
-  if(iter != vec.end()) {
-    vec.erase(iter, vec.end());
-  }
+  auto iter = std::unique(vec.begin(), vec.end());
+  vec.erase(iter, vec.end());
 
   Json::Value file_list(Json::arrayValue);
-  for(int i=0 ; i<vec.size(); i++) {
-    file_list.append(Json::Value(vec[i]));
+  for(const auto& item : vec) {
+    file_list.append(Json::Value(item));
   }
   
   map["file_list"] = file_list;
