@@ -93,6 +93,16 @@ class subway_app : public base_app {
     void RecordLog(int type, std::string &root_path, long &size,
         long &free_size, std::vector<DateListItem> &vec, int flag);
 
+    int ShowRecordDateList(Command &cmd, Json::Value & map, std::string &out_msg);
+
+    int ShowLogDateList(Command &cmd, Json::Value & map, std::string &out_msg);
+
+    int ShowDateList(Command &cmd, int type, Json::Value &map,
+        std::string &out_msg);
+
+    void ListDate(int type, std::string &root_path, long &size,
+        long &free_size, std::vector<std::string> &vec, int flag, std::string &date);
+
     int RecordDateCopy(Command &cmd, Json::Value &map, std::string &out_msg);
 
     int RecordTimeCopy(Command &cmd, Json::Value &map, std::string &out_msg);
