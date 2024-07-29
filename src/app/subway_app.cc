@@ -664,6 +664,22 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
 }
 
 //新增：查询录像、日志列表 cmd-携带数据 date: 20221215
+static void ShowCopyDateList(std::string xx, std::vector<std::string> &vec)
+{
+  DIR *pdir = opendir(xx.data());
+  struct dirent *pent;
+  if(pdir) {
+    while((pent = readdir(pdir)) != NULL) {
+      if(pent->d_type == DT_REG) {
+        vec.push_back(pent->d_name);
+      }
+    }
+    closedir(pdir);
+  } else {
+    AERROR << "Failed to open directory: " << xx ;
+  }
+}
+
 int subway_app::ShowRecordDateList(Command &cmd, Json::Value & map, std::string &out_msg)
 {
   AINFO << __func__ << " enter " << std::endl;
@@ -698,13 +714,13 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   //remove duplicates
   std::vector<std::string>::iterator iter;
   std::sort(vec.begin(), vec.end());
-  iter = std::unique(vec.begin(), vec.end())
+  iter = std::unique(vec.begin(), vec.end());
   if(iter != vec.end()) {
     vec.erase(iter, vec.end());
   }
 
   for(int i=0 ; i<vec.size(); i++) {
-    map.append(Json::value(vec[i]));
+    map.append(Json::Value(vec[i]));
   }
 
   return 0;
@@ -739,21 +755,6 @@ void subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
   }
 }
 
-static void ShowCopyDateList(std::string xx, std::vector<std::string> &vec)
-{
-  DIR *pdir = opendir(xx.data());
-  struct dirent *pent;
-  if(pdir) {
-    while((pent = readdir(pdir)) != NULL) {
-      if(pent->d_type == DT_REG) {
-        vec.push_back(pent->d_name);
-      }
-    }
-    close(pdir);
-  } else {
-    AERROR << "Failed to open directory: " << xx ;
-  }
-}
 
 
 int subway_app::RecordDateCopy(Command &cmd, Json::Value &map,
