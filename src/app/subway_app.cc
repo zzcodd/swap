@@ -665,15 +665,22 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
 }
 
 //新增：查询录像、日志列表 cmd-携带数据 date: 20221215
-static bool ShowCopyDateList(std::string xx, std::vector<std::string> &vec)
+static bool ShowCopyDateList(const std::string& dir, const std::string& base_path, std::vector<std::string> &vec)
 {
   DIR *pdir = opendir(xx.data());
   struct dirent *pent;
   if(pdir) {
     while((pent = readdir(pdir)) != NULL) {
+      std::string file_name = pent->d_name;
+      std::string full_path = dir + "/" + file_name;
       AINFO << "open dir " << xx;
       if(pent->d_type == DT_REG) {
-        vec.push_back(pent->d_name);
+        vec.emplace_back(base_path, file_name);
+      } else if(pent->d_type ++ DT_DIR) {
+        if(subdir != "." && subdir != "..")
+        {
+          ShowCopyDateList(full_path, base_path + "/" +file_name, vec);
+        }
       }
     }
     closedir(pdir);
@@ -728,7 +735,10 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
 
   Json::Value file_list(Json::arrayValue);
   for(const auto& item : vec) {
-    file_list.append(Json::Value(item));
+    Json::Value file_info;
+    file_info["folder"] = item.first;
+    file_info[:file] = item.second;
+    file_list.append(file_info);
   }
   
   map["file_list"] = file_list;
@@ -754,10 +764,10 @@ bool subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
 
     if(rec) {
       if(flag == 1){
-        success = ShowCopyDateList(root_path + "/bag/" + date_value, vec);
+        success = ShowCopyDateList(root_path + "/bag/" + date_value, date_value + "/", vec);
       }
-      success = ShowCopyDateList(root_path + "/camera/full/" + date_value, vec);
-      success = ShowCopyDateList(root_path + "/camera/key/" + date_value, vec);
+      success = ShowCopyDateList(root_path + "/camera/full/" + date_value, date_value + "/", vec);
+      success = ShowCopyDateList(root_path + "/camera/key/" + date_value, date_value + "/", vec);
     }
   }
   //log
@@ -766,8 +776,8 @@ bool subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
     size = free_size = 0L;
     rec = GetRecordPathAndSize(LOCAL_LOG_PATH, root_path, size, free_size);
     if(rec) {
-      success = ShowCopyDateList(root_path + "/ips/" + date_value + "/", vec);
-      success = ShowCopyDateList(root_path + "/lte/" + date_value + "/", vec);
+      success = ShowCopyDateList(root_path + "/ips/" + date_value + "/", date_value + "/", vec);
+      success = ShowCopyDateList(root_path + "/lte/" + date_value + "/", date_value + "/", vec);
     }
   }
 
