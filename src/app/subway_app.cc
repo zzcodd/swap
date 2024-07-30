@@ -665,30 +665,37 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
 }
 
 //新增：查询录像、日志列表 cmd-携带数据 date: 20221215
-static bool ShowCopyDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>> &vec)
-{
-  DIR *pdir = opendir(dir.data());
+
+
+// Function to list files in a directory and record their paths
+static bool ShowCopyDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec) {
+  AINFO << "Entering ShowCopyDateList for directory: " << dir << std::endl;
+  DIR *pdir = opendir(dir.c_str());
   struct dirent *pent;
   if(pdir) {
     while((pent = readdir(pdir)) != NULL) {
-      std::string file_name = pent->d_name;
+      std::string file_name(pent->d_name);
       std::string full_path = dir + "/" + file_name;
+      AINFO << "Reading directory entry: " << file_name << " in directory: " << dir << std::endl;
       if(pent->d_type == DT_REG) {
+        AINFO << "File: " << file_name << " added to list" << std::endl;
         vec.emplace_back(base_path, file_name);
       } else if(pent->d_type == DT_DIR) {
-        if(file_name != "." && file_name != "..")
-        {
-          ShowCopyDateList(full_path, base_path + "/" +file_name, vec);
+        if(file_name != "." && file_name != "..") {
+          AINFO << "Entering subdirectory: " << full_path << std::endl;
+          // Recursively list files in subdirectories
+          ShowCopyDateList(full_path, base_path + "/" + file_name, vec);
         }
       }
     }
     closedir(pdir);
     return true;
   } else {
-    AERROR << "Failed to open directory: " << dir ;
+    AERROR << "Failed to open directory: " << dir << std::endl;
     return false;
   }
 }
+
 
 int subway_app::ShowRecordDateList(Command &cmd, Json::Value & map, std::string &out_msg)
 {
