@@ -697,6 +697,37 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
   return true;
 }
 
+static bool ShowCopyDateListWithTimeFilter(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec, const std::string& start_time, const std::string& end_time, bool include_jpg) {
+{
+  AINFO << "Entering ShowCopyDateListWithTimeFilter for directory: " << dir << std::endl;
+  DIR *pdir = opendir(dir.c_str());
+  if (!pdir) {
+    AERROR << "Failed to open directory: " << dir << ", error: " << strerror(errno) << std::endl;
+    return false;
+  }
+
+  struct dirent *pent;
+  while ((pent = readdir(pdir)) != NULL) {
+    std::string file_name(pent->d_name);
+    std::string full_path = dir + "/" + file_name;
+    if(pent->d_type == DT_REG) {
+      std::string ext = file_name.sbustr(file_name.find_last_of('.') + 1);
+      std::string timestamp = file_name.substr(0, 17);
+      if ((timestamp >= start_time) && (timestamp <= end_time)) {
+        if (ext != "ts" && file_name != "size.dat" && (include_jpg || ext != "jpg")) {
+          vec.emplace_back(base_path, file_name);
+        }
+      }
+    } else if (pent->d_type == DT_DIR) {
+      if(file_name != "." && file_name != "..") {
+        ShowCopyDateListWithTimeFilter(full_path, base_path + "/" + file_name, vec, start_time, end_time, include_jpg);
+      }
+    }
+  }
+  closedir(pdir);
+  return true;
+}
+
 
 static bool ShowCopyLogDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec) 
 {
@@ -738,6 +769,18 @@ int subway_app::ShowRecordDateListWithoutJPG(Command &cmd, Json::Value & map, st
   return ShowDateList(cmd, 0, map, out_msg, false);
 }
 
+int ShowRecordDateListWithTimeFilter(Command &cmd, Json::Value & map, std::string &out_msg)
+{
+  AINFO << __func__ << " enter " ;
+  return ShowDateListWithTimeFilter(cmd, map, out_msg, true);
+}
+
+int ShowRecordDateListWithoutJPGWithTimeFilter(Command &cmd, Json::Value & map, std::string &out_msg)
+{
+  AINFO << __func__ << " enter " ;
+  return ShowDateListWithTimeFilter(cmd, map, out_msg, false);
+}
+
 int subway_app::ShowLogDateList(Command &cmd, Json::Value & map, std::string &out_msg)
 {
   AINFO << __func__ << " enter ";
@@ -765,6 +808,72 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value &map, std::stri
 
   if (!rc) {
     out_msg = "Failed to list date";
+    return -1;
+  }
+
+  // Remove duplicates
+  std::sort(vec.begin(), vec.end());
+  auto iter = std::unique(vec.begin(), vec.end());
+  vec.erase(iter, vec.end());
+
+  // Sort by folder, sort by file extension and then by file name
+  std::sort(vec.begin(), vec.end(), [](const std::pair<std::string, std::string>& a, const std::pair<std::string, std::string>& b) {
+    if (a.first == b.first) {
+      std::string ext_a = a.second.substr(a.second.find_last_of('.') + 1);
+      std::string ext_b = b.second.substr(b.second.find_last_of('.') + 1);
+      if (ext_a == ext_b) {
+        return a.second < b.second;
+      }
+      return ext_a < ext_b;
+    }
+    return a.first < b.first;
+  });
+
+  Json::Value file_list(Json::arrayValue);
+  for (const auto& item : vec) {
+    Json::Value file_info;
+    file_info["folder"] = item.first;
+    file_info["file"] = item.second;
+    file_list.append(file_info);
+  }
+
+  map["file_list"] = file_list;
+  map["file_count"] = static_cast<int>(vec.size());
+
+  out_msg = "Query success";
+  return 0;
+}
+
+int subway_app::ShowDateListWithTimeFilter(Command &cmd, Json::Value &map, std::string &out_msg, bool include_jpg) 
+{
+  AINFO << __func__ << " enter " << std::endl;
+
+  std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, "date");
+  std::vector<std::string> name_list;
+  split_string(value, value.size(), name_list, "|"); 
+
+  if(name_list.size() != 2) {
+    out_msg = "Invalid date format";
+    return -1;
+  }
+  std::string start_time = name_list[0];
+  std::string end_time = name_list[1];
+
+  std::vector<std::pair<std::string, std::string>> vec;
+  vec.clear();
+  std::string root_path;
+  long size = 0L;
+  long free_size = 0L;
+  int client_type = IdentifyClient(cmd);
+
+  bool rc = ListDateWithTimeFilter(root_path, size, free_size, vec, 0, date_value, start_time, end_time, include_jpg);
+
+  if (client_type == CLIENT_ADMIN) {
+    rc = ListDateWithTimeFilter(root_path, size, free_size, vec, 1, date_value, start_time, end_time, include_jpg) || rc;
+  }
+
+  if (!rc) {
+    out_msg = "Failed to list date with time filter";
     return -1;
   }
 
@@ -841,6 +950,31 @@ bool subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
 
   return success;
 }
+
+bool subway_app::ListDateWithTimeFilter(std::string &root_path, long &size, long &free_size, std::vector<std::pair<std::string, std::string>>& vec, int flag, std::string &date_value, const std::string& start_time, const std::string& end_time, bool include_jpg) {
+  AINFO << __func__ << " enter " << std::endl;
+
+  bool rec = false; 
+  bool success = false;
+  
+  root_path = "";
+  size = free_size = 0L;
+  rec = GetRecordPathAndSize(LOCAL_RECORD_PATH, root_path, size, free_size);
+  AINFO << "root_path = " << root_path << std::endl;
+
+  if (flag == 1) {
+    success = ShowCopyDateListWithTimeFilter(root_path + "/bag/" + date_value, date_value + "/", vec, start_time, end_time, include_jpg) || success;
+  }
+  success = ShowCopyDateListWithTimeFilter(root_path + "/camera/full/" + date_value, date_value + "/", vec, start_time, end_time, include_jpg) || success;
+  success = ShowCopyDateListWithTimeFilter(root_path + "/camera/key/" + date_value, date_value + "/", vec, start_time, end_time, include_jpg) || success;
+
+  if (!success) {
+    AINFO << "Failed to list date for type " << type << std::endl;
+  }
+
+  return success;
+}
+
 
 
 
