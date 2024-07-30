@@ -96,7 +96,6 @@ class subway_app : public base_app {
     int ShowRecordDateList(Command &cmd, Json::Value & map, std::string &out_msg);
     int ShowRecordDateListWithoutJPG(Command &cmd, Json::Value & map, std::string &out_msg);
 
-
     int ShowLogDateList(Command &cmd, Json::Value & map, std::string &out_msg);
 
     int ShowDateList(Command &cmd, int type, Json::Value &map,

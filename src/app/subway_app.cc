@@ -709,7 +709,7 @@ int ShowRecordDateListWithoutJPG(Command &cmd, Json::Value & map, std::string &o
 int subway_app::ShowLogDateList(Command &cmd, Json::Value & map, std::string &out_msg)
 {
   AINFO << __func__ << " enter ";
-  return ShowDateList(cmd, 1, map, out_msg);
+  return ShowDateList(cmd, 1, map, out_msg, true);
 }
 
 
