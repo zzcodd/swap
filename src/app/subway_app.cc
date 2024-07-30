@@ -848,7 +848,7 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value &map, std::stri
 
 int subway_app::ShowDateListWithTimeFilter(Command &cmd, Json::Value &map, std::string &out_msg, bool include_jpg) 
 {
-  AINFO << __func__ << " enter " << std::endl;
+  AINFO << __func__ << " enter ";
 
   std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, "date");
   std::vector<std::string> name_list;
@@ -856,7 +856,7 @@ int subway_app::ShowDateListWithTimeFilter(Command &cmd, Json::Value &map, std::
 
   date_value = date_value.substr(0,8);
 
-  if(name_list.size() != 2) {
+  if(name_list.size() != 2 || name_list[0].lenght()!=17 || name_list[1].length()!=17) {
     out_msg = "Invalid date format";
     return -1;
   }
@@ -956,7 +956,7 @@ bool subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
 }
 
 bool subway_app::ListDateWithTimeFilter(std::string &root_path, long &size, long &free_size, std::vector<std::pair<std::string, std::string>>& vec, int flag, std::string &date_value, const std::string& start_time, const std::string& end_time, bool include_jpg) {
-  AINFO << __func__ << " enter " << std::endl;
+  AINFO << __func__ << " enter " ;
 
   bool rec = false; 
   bool success = false;
@@ -964,7 +964,7 @@ bool subway_app::ListDateWithTimeFilter(std::string &root_path, long &size, long
   root_path = "";
   size = free_size = 0L;
   rec = GetRecordPathAndSize(LOCAL_RECORD_PATH, root_path, size, free_size);
-  AINFO << "root_path = " << root_path << std::endl;
+  AINFO << "root_path = " << root_path ;
 
   if(rec) {
     if (flag == 1) {
@@ -981,7 +981,7 @@ bool subway_app::ListDateWithTimeFilter(std::string &root_path, long &size, long
   return success;
 }
 
-////end
+
 
 
 
