@@ -673,7 +673,7 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
     while((pent = readdir(pdir)) != NULL) {
       std::string file_name = pent->d_name;
       std::string full_path = dir + "/" + file_name;
-      AINFO << "open dir " << xx;
+      AINFO << "open dir " << dir;
       if(pent->d_type == DT_REG) {
         vec.emplace_back(base_path, file_name);
       } else if(pent->d_type + DT_DIR) {
@@ -686,7 +686,7 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
     closedir(pdir);
     return true;
   } else {
-    AERROR << "Failed to open directory: " << xx ;
+    AERROR << "Failed to open directory: " << dir ;
     return false;
   }
 }
@@ -748,7 +748,7 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   return 0;
 }
 
-bool subway_app::ListDate(int type, std::string &root_path, long &size, long &free_size, std::vector<std::string> &vec, int flag, std::string &date_value)
+bool subway_app::ListDate(int type, std::string &root_path, long &size, long &free_size, std::vector<std::pair<std::string, std::string>>& vec, int flag, std::string &date_value)
 {
   AINFO << __func__ << " enter " << std::endl;
 

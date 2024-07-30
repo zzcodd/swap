@@ -101,7 +101,7 @@ class subway_app : public base_app {
         std::string &out_msg);
 
     bool ListDate(int type, std::string &root_path, long &size,
-        long &free_size, std::vector<std::string> &vec, int flag, std::string &date);
+        long &free_size, std::vector<std::pair<std::string, std::string>>& vec, int flag, std::string &date_value);
 
     int RecordDateCopy(Command &cmd, Json::Value &map, std::string &out_msg);
 
