@@ -94,11 +94,13 @@ class subway_app : public base_app {
         long &free_size, std::vector<DateListItem> &vec, int flag);
 
     int ShowRecordDateList(Command &cmd, Json::Value & map, std::string &out_msg);
+    int ShowRecordDateListWithoutJPG(Command &cmd, Json::Value & map, std::string &out_msg);
+
 
     int ShowLogDateList(Command &cmd, Json::Value & map, std::string &out_msg);
 
     int ShowDateList(Command &cmd, int type, Json::Value &map,
-        std::string &out_msg);
+        std::string &out_msg, bool include_jpg);
 
     bool ListDate(int type, std::string &root_path, long &size,
         long &free_size, std::vector<std::pair<std::string, std::string>>& vec, int flag, std::string &date_value);

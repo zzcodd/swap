@@ -665,8 +665,6 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
 }
 
 //新增：查询录像、日志列表 cmd-携带数据 date: 20221215
-
-
 // Function to list files in a directory and record their paths
 static bool ShowCopyDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec) {
   AINFO << "Entering ShowCopyDateList for directory: " << dir ;
@@ -677,7 +675,10 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
       std::string file_name(pent->d_name);
       std::string full_path = dir + "/" + file_name;
       if(pent->d_type == DT_REG) {
-        vec.emplace_back(base_path, file_name);
+        std::string ext = file_name.substr(file_name.find_last_of('.')+1);
+        if(ext != "ts" && file_name != "size.dat") {
+          vec.emplace_back(base_path, file_name);
+        }
       } else if(pent->d_type == DT_DIR) {
         if(file_name != "." && file_name != "..") {
           // Recursively list files in subdirectories
@@ -696,7 +697,13 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
 int subway_app::ShowRecordDateList(Command &cmd, Json::Value & map, std::string &out_msg)
 {
   AINFO << __func__ << " enter " ;
-  return ShowDateList(cmd, 0, map, out_msg);
+  return ShowDateList(cmd, 0, map, out_msg, true);
+}
+
+int ShowRecordDateListWithoutJPG(Command &cmd, Json::Value & map, std::string &out_msg)
+{
+  AINFO << __func__ << " enter " ;
+  return ShowDateList(cmd, 0, map, out_msg, false);
 }
 
 int subway_app::ShowLogDateList(Command &cmd, Json::Value & map, std::string &out_msg)
@@ -705,13 +712,12 @@ int subway_app::ShowLogDateList(Command &cmd, Json::Value & map, std::string &ou
   return ShowDateList(cmd, 1, map, out_msg);
 }
 
-int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::string &out_msg)
+int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::string &out_msg, bool include_jpg)
 {
   AINFO << __func__ << " enter " ;
 
-  //20221215
   std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, "date");
-  AINFO <<"!!! date " << date_value;
+
   std::vector<std::pair<std::string, std::string>> vec;
   vec.clear();
   std::string root_path;
@@ -722,7 +728,7 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   bool rc = ListDate(type, root_path, size, free_size, vec, 0, date_value);
 
   if(client_type == CLIENT_ADMIN) {
-    rc = ListDate(type, root_path, size, free_size, vec, 1, date_value);
+    rc = ListDate(type, root_path, size, free_size, vec, 1, date_value) || rc;
   }
 
   if(!rc) {
@@ -730,19 +736,28 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
     return -1;
   }
 
+  if(!include_jpg) {
+    vec.erase(std::remove_if(vec.begin(), vec.end(), [](const std::pair<std::string, std::string>& item){
+      return item.second.substr(item.second.find_last_of('.')+1) == 'jpg';
+    }),vec.end())
+  }
+
   //remove duplicates
   std::sort(vec.begin(), vec.end());
   auto iter = std::unique(vec.begin(), vec.end());
   vec.erase(iter, vec.end());
 
-  //sort by file extension and then by file name
+  //sort by folder, sort by file extension and then by file name
   std::sort(vec.begin(), vec.end(), [](const std::pair<std::string, std::string>& a, const std::pair<std::string, std::string>& b){
-    std::string ext_a = a.second.substr(a.second.find_last_of('.')+1);
-    std::string ext_b = b.second.substr(b.second.find_last_of('.')+1);
-    if(ext_a == ext_b) {
-      return a.second < b.second;
+    if(a.first == b.first) {   
+      std::string ext_a = a.second.substr(a.second.find_last_of('.')+1);
+      std::string ext_b = b.second.substr(b.second.find_last_of('.')+1);
+      if(ext_a == ext_b) {
+        return a.second < b.second;
+      }
+      return ext_a < ext_b ;
     }
-    return ext_a < ext_b ;
+    return a.first < b.first;
   });
 
   Json::Value file_list(Json::arrayValue);
