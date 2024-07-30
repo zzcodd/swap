@@ -701,8 +701,8 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   AINFO << __func__ << " enter " << std::endl;
 
   //20221215
-  std::string date = BufferParser::Instance()->FindValueByKey(cmd, date);
-  AINFO <<"!!! date " << date;
+  std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, date_value);
+  AINFO <<"!!! date " << date_value;
   std::vector<std::string> vec;
   vec.clear();
   std::string root_path;
@@ -710,10 +710,10 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   long free_size = 0L;
   int client_type = IdentifyClient(cmd);
 
-  bool rc = ListDate(type, root_path, size, free_size, vec, 0, date);
+  bool rc = ListDate(type, root_path, size, free_size, vec, 0, date_value);
 
   if(client_type == CLIENT_ADMIN) {
-    rc = ListDate(type, root_path, size, free_size, vec, 1, date);
+    rc = ListDate(type, root_path, size, free_size, vec, 1, date_value);
   }
 
   if(!rc) {
@@ -738,7 +738,7 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   return 0;
 }
 
-bool subway_app::ListDate(int type, std::string &root_path, long &size, long &free_size, std::vector<std::string> &vec, int flag, std::string &date)
+bool subway_app::ListDate(int type, std::string &root_path, long &size, long &free_size, std::vector<std::string> &vec, int flag, std::string &date_value)
 {
   AINFO << __func__ << " enter " << std::endl;
 
@@ -754,10 +754,10 @@ bool subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
 
     if(rec) {
       if(flag == 1){
-        success = ShowCopyDateList(root_path + "/bag/" + date, vec);
+        success = ShowCopyDateList(root_path + "/bag/" + date_value, vec);
       }
-      success = ShowCopyDateList(root_path + "/camera/full/" + date, vec);
-      success = ShowCopyDateList(root_path + "/camera/key/" + date, vec);
+      success = ShowCopyDateList(root_path + "/camera/full/" + date_value, vec);
+      success = ShowCopyDateList(root_path + "/camera/key/" + date_value, vec);
     }
   }
   //log
