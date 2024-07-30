@@ -712,12 +712,12 @@ int subway_app::ShowLogDateList(Command &cmd, Json::Value & map, std::string &ou
   return ShowDateList(cmd, 1, map, out_msg);
 }
 
-int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::string &out_msg, bool include_jpg)
-{
-  AINFO << __func__ << " enter " ;
+
+int subway_app::ShowDateList(Command &cmd, int type, Json::Value &map, std::string &out_msg, bool include_jpg) {
+  AINFO << __func__ << " enter " << std::endl;
 
   std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, "date");
-
+  AINFO << "!!! date " << date_value;
   std::vector<std::pair<std::string, std::string>> vec;
   vec.clear();
   std::string root_path;
@@ -727,51 +727,52 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
 
   bool rc = ListDate(type, root_path, size, free_size, vec, 0, date_value);
 
-  if(client_type == CLIENT_ADMIN) {
+  if (client_type == CLIENT_ADMIN) {
     rc = ListDate(type, root_path, size, free_size, vec, 1, date_value) || rc;
   }
 
-  if(!rc) {
+  if (!rc) {
     out_msg = "Failed to list date";
     return -1;
   }
 
-  if(!include_jpg) {
-    vec.erase(std::remove_if(vec.begin(), vec.end(), [](const std::pair<std::string, std::string>& item){
-      return item.second.substr(item.second.find_last_of('.')+1) == 'jpg';
-    }),vec.end())
+  // Filter out .jpg files if necessary
+  if (!include_jpg) {
+    vec.erase(std::remove_if(vec.begin(), vec.end(), [](const std::pair<std::string, std::string>& item) {
+      return item.second.substr(item.second.find_last_of('.') + 1) == "jpg";
+    }), vec.end());
   }
 
-  //remove duplicates
+  // Remove duplicates
   std::sort(vec.begin(), vec.end());
   auto iter = std::unique(vec.begin(), vec.end());
   vec.erase(iter, vec.end());
 
-  //sort by folder, sort by file extension and then by file name
-  std::sort(vec.begin(), vec.end(), [](const std::pair<std::string, std::string>& a, const std::pair<std::string, std::string>& b){
-    if(a.first == b.first) {   
-      std::string ext_a = a.second.substr(a.second.find_last_of('.')+1);
-      std::string ext_b = b.second.substr(b.second.find_last_of('.')+1);
-      if(ext_a == ext_b) {
+  // Sort by folder, sort by file extension and then by file name
+  std::sort(vec.begin(), vec.end(), [](const std::pair<std::string, std::string>& a, const std::pair<std::string, std::string>& b) {
+    if (a.first == b.first) {
+      std::string ext_a = a.second.substr(a.second.find_last_of('.') + 1);
+      std::string ext_b = b.second.substr(b.second.find_last_of('.') + 1);
+      if (ext_a == ext_b) {
         return a.second < b.second;
       }
-      return ext_a < ext_b ;
+      return ext_a < ext_b;
     }
     return a.first < b.first;
   });
 
   Json::Value file_list(Json::arrayValue);
-  for(const auto& item : vec) {
+  for (const auto& item : vec) {
     Json::Value file_info;
     file_info["folder"] = item.first;
     file_info["file"] = item.second;
     file_list.append(file_info);
   }
-  
+
   map["file_list"] = file_list;
   map["file_count"] = static_cast<int>(vec.size());
 
-  out_msg = "Query success"; 
+  out_msg = "Query success";
   return 0;
 }
 
