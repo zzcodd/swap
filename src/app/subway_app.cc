@@ -665,7 +665,7 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
 }
 
 //新增：查询录像、日志列表 cmd-携带数据 date: 20221215
-static bool ShowCopyDateList(const std::string& dir, const std::string& base_path, std::vector<std::string> &vec)
+static bool ShowCopyDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>> &vec)
 {
   DIR *pdir = opendir(dir.data());
   struct dirent *pent;
