@@ -673,6 +673,7 @@ static bool ShowCopyDateList(std::string xx, std::vector<std::string> &vec)
   struct dirent *pent;
   if(pdir) {
     while((pent = readdir(pdir)) != NULL) {
+      AINFO << "open dir " << xx;
       if(pent->d_type == DT_REG) {
         vec.push_back(pent->d_name);
       }
@@ -750,6 +751,8 @@ bool subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
     root_path = "";
     size = free_size = 0L;
     rec = GetRecordPathAndSize(LOCAL_RECORD_PATH, root_path, size, free_size);
+    AINFO << "root_path = " << root_path;
+
     if(rec) {
       if(flag == 1){
         success = ShowCopyDateList(root_path + "/bag/" + date, vec);
