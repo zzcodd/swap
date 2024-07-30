@@ -695,16 +695,24 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
   }
 }
 
+
 static bool ShowCopyLogDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec) 
 {
     AINFO << "Entering ShowCopyLogDateList for directory: " << dir;
     DIR *pdir = opendir(dir.c_str());
+    if (!pdir) {
+      AERROR << "Failed to open directory: " << dir << std::endl;
+      return false;
+    }
     struct dirent *pent;
     if (pdir) {
       while ((pent = readdir(pdir)) != NULL) {
         std::string file_name(pent->d_name);
         std::string full_path = dir + "/" + file_name;
+        AINFO << "Reading directory entry: " << file_name << " in directory: " << dir << std::endl;
+
         if (pent->d_type == DT_REG) {
+          AINFO << "File: " << file_name << " added to list" << std::endl;
           vec.emplace_back(base_path, file_name);
         } else if (pent->d_type == DT_DIR) {
           if (file_name != "." && file_name != "..") {
