@@ -8,6 +8,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <fstream>
+#include <cerrno>
+#include <cstring>
 #include <opencv2/opencv.hpp>
 #include "src/utils/vpsystem.h"
 #include "../config.h"
@@ -671,7 +673,7 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
   AINFO << "Entering ShowCopyDateList for directory: " << dir ;
   DIR *pdir = opendir(dir.c_str());
   if (!pdir) {
-    AINFO << "Failed to open directory: " << dir;
+    AINFO << "Failed to open directory: " << ", error: " << strerror(errno) << dir ;
     return false;
   }
 
@@ -701,7 +703,7 @@ static bool ShowCopyLogDateList(const std::string& dir, const std::string& base_
     AINFO << "Entering ShowCopyLogDateList for directory: " << dir;
     DIR *pdir = opendir(dir.c_str());
     if (!pdir) {
-      AINFO << "Failed to open directory: " << dir ;
+      AINFO << "Failed to open directory: " << ", error: " << strerror(errno) << dir ;
       return false;
     }
     struct dirent *pent;
