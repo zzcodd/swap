@@ -669,20 +669,17 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
 
 // Function to list files in a directory and record their paths
 static bool ShowCopyDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec) {
-  AINFO << "Entering ShowCopyDateList for directory: " << dir << std::endl;
+  AINFO << "Entering ShowCopyDateList for directory: " << dir ;
   DIR *pdir = opendir(dir.c_str());
   struct dirent *pent;
   if(pdir) {
     while((pent = readdir(pdir)) != NULL) {
       std::string file_name(pent->d_name);
       std::string full_path = dir + "/" + file_name;
-      AINFO << "Reading directory entry: " << file_name << " in directory: " << dir << std::endl;
       if(pent->d_type == DT_REG) {
-        AINFO << "File: " << file_name << " added to list" << std::endl;
         vec.emplace_back(base_path, file_name);
       } else if(pent->d_type == DT_DIR) {
         if(file_name != "." && file_name != "..") {
-          AINFO << "Entering subdirectory: " << full_path << std::endl;
           // Recursively list files in subdirectories
           ShowCopyDateList(full_path, base_path + "/" + file_name, vec);
         }
@@ -696,22 +693,21 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
   }
 }
 
-
 int subway_app::ShowRecordDateList(Command &cmd, Json::Value & map, std::string &out_msg)
 {
-  AINFO << __func__ << " enter " << std::endl;
+  AINFO << __func__ << " enter " ;
   return ShowDateList(cmd, 0, map, out_msg);
 }
 
 int subway_app::ShowLogDateList(Command &cmd, Json::Value & map, std::string &out_msg)
 {
-  AINFO << __func__ << " enter " << std::endl;
+  AINFO << __func__ << " enter ";
   return ShowDateList(cmd, 1, map, out_msg);
 }
 
 int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::string &out_msg)
 {
-  AINFO << __func__ << " enter " << std::endl;
+  AINFO << __func__ << " enter " ;
 
   //20221215
   std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, "date");
@@ -739,6 +735,16 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   auto iter = std::unique(vec.begin(), vec.end());
   vec.erase(iter, vec.end());
 
+  //sort by file extension and then by file name
+  std::sort(vec.begin(), vec.end(), [](const std::pair<std::string, std:string>& a, const std::pair<std::string, std::string>& b){
+    std::string ext_a = a.second.substr(a.second.find_last_of('.')+1);
+    std::string ext_b = b.second.substr(b.second.find_last_of('.')+1);
+    if(ext_a == ext_b) {
+      return a.second < b.second;
+    }
+    return ext_a < ext_b ;
+  })
+
   Json::Value file_list(Json::arrayValue);
   for(const auto& item : vec) {
     Json::Value file_info;
@@ -756,7 +762,7 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
 
 bool subway_app::ListDate(int type, std::string &root_path, long &size, long &free_size, std::vector<std::pair<std::string, std::string>>& vec, int flag, std::string &date_value)
 {
-  AINFO << __func__ << " enter " << std::endl;
+  AINFO << __func__ << " enter " ;
 
   bool rec = false; 
   bool success = false;
@@ -789,6 +795,7 @@ bool subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
 
   return success;
 }
+
 
 
 
