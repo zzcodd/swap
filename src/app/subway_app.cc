@@ -736,14 +736,14 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   vec.erase(iter, vec.end());
 
   //sort by file extension and then by file name
-  std::sort(vec.begin(), vec.end(), [](const std::pair<std::string, std:string>& a, const std::pair<std::string, std::string>& b){
+  std::sort(vec.begin(), vec.end(), [](const std::pair<std::string, std::string>& a, const std::pair<std::string, std::string>& b){
     std::string ext_a = a.second.substr(a.second.find_last_of('.')+1);
     std::string ext_b = b.second.substr(b.second.find_last_of('.')+1);
     if(ext_a == ext_b) {
       return a.second < b.second;
     }
     return ext_a < ext_b ;
-  })
+  });
 
   Json::Value file_list(Json::arrayValue);
   for(const auto& item : vec) {
