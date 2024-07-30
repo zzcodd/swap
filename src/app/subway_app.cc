@@ -697,7 +697,8 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
   return true;
 }
 
-static bool ShowCopyDateListWithTimeFilter(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec, const std::string& start_time, const std::string& end_time, bool include_jpg) {
+static bool ShowCopyDateListWithTimeFilter(const std::string& dir, const std::string& base_path, 
+    std::vector<std::pair<std::string, std::string>>& vec, const std::string& start_time, const std::string& end_time, bool include_jpg) 
 {
   AINFO << "Entering ShowCopyDateListWithTimeFilter for directory: " << dir << std::endl;
   DIR *pdir = opendir(dir.c_str());
@@ -727,7 +728,6 @@ static bool ShowCopyDateListWithTimeFilter(const std::string& dir, const std::st
   closedir(pdir);
   return true;
 }
-
 
 static bool ShowCopyLogDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec) 
 {
@@ -786,7 +786,6 @@ int subway_app::ShowLogDateList(Command &cmd, Json::Value & map, std::string &ou
   AINFO << __func__ << " enter ";
   return ShowDateList(cmd, 1, map, out_msg, true);
 }
-
 
 int subway_app::ShowDateList(Command &cmd, int type, Json::Value &map, std::string &out_msg, bool include_jpg) {
   AINFO << __func__ << " enter " ;
@@ -850,7 +849,7 @@ int subway_app::ShowDateListWithTimeFilter(Command &cmd, Json::Value &map, std::
 
   std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, "date");
   std::vector<std::string> name_list;
-  split_string(value, value.size(), name_list, "|"); 
+  split_string(date_value, date_value.size(), name_list, "|"); 
 
   if(name_list.size() != 2) {
     out_msg = "Invalid date format";
@@ -975,7 +974,7 @@ bool subway_app::ListDateWithTimeFilter(std::string &root_path, long &size, long
   return success;
 }
 
-
+////end
 
 
 
