@@ -701,7 +701,7 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   AINFO << __func__ << " enter " << std::endl;
 
   //20221215
-  std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, date_value);
+  std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, "date");
   AINFO <<"!!! date " << date_value;
   std::vector<std::string> vec;
   vec.clear();
