@@ -769,13 +769,13 @@ int subway_app::ShowRecordDateListWithoutJPG(Command &cmd, Json::Value & map, st
   return ShowDateList(cmd, 0, map, out_msg, false);
 }
 
-int ShowRecordDateListWithTimeFilter(Command &cmd, Json::Value & map, std::string &out_msg)
+int subway_app::ShowRecordDateListWithTimeFilter(Command &cmd, Json::Value & map, std::string &out_msg)
 {
   AINFO << __func__ << " enter " ;
   return ShowDateListWithTimeFilter(cmd, map, out_msg, true);
 }
 
-int ShowRecordDateListWithoutJPGWithTimeFilter(Command &cmd, Json::Value & map, std::string &out_msg)
+int subway_app::ShowRecordDateListWithoutJPGWithTimeFilter(Command &cmd, Json::Value & map, std::string &out_msg)
 {
   AINFO << __func__ << " enter " ;
   return ShowDateListWithTimeFilter(cmd, map, out_msg, false);
