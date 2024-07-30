@@ -671,7 +671,7 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
   AINFO << "Entering ShowCopyDateList for directory: " << dir ;
   DIR *pdir = opendir(dir.c_str());
   if (!pdir) {
-    AERROR << "Failed to open directory: " << dir << ", error: " << strerror(error) << std::endl;
+    AINFO << "Failed to open directory: " << dir;
     return false;
   }
 
@@ -701,7 +701,7 @@ static bool ShowCopyLogDateList(const std::string& dir, const std::string& base_
     AINFO << "Entering ShowCopyLogDateList for directory: " << dir;
     DIR *pdir = opendir(dir.c_str());
     if (!pdir) {
-      AINFO << "Failed to open directory: " << dir << ", error: " << strerror(error) ;
+      AINFO << "Failed to open directory: " << dir ;
       return false;
     }
     struct dirent *pent;
