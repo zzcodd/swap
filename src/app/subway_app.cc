@@ -213,6 +213,9 @@ int subway_app::PickHandle(Command &cmd, Json::Value &map,
   HANDLE_CMD("show_record_date_list", ShowRecordDateList);
   HANDLE_CMD("show_record_date_list_noJPG", ShowRecordDateListWithoutJPG);
 
+  HANDLE_CMD("show_record_date_list_range", ShowRecordDateListWithTimeFilter);
+  HANDLE_CMD("show_record_date_list_range_noJPG", ShowRecordDateListWithoutJPGWithTimeFilter);
+
   HANDLE_CMD("show_log_date_list", ShowLogDateList);
 
   HANDLE_CMD("record_range_copy", RecordDateCopy);
