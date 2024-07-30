@@ -667,7 +667,7 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
 
 //新增：查询录像、日志列表 cmd-携带数据 date: 20221215
 // Function to list files in a directory and record their paths
-static bool ShowCopyDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec) {
+static bool ShowCopyDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec, bool include_jpg) {
   AINFO << "Entering ShowCopyDateList for directory: " << dir ;
   DIR *pdir = opendir(dir.c_str());
   struct dirent *pent;
@@ -677,16 +677,42 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
       std::string full_path = dir + "/" + file_name;
       if(pent->d_type == DT_REG) {
         std::string ext = file_name.substr(file_name.find_last_of('.')+1);
-        if(ext != "ts" && file_name != "size.dat") {
+        if(ext != "ts" && file_name != "size.dat" && (include_jpg || ext != "jpg")) {
           vec.emplace_back(base_path, file_name);
         }
       } else if(pent->d_type == DT_DIR) {
         if(file_name != "." && file_name != "..") {
           // Recursively list files in subdirectories
-          ShowCopyDateList(full_path, base_path + "/" + file_name, vec);
+          ShowCopyDateList(full_path, base_path + "/" + file_name, vec, include_jpg);
         }
       }
     }
+    closedir(pdir);
+    return true;
+  } else {
+    AERROR << "Failed to open directory: " << dir << std::endl;
+    return false;
+  }
+}
+
+static bool ShowCopyLogDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec) 
+{
+    AINFO << "Entering ShowCopyLogDateList for directory: " << dir;
+    DIR *pdir = opendir(dir.c_str());
+    struct dirent *pent;
+    if (pdir) {
+      while ((pent = readdir(pdir)) != NULL) {
+        std::string file_name(pent->d_name);
+        std::string full_path = dir + "/" + file_name;
+        if (pent->d_type == DT_REG) {
+          vec.emplace_back(base_path, file_name);
+        } else if (pent->d_type == DT_DIR) {
+          if (file_name != "." && file_name != "..") {
+            // Recursively list files in subdirectories
+            ShowLogDateList(full_path, base_path + "/" + file_name, vec);
+          }
+        }
+      }
     closedir(pdir);
     return true;
   } else {
@@ -715,10 +741,10 @@ int subway_app::ShowLogDateList(Command &cmd, Json::Value & map, std::string &ou
 
 
 int subway_app::ShowDateList(Command &cmd, int type, Json::Value &map, std::string &out_msg, bool include_jpg) {
-  AINFO << __func__ << " enter " << std::endl;
+  AINFO << __func__ << " enter " ;
 
   std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, "date");
-  AINFO << "!!! date " << date_value;
+
   std::vector<std::pair<std::string, std::string>> vec;
   vec.clear();
   std::string root_path;
@@ -726,22 +752,15 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value &map, std::stri
   long free_size = 0L;
   int client_type = IdentifyClient(cmd);
 
-  bool rc = ListDate(type, root_path, size, free_size, vec, 0, date_value);
+  bool rc = ListDate(type, root_path, size, free_size, vec, 0, date_value, include_jpg);
 
   if (client_type == CLIENT_ADMIN) {
-    rc = ListDate(type, root_path, size, free_size, vec, 1, date_value) || rc;
+    rc = ListDate(type, root_path, size, free_size, vec, 1, date_value, include_jpg) || rc;
   }
 
   if (!rc) {
     out_msg = "Failed to list date";
     return -1;
-  }
-
-  // Filter out .jpg files if necessary
-  if (!include_jpg) {
-    vec.erase(std::remove_if(vec.begin(), vec.end(), [](const std::pair<std::string, std::string>& item) {
-      return item.second.substr(item.second.find_last_of('.') + 1) == "jpg";
-    }), vec.end());
   }
 
   // Remove duplicates
@@ -777,7 +796,7 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value &map, std::stri
   return 0;
 }
 
-bool subway_app::ListDate(int type, std::string &root_path, long &size, long &free_size, std::vector<std::pair<std::string, std::string>>& vec, int flag, std::string &date_value)
+bool subway_app::ListDate(int type, std::string &root_path, long &size, long &free_size, std::vector<std::pair<std::string, std::string>>& vec, int flag, std::string &date_value, bool include_jpg)
 {
   AINFO << __func__ << " enter " ;
 
@@ -793,10 +812,10 @@ bool subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
 
     if(rec) {
       if(flag == 1){
-        success = ShowCopyDateList(root_path + "/bag/" + date_value, date_value + "/", vec) || success;
+        success = ShowCopyDateList(root_path + "/bag/" + date_value, date_value + "/", vec, include_jpg) || success;
       }
-      success = ShowCopyDateList(root_path + "/camera/full/" + date_value, date_value + "/", vec) || success;
-      success = ShowCopyDateList(root_path + "/camera/key/" + date_value, date_value + "/", vec) || success;
+      success = ShowCopyDateList(root_path + "/camera/full/" + date_value, date_value + "/", vec, include_jpg) || success;
+      success = ShowCopyDateList(root_path + "/camera/key/" + date_value, date_value + "/", vec, include_jpg) || success;
     }
   }
   //log
@@ -805,8 +824,8 @@ bool subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
     size = free_size = 0L;
     rec = GetRecordPathAndSize(LOCAL_LOG_PATH, root_path, size, free_size);
     if(rec) {
-      success = ShowCopyDateList(root_path + "/ips/" + date_value + "/", date_value + "/", vec) || success;
-      success = ShowCopyDateList(root_path + "/lte/" + date_value + "/", date_value + "/", vec) || success;
+      success = ShowCopyLogDateList(root_path + "/ips/" + date_value + "/", date_value + "/", vec) || success;
+      success = ShowCopyLogDateList(root_path + "/lte/" + date_value + "/", date_value + "/", vec) || success;
     }
   }
 
