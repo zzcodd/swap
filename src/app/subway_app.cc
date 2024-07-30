@@ -667,6 +667,8 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
 //新增：查询录像、日志列表 cmd-携带数据 date: 20221215
 static bool ShowCopyDateList(std::string xx, std::vector<std::string> &vec)
 {
+  AINFO << __func__ << " enter " << std::endl;
+
   DIR *pdir = opendir(xx.data());
   struct dirent *pent;
   if(pdir) {
@@ -738,6 +740,8 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
 
 bool subway_app::ListDate(int type, std::string &root_path, long &size, long &free_size, std::vector<std::string> &vec, int flag, std::string &date)
 {
+  AINFO << __func__ << " enter " << std::endl;
+
   bool rec = false; 
   bool success = true;
 
