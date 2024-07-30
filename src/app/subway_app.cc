@@ -961,12 +961,14 @@ bool subway_app::ListDateWithTimeFilter(std::string &root_path, long &size, long
   rec = GetRecordPathAndSize(LOCAL_RECORD_PATH, root_path, size, free_size);
   AINFO << "root_path = " << root_path << std::endl;
 
-  if (flag == 1) {
-    success = ShowCopyDateListWithTimeFilter(root_path + "/bag/" + date_value, date_value + "/", vec, start_time, end_time, include_jpg) || success;
+  if(rec) {
+    if (flag == 1) {
+      success = ShowCopyDateListWithTimeFilter(root_path + "/bag/" + date_value, date_value + "/", vec, start_time, end_time, include_jpg) || success;
+    }
+    success = ShowCopyDateListWithTimeFilter(root_path + "/camera/full/" + date_value, date_value + "/", vec, start_time, end_time, include_jpg) || success;
+    success = ShowCopyDateListWithTimeFilter(root_path + "/camera/key/" + date_value, date_value + "/", vec, start_time, end_time, include_jpg) || success;
   }
-  success = ShowCopyDateListWithTimeFilter(root_path + "/camera/full/" + date_value, date_value + "/", vec, start_time, end_time, include_jpg) || success;
-  success = ShowCopyDateListWithTimeFilter(root_path + "/camera/key/" + date_value, date_value + "/", vec, start_time, end_time, include_jpg) || success;
-
+  
   if (!success) {
     AINFO << "Failed to list date for type " << type << std::endl;
   }
