@@ -970,7 +970,7 @@ bool subway_app::ListDateWithTimeFilter(std::string &root_path, long &size, long
   }
   
   if (!success) {
-    AINFO << "Failed to list date for type " << type << std::endl;
+    AINFO << "Failed to list date with time filter " << std::endl;
   }
 
   return success;
