@@ -209,6 +209,7 @@ int subway_app::PickHandle(Command &cmd, Json::Value &map,
   HANDLE_CMD("get_log_date_list", GetLogDateList);
 
   HANDLE_CMD("show_record_date_list", ShowRecordDateList);
+  HANDLE_CMD("show_record_date_list_noJPG", ShowRecordDateListWithoutJPG);
 
   HANDLE_CMD("show_log_date_list", ShowLogDateList);
 
@@ -700,7 +701,7 @@ int subway_app::ShowRecordDateList(Command &cmd, Json::Value & map, std::string 
   return ShowDateList(cmd, 0, map, out_msg, true);
 }
 
-int ShowRecordDateListWithoutJPG(Command &cmd, Json::Value & map, std::string &out_msg)
+int subway_app::ShowRecordDateListWithoutJPG(Command &cmd, Json::Value & map, std::string &out_msg)
 {
   AINFO << __func__ << " enter " ;
   return ShowDateList(cmd, 0, map, out_msg, false);
