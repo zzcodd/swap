@@ -670,29 +670,29 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
 static bool ShowCopyDateList(const std::string& dir, const std::string& base_path, std::vector<std::pair<std::string, std::string>>& vec, bool include_jpg) {
   AINFO << "Entering ShowCopyDateList for directory: " << dir ;
   DIR *pdir = opendir(dir.c_str());
-  struct dirent *pent;
-  if(pdir) {
-    while((pent = readdir(pdir)) != NULL) {
-      std::string file_name(pent->d_name);
-      std::string full_path = dir + "/" + file_name;
-      if(pent->d_type == DT_REG) {
-        std::string ext = file_name.substr(file_name.find_last_of('.')+1);
-        if(ext != "ts" && file_name != "size.dat" && (include_jpg || ext != "jpg")) {
-          vec.emplace_back(base_path, file_name);
-        }
-      } else if(pent->d_type == DT_DIR) {
-        if(file_name != "." && file_name != "..") {
-          // Recursively list files in subdirectories
-          ShowCopyDateList(full_path, base_path + "/" + file_name, vec, include_jpg);
-        }
-      }
-    }
-    closedir(pdir);
-    return true;
-  } else {
-    AERROR << "Failed to open directory: " << dir << std::endl;
+  if (!pdir) {
+    AERROR << "Failed to open directory: " << dir << ", error: " << strerror(error) << std::endl;
     return false;
   }
+
+  struct dirent *pent;
+  while((pent = readdir(pdir)) != NULL) {
+    std::string file_name(pent->d_name);
+    std::string full_path = dir + "/" + file_name;
+    if(pent->d_type == DT_REG) {
+      std::string ext = file_name.substr(file_name.find_last_of('.')+1);
+      if(ext != "ts" && file_name != "size.dat" && (include_jpg || ext != "jpg")) {
+        vec.emplace_back(base_path, file_name);
+      }
+    } else if(pent->d_type == DT_DIR) {
+      if(file_name != "." && file_name != "..") {
+        // Recursively list files in subdirectories
+        ShowCopyDateList(full_path, base_path + "/" + file_name, vec, include_jpg);
+      }
+    }
+  }
+  closedir(pdir);
+  return true;
 }
 
 
@@ -701,32 +701,30 @@ static bool ShowCopyLogDateList(const std::string& dir, const std::string& base_
     AINFO << "Entering ShowCopyLogDateList for directory: " << dir;
     DIR *pdir = opendir(dir.c_str());
     if (!pdir) {
-      AERROR << "Failed to open directory: " << dir << std::endl;
+      AINFO << "Failed to open directory: " << dir << ", error: " << strerror(error) ;
       return false;
     }
     struct dirent *pent;
-    if (pdir) {
-      while ((pent = readdir(pdir)) != NULL) {
-        std::string file_name(pent->d_name);
-        std::string full_path = dir + "/" + file_name;
-        AINFO << "Reading directory entry: " << file_name << " in directory: " << dir << std::endl;
+    
+    while ((pent = readdir(pdir)) != NULL) {
+      std::string file_name(pent->d_name);
+      std::string full_path = dir + "/" + file_name;
+      AINFO << "Reading directory entry: " << file_name << " in directory: " << dir;
 
-        if (pent->d_type == DT_REG) {
-          AINFO << "File: " << file_name << " added to list" << std::endl;
-          vec.emplace_back(base_path, file_name);
-        } else if (pent->d_type == DT_DIR) {
-          if (file_name != "." && file_name != "..") {
-            // Recursively list files in subdirectories
-            ShowCopyLogDateList(full_path, base_path + "/" + file_name, vec);
-          }
+      if (pent->d_type == DT_REG) {
+        AINFO << "File: " << file_name << " added to list" ;
+        vec.emplace_back(base_path, file_name);
+      } else if (pent->d_type == DT_DIR) {
+        if (file_name != "." && file_name != "..") {
+          // Recursively list files in subdirectories
+          AINFO <<"Entering suddirectory: " << full_path ;
+          ShowCopyLogDateList(full_path, base_path + "/" + file_name, vec);
         }
       }
-    closedir(pdir);
-    return true;
-  } else {
-    AERROR << "Failed to open directory: " << dir << std::endl;
-    return false;
-  }
+    }
+  closedir(pdir);
+  return true;
+  
 }
 
 int subway_app::ShowRecordDateList(Command &cmd, Json::Value & map, std::string &out_msg)
@@ -831,10 +829,15 @@ bool subway_app::ListDate(int type, std::string &root_path, long &size, long &fr
     root_path = "";
     size = free_size = 0L;
     rec = GetRecordPathAndSize(LOCAL_LOG_PATH, root_path, size, free_size);
+    AINFO << "root_path = " << root_path;
     if(rec) {
       success = ShowCopyLogDateList(root_path + "/ips/" + date_value + "/", date_value + "/", vec) || success;
       success = ShowCopyLogDateList(root_path + "/lte/" + date_value + "/", date_value + "/", vec) || success;
     }
+  }
+
+  if( !success ) {
+    AINFO << "Failed to list date for type " << type ;
   }
 
   return success;
