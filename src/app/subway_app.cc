@@ -711,15 +711,12 @@ static bool ShowCopyLogDateList(const std::string& dir, const std::string& base_
     while ((pent = readdir(pdir)) != NULL) {
       std::string file_name(pent->d_name);
       std::string full_path = dir + "/" + file_name;
-      AINFO << "Reading directory entry: " << file_name << " in directory: " << dir;
 
       if (pent->d_type == DT_REG) {
-        AINFO << "File: " << file_name << " added to list" ;
         vec.emplace_back(base_path, file_name);
       } else if (pent->d_type == DT_DIR) {
         if (file_name != "." && file_name != "..") {
           // Recursively list files in subdirectories
-          AINFO <<"Entering suddirectory: " << full_path ;
           ShowCopyLogDateList(full_path, base_path + "/" + file_name, vec);
         }
       }
