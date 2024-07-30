@@ -667,7 +667,7 @@ void subway_app::RecordLog(int type, std::string &root_path, long &size,
 //新增：查询录像、日志列表 cmd-携带数据 date: 20221215
 static bool ShowCopyDateList(const std::string& dir, const std::string& base_path, std::vector<std::string> &vec)
 {
-  DIR *pdir = opendir(xx.data());
+  DIR *pdir = opendir(dir.data());
   struct dirent *pent;
   if(pdir) {
     while((pent = readdir(pdir)) != NULL) {
@@ -676,8 +676,8 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
       AINFO << "open dir " << xx;
       if(pent->d_type == DT_REG) {
         vec.emplace_back(base_path, file_name);
-      } else if(pent->d_type ++ DT_DIR) {
-        if(subdir != "." && subdir != "..")
+      } else if(pent->d_type + DT_DIR) {
+        if(file_name != "." && file_name != "..")
         {
           ShowCopyDateList(full_path, base_path + "/" +file_name, vec);
         }
@@ -710,7 +710,7 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   //20221215
   std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, "date");
   AINFO <<"!!! date " << date_value;
-  std::vector<std::string> vec;
+  std::vector<std::pair<std::string, std::string>> vec;
   vec.clear();
   std::string root_path;
   long size = 0L;
@@ -737,7 +737,7 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value & map, std::str
   for(const auto& item : vec) {
     Json::Value file_info;
     file_info["folder"] = item.first;
-    file_info[:file] = item.second;
+    file_info["file"] = item.second;
     file_list.append(file_info);
   }
   
