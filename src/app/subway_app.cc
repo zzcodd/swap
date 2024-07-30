@@ -703,10 +703,10 @@ static bool ShowCopyDateList(const std::string& dir, const std::string& base_pat
 static bool ShowCopyDateListWithTimeFilter(const std::string& dir, const std::string& base_path, 
     std::vector<std::pair<std::string, std::string>>& vec, const std::string& start_time, const std::string& end_time, bool include_jpg) 
 {
-  AINFO << "Entering ShowCopyDateListWithTimeFilter for directory: " << dir << std::endl;
+  AINFO << "Entering ShowCopyDateListWithTimeFilter for directory: " << dir ;
   DIR *pdir = opendir(dir.c_str());
   if (!pdir) {
-    AERROR << "Failed to open directory: " << dir << ", error: " << strerror(errno) << std::endl;
+    AINFO << "Failed to open directory: " << dir << ", error: " << strerror(errno) ;
     return false;
   }
 
@@ -854,6 +854,8 @@ int subway_app::ShowDateListWithTimeFilter(Command &cmd, Json::Value &map, std::
   std::vector<std::string> name_list;
   split_string(date_value, date_value.size(), name_list, "|"); 
 
+  date_value = date_value.substr(0,8);
+
   if(name_list.size() != 2) {
     out_msg = "Invalid date format";
     return -1;
@@ -973,7 +975,7 @@ bool subway_app::ListDateWithTimeFilter(std::string &root_path, long &size, long
   }
   
   if (!success) {
-    AINFO << "Failed to list date with time filter " << std::endl;
+    AINFO << "Failed to list date with time filter " ;
   }
 
   return success;
