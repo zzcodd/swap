@@ -856,7 +856,7 @@ int subway_app::ShowDateListWithTimeFilter(Command &cmd, Json::Value &map, std::
 
   date_value = date_value.substr(0,8);
 
-  if(name_list.size() != 2 || name_list[0].lenght()!=17 || name_list[1].length()!=17) {
+  if(name_list.size() != 2 || name_list[0].length()!=17 || name_list[1].length()!=17) {
     out_msg = "Invalid date format";
     return -1;
   }
