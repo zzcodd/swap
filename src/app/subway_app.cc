@@ -712,7 +712,7 @@ static bool ShowCopyDateListWithTimeFilter(const std::string& dir, const std::st
     std::string file_name(pent->d_name);
     std::string full_path = dir + "/" + file_name;
     if(pent->d_type == DT_REG) {
-      std::string ext = file_name.sbustr(file_name.find_last_of('.') + 1);
+      std::string ext = file_name.substr(file_name.find_last_of('.') + 1);
       std::string timestamp = file_name.substr(0, 17);
       if ((timestamp >= start_time) && (timestamp <= end_time)) {
         if (ext != "ts" && file_name != "size.dat" && (include_jpg || ext != "jpg")) {
