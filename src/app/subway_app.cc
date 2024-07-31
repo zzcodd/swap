@@ -1299,7 +1299,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   }
   else if(copy_task.total_size < usb_free) {
     AINFO << "Copying...";
-    rc = ParallerReadCopy(type, client_type, rc, usb_path, usb_free, copy_task.ex_from, copy_task.ex_to, 
+    rc = ParallelRealCopy(type, client_type, rc, usb_path, usb_free, copy_task.ex_from, copy_task.ex_to, 
         copy_task.ix_from, copy_task.ix_to);
   }
   else copy_task.state = rc = 3;
@@ -1344,7 +1344,7 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
 
 }
 
-void subway_app::CopySingleFile(const std::string& src, const std::string&dest, std::atomic<int>& task_state) {
+static void CopySingleFile(const std::string& src, const std::string&dest, std::atomic<int>& task_state) {
   std::string cmd = "rsync -a " + src + " " + dest;
   std::string rtnString;
   AINFO << __func__ << " will execute cmd: " << cmd;
