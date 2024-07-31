@@ -1034,7 +1034,7 @@ int subway_app::DateCopy(Command &cmd, int type, Json::Value &map,
 void* subway_app::CopyHandler(void *param)
 {
   clock_t start_time = clock();
-  AINFO << "现在开始计时 开始时间为： " << start_time;
+  AINFO << "现在开始计时 开始时间为： " << (double)start_time/CLOCKS_PER_SEC;
   
   AINFO << __func__ << " enter\n";
   int rc = 1;
@@ -1076,8 +1076,8 @@ void* subway_app::CopyHandler(void *param)
 
   clock_t end_time = clock();
   clock_t full_time = end_time - start_time;
-  AINFO << "现在结束 结束时间为" << end_time;
-  AINFO << "总共耗时："  << full_time << endl;
+  AINFO << "现在结束 结束时间为" << (double)end_time/CLOCKS_PER_SEC;
+  AINFO << "总共耗时："  << (double)full_time/CLOCKS_PER_SEC << endl;
 
   return NULL;
 }
