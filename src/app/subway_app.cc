@@ -1310,6 +1310,14 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   return rc;
 }
 
+static void CopySingleFile(const std::string& src, const std::string&dest, std::atomic<int>& task_state) {
+  std::string cmd = "rsync -a " + src + " " + dest;
+  std::string rtnString;
+  AINFO << __func__ << " will execute cmd: " << cmd;
+  vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
+  task_state++;
+}
+
 int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::string& usb_path, 
     long usb_free, std::vector<std::string>& ex_from, std::vector<std::string>& ex_to, std::vector<std::string>& ix_from, std::vector<std::string>& ix_to)
 {
@@ -1344,13 +1352,7 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
 
 }
 
-static void CopySingleFile(const std::string& src, const std::string&dest, std::atomic<int>& task_state) {
-  std::string cmd = "rsync -a " + src + " " + dest;
-  std::string rtnString;
-  AINFO << __func__ << " will execute cmd: " << cmd;
-  vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
-  task_state++;
-}
+
 
 
 void subway_app::AppendCopyFromPath(std::string xx, bool yy,
