@@ -856,7 +856,7 @@ int subway_app::ShowDateListWithTimeFilter(Command &cmd, Json::Value &map, std::
 
   date_value = date_value.substr(0,8);
 
-  if(name_list.size() != 2 || name_list[0].length()!=17 || name_list[1].length()!=17) {
+  if(name_list.size() != 2 || name_list[0].length()!=14 || name_list[1].length()!=14) {
     out_msg = "Invalid date format";
     return -1;
   }
@@ -1033,6 +1033,9 @@ int subway_app::DateCopy(Command &cmd, int type, Json::Value &map,
 
 void* subway_app::CopyHandler(void *param)
 {
+  clock_t start_time = clock();
+  AINFO << "现在开始计时 开始时间为： " << start_time;
+  
   AINFO << __func__ << " enter\n";
   int rc = 1;
   int type = copy_task.type;
@@ -1070,6 +1073,12 @@ void* subway_app::CopyHandler(void *param)
   copy_task.state = rc;
   is_copying = false;
   AINFO << __func__ << " exit state " << rc;
+
+  clock_t end_time = clock();
+  clock_t full_time = end_time - start_time;
+  AINFO << "现在结束 结束时间为" << end_time;
+  AINFO << "总共耗时："  << full_time << endl;
+
   return NULL;
 }
 
