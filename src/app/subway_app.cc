@@ -11,6 +11,7 @@
 #include <cerrno>
 #include <cstring>
 #include <opencv2/opencv.hpp>
+#include <atomic>
 #include "src/utils/vpsystem.h"
 #include "../config.h"
 #include "common_utils/include/file_util.h"
@@ -1315,7 +1316,7 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
   std::atomic<int> task_state(0);
   std::vector<std::thread> threads;
   unsigned int exSize = ex_from.size();
-  unsigned int inSize = ix_from.size();
+  unsigned int ixSize = ix_from.size();
 
   for (unsigned int i = 0; i < exSize; i++) {
       threads.emplace_back(CopySingleFile, ex_from[i], ex_to[i], std::ref(task_state));

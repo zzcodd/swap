@@ -2,6 +2,8 @@
 
 #include <string>
 #include <jsoncpp/json/json.h>
+#include <atomic>
+
 #include "base_app.h"
 #include "../buffer_parser.h"
 
