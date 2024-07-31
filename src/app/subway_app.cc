@@ -1041,8 +1041,7 @@ void* subway_app::CopyHandler(void *param)
   int type = copy_task.type;
   copy_task.state = 0;
   int client_type = IdentifyClient(copy_command);
-  std::string value = BufferParser::Instance()->FindValueByKey(copy_command,
-      "date");
+  std::string value = BufferParser::Instance()->FindValueByKey(copy_command,"date");
   std::vector<std::string> name_list;
   split_string(value, value.size(), name_list, "|");
 
@@ -1053,6 +1052,7 @@ void* subway_app::CopyHandler(void *param)
       usb_free);
   AINFO << __func__ << " usbdisk state " << rec_usb << " path " << usb_path <<
       " size " << usb_size << " free " << usb_free << std::endl;
+  
   if (rec_usb) {
     std::string root_path = usb_path + "/" + SUBWAY_COPY_ROOT_NAME;
     if (access(root_path.data(), F_OK) != 0) {
@@ -1082,9 +1082,9 @@ void* subway_app::CopyHandler(void *param)
   return NULL;
 }
 
+#if 0
 int subway_app::RealCopy(int type, int client_type, int &rc,
-    std::string &usb_path, long &usb_free,
-    std::vector<std::string> &name_list)
+    std::string &usb_path, long &usb_free, std::vector<std::string> &name_list)
 {
   system("touch /tmp/copying_file");
   copy_task.percent = 0;
@@ -1118,6 +1118,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
       AppendCopyFromPath(path + "/lte/", false, name_list);
     }
   }
+
   for (int i = 0; i < copy_task.ex_from.size(); i++)
     AppendCopyToPath(copy_task.ex_from[i], false, usb_path);
 
@@ -1205,12 +1206,151 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
     }
     rc = 1;
   }
+
   else copy_task.state = rc = 3;
   AINFO << "Copy and sync done, code " << rc;
   copy_task.percent = 100;
   remove("/tmp/copying_file");
   return rc;
 }
+#endif
+
+
+int subway_app::RealCopy(int type, int client_type, int &rc,
+    std::string &usb_path, long &usb_free, std::vector<std::string> &name_list)
+{
+  system("touch /tmp/copying_file");
+  copy_task.percent = 0;
+  copy_task.total_size = 0L;
+  copy_task.start_ts = time(NULL);
+
+  std::string ex_camera, ex_log, ix_bag, ix_log;
+  ex_camera = ex_log = ix_bag = ix_log = "";
+
+  std::string path = "";
+  long size, free_s;
+  size = free_s = 0L;
+  bool usrdisk_rec = false;
+  bool rec;
+  // record
+  if (0 == type) {
+    usrdisk_rec = GetRecordPathAndSize(LOCAL_RECORD_PATH, path, size, free_s);
+    if (usrdisk_rec) {
+      if (CLIENT_ADMIN == client_type)
+        AppendRecordCopyFromPath(path + "/bag/", true, name_list, false);
+      AppendRecordCopyFromPath(path + "/camera/full/", false, name_list, true);
+      AppendRecordCopyFromPath(path + "/camera/key/", false, name_list, true);
+    }
+  }
+  // log
+  else if (1 == type) {
+    size = free_s = 0L;
+    rec = GetLogPathAndSize(LOCAL_LOG_PATH, path, size, free_s);
+    if (rec) {
+      AppendCopyFromPath(path + "/ips/", false, name_list);
+      AppendCopyFromPath(path + "/lte/", false, name_list);
+    }
+  }
+
+  for (int i = 0; i < copy_task.ex_from.size(); i++)
+    AppendCopyToPath(copy_task.ex_from[i], false, usb_path);
+
+  if (CLIENT_ADMIN == client_type) {
+    path = "";
+    if (0 == type) {
+      size = free_s = 0L;
+      rec = GetRecordPathAndSize("internaldisk", path, size, free_s);
+      if (rec) {
+        if (!usrdisk_rec) {
+          AppendRecordCopyFromPath(path + "/bag/", true, name_list, false);
+          AppendRecordCopyFromPath(path + "/camera/full/", true, name_list,
+              true);
+          AppendRecordCopyFromPath(path + "/camera/key/", true, name_list,
+              true);
+        }
+      }
+    }
+    else if (1 == type) {
+      size = free_s = 0L;
+      rec = GetLogPathAndSize("internaldisk", path, size, free_s);
+      if (rec) {
+        AppendCopyFromPath(path + "/ips/", true, name_list);
+        AppendCopyFromPath(path + "/lte/", true, name_list);
+      }
+    }
+    for (int i = 0; i < copy_task.ix_from.size(); i++)
+      AppendCopyToPath(copy_task.ix_from[i], true, usb_path);
+  }
+#if 1
+  for (int i = 0; i < copy_task.ex_from.size(); i++)
+    AINFO << "ex_from: i " << i << " v " <<copy_task.ex_from[i]<<"\n";
+  for (int i = 0; i < copy_task.ex_to.size(); i++)
+    AINFO << "ex_to: i " << i << " v " << copy_task.ex_to[i]<<"\n";
+  for (int i = 0; i < copy_task.ix_from.size(); i++)
+    AINFO << "ix_from: i " << i << " v " <<copy_task.ix_from[i]<<"\n";
+  for (int i = 0; i < copy_task.ix_to.size(); i++)
+    AINFO << "ix_to: i " << i << " v " << copy_task.ix_to[i]<<"\n";
+  AINFO << "total_size: " << copy_task.total_size << " usb_free: " << usb_free << std::endl;
+#endif
+
+  if (copy_task.ix_from.size() < 1 && copy_task.ex_from.size() < 1) {
+    copy_task.state = rc = 4;
+  }
+  else if(copy_task.total_size < usb_free) {
+    AINFO << "Copying...";
+    rc = ParallerReadCopy(type, client_type, rc, usb_path, usb_free, copy_task.ex_from, copy_task.ex_to, 
+        copy_task.ix_from, copy_task.ix_to);
+  }
+  else copy_task.state = rc = 3;
+  
+  AINFO << "Copy and sync done, code " << rc;
+  copy_task.percent = 100;
+  remove("/tmp/copying_file");
+  return rc;
+}
+
+int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::string& usb_path, 
+    long usb_free, std::vector<std::string>& ex_from, std::vector<std::string>& ex_to, std::vector<std::string>& ix_from, std::vector<std::string>& ix_to)
+{
+  std::atomic<int> task_state(0);
+  std::vector<std::thread> threads;
+  unsigned int exSize = ex_from.size();
+  unsigned int inSize = ix_from.size();
+
+  for (unsigned int i = 0; i < exSize; i++) {
+      threads.emplace_back(CopySingleFile, ex_from[i], ex_to[i], std::ref(task_state));
+  }
+
+  if (client_type == CLIENT_ADMIN) {
+      for (unsigned int i = 0; i < ixSize; i++) {
+          threads.emplace_back(CopySingleFile, ix_from[i], ix_to[i], std::ref(task_state));
+      }
+  }
+
+  for(auto& thread : threads) {
+    if(thread.joinable()) {
+      thread.join();
+    }
+  }
+ 
+  if (task_state == exSize + ixSize) {
+      rc = 1;
+  } else {
+      rc = 0;
+  }
+
+  return rc; 
+
+}
+
+void subway_app::CopySingleFile(const std::string& src, const std::string&dest, std::atomic<int>& task_state) {
+  std::string cmd = "rsync -a " + src + " " + dest;
+  std::string rtnString;
+  AINFO << __func__ << " will execute cmd: " << cmd;
+  vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
+  task_state++;
+}
+
 
 void subway_app::AppendCopyFromPath(std::string xx, bool yy,
     std::vector<std::string> &name_list)
@@ -1351,9 +1491,6 @@ void subway_app::AppendCopyToPath(std::string xx, bool yy,
 
 void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
 {
-  // 开始计时
-  auto start_time = std::chrono::high_resolution_clock::now();
-  AINFO << "ExecuteCopyCommand start time: " << std::chrono::duration_cast<std::chrono::seconds>(start_time.time_since_epoch()).count();
 
   bool is_allow = false;
   if (access(xx.c_str(), F_OK) != 0)
@@ -1361,17 +1498,11 @@ void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
   else is_allow = true;
   if (is_allow) {
     std::string rtnString;
-    std::string cmd = "rsync -az " + yy + " " + xx;
+    std::string cmd = "rsync -a " + yy + " " + xx;
     AINFO << __func__ << " will execute cmd: " << cmd;
     vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
   }
 
-   // 结束计时
-  auto end_time = std::chrono::high_resolution_clock::now();
-  auto duration = std::chrono::duration_cast<std::chrono::seconds>(end_time - start_time).count();
-
-  AINFO << "ExecuteCopyCommand end time: " << std::chrono::duration_cast<std::chrono::seconds>(end_time.time_since_epoch()).count();
-  AINFO << "ExecuteCopyCommand total duration: " << duration << " seconds" << std::endl;
 }
 
 int subway_app::QueryCopyProgress(Command &cmd, Json::Value &map,
