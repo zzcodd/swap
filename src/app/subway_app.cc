@@ -1361,7 +1361,7 @@ void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
   else is_allow = true;
   if (is_allow) {
     std::string rtnString;
-    std::string cmd = "rsync -a " + yy + " " + xx;
+    std::string cmd = "rsync -az " + yy + " " + xx;
     AINFO << __func__ << " will execute cmd: " << cmd;
     vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
   }
