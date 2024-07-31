@@ -145,7 +145,6 @@ class subway_app : public base_app {
 
     int ParallelRealCopy(int type, int client_type, int& rc, const std::string& usb_path, long usb_free, std::vector<std::string>& ex_from, std::vector<std::string>& ex_to, std::vector<std::string>& ix_from, std::vector<std::string>& ix_to);
 
-    void CopySingleFile(const std::string& src, const std::string& dest, std::atomic<int>& task_state);
 
     int QueryCopyProgress(Command &cmd, Json::Value &map,
         std::string &out_msg);
