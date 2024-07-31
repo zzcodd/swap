@@ -1351,6 +1351,10 @@ void subway_app::AppendCopyToPath(std::string xx, bool yy,
 
 void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
 {
+  // 开始计时
+  auto start_time = std::chrono::high_resolution_clock::now();
+  AINFO << "ExecuteCopyCommand start time: " << std::chrono::duration_cast<std::chrono::seconds>(start_time.time_since_epoch()).count();
+
   bool is_allow = false;
   if (access(xx.c_str(), F_OK) != 0)
   is_allow = makeDir(xx.c_str());
@@ -1361,6 +1365,13 @@ void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
     AINFO << __func__ << " will execute cmd: " << cmd;
     vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
   }
+
+   // 结束计时
+  auto end_time = std::chrono::high_resolution_clock::now();
+  auto duration = std::chrono::duration_cast<std::chrono::seconds>(end_time - start_time).count();
+
+  AINFO << "ExecuteCopyCommand end time: " << std::chrono::duration_cast<std::chrono::seconds>(end_time.time_since_epoch()).count();
+  AINFO << "ExecuteCopyCommand total duration: " << duration << " seconds" << std::endl;
 }
 
 int subway_app::QueryCopyProgress(Command &cmd, Json::Value &map,
