@@ -1033,8 +1033,8 @@ int subway_app::DateCopy(Command &cmd, int type, Json::Value &map,
 
 void* subway_app::CopyHandler(void *param)
 {
-  clock_t start_time = clock();
-  AINFO << "现在开始计时 开始时间为： " << (double)start_time/CLOCKS_PER_SEC;
+  auto start_time = std::chrono::high_resolution_clock::now();
+  AINFO << "现在开始计时 开始时间为： " << std::chrono::duration_cast<std::chrono::seconds>(start_time.time_since_epoch()).count();
   
   AINFO << __func__ << " enter\n";
   int rc = 1;
@@ -1074,10 +1074,10 @@ void* subway_app::CopyHandler(void *param)
   is_copying = false;
   AINFO << __func__ << " exit state " << rc;
 
-  clock_t end_time = clock();
-  clock_t full_time = end_time - start_time;
-  AINFO << "现在结束 结束时间为" << (double)end_time/CLOCKS_PER_SEC;
-  AINFO << "总共耗时："  << (double)full_time/CLOCKS_PER_SEC << endl;
+  auto end_time = std::chrono::high_resolution_clock::now();
+  auto full_time = std::chrono::duration_cast<std::chrono::seconds>(end_time - start_time).count();
+  AINFO << "现在结束 结束时间为" << std::chrono::duration_cast<std::chrono::seconds>(end_time.time_since_epoch()).count();
+  AINFO << "总共耗时：" << full_time << "秒" << std::endl;
 
   return NULL;
 }
