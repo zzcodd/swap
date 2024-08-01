@@ -1476,7 +1476,7 @@ void subway_app::AppendRecordCopyFromPath(std::string xx, bool is_internal,
 
         if (cur_count < st_count | cur_count > et_count) continue;
 
-        std::string filename = name_list[n]->d_name;
+        std::string filename = namelist[n]->d_name;
         if(is_video && filename.find(".avi")==std::string::npos && filename.find(".mp4")==std::string::npos) {
           free(namelist[n]);
           continue;
