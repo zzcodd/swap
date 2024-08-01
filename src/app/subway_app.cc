@@ -1327,6 +1327,12 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
   unsigned int ixSize = ix_from.size();
 
   for (unsigned int i = 0; i < exSize; i++) {
+    if (0 == type && CLIENT_CIDI == client_type) {
+      if (copy_task.ex_from[i].find(".avi", 48) == std::string::npos && 
+        copy_task.ex_from[i].find(".mp4", 48) == std::string::npos) {
+          continue;
+      }
+    }
       threads.emplace_back(CopySingleFile, ex_from[i], ex_to[i], std::ref(task_state));
   }
 
