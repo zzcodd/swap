@@ -1301,8 +1301,20 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
     AINFO << "Copying...";
     rc = ParallelRealCopy(type, client_type, rc, usb_path, usb_free, copy_task.ex_from, copy_task.ex_to, 
         copy_task.ix_from, copy_task.ix_to);
+
+    //同步操作
+    for(int i = 0; i < copy_task.ix_to.size(); i++) {
+      if(copy_task.ix_to.size()<= i+1 || copy_task.ix_to[i] != copy_task.ix_to[i+1]){
+        std::string cmdString = "sync";
+        std::string rtnString;
+        cmdString += copy_task.ix_to[i];
+        vpSystem::Instance()->call_cmd(cmdString.data(), rtnString, 1);
+      }    
+    }  
   }
-  else copy_task.state = rc = 3;
+  else {
+    copy_task.state = rc =3;
+  }
   
   AINFO << "Copy and sync done, code " << rc;
   copy_task.percent = 100;
@@ -1310,12 +1322,14 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   return rc;
 }
 
-static void CopySingleFile(const std::string& src, const std::string&dest, std::atomic<int>& task_state) {
-  std::string cmd = "rsync -a " + src + " " + dest;
-  std::string rtnString;
-  AINFO << __func__ << " will execute cmd: " << cmd;
-  vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
-  task_state++;
+static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>>& files, std::atomic<int>& task_state) {
+  for(const auto& file : files) {
+    std::string cmd = "rsync -a " + file.first + " " + file.second;
+    std::string rtnString;
+    AINFO << __func__ << " will execute cmd: " << cmd;
+    vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
+    task_state++;
+  }
 }
 
 int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::string& usb_path, 
@@ -1325,29 +1339,43 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
   std::vector<std::thread> threads;
   unsigned int exSize = ex_from.size();
   unsigned int ixSize = ix_from.size();
+  size_t batchSize = 10; //批量处理10个文件
 
+//外部文件
+  std::vector<std::pair<std::string, std::string>> batch;
   for (unsigned int i = 0; i < exSize; i++) {
-    if (0 == type && CLIENT_CIDI == client_type) {
-      if (copy_task.ex_from[i].find(".avi", 48) == std::string::npos && 
-        copy_task.ex_from[i].find(".mp4", 48) == std::string::npos) {
-          continue;
+      batch.emplace_back(ex_from[i], ex_to[i]);
+      if(batch.size() == batchSize) {
+        threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));
+        batch.clear();
       }
-    }
-      threads.emplace_back(CopySingleFile, ex_from[i], ex_to[i], std::ref(task_state));
+  }
+  if(!batch.empty()) {
+    threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));
   }
 
+//内部文件
   if (client_type == CLIENT_ADMIN) {
+      batch.clear();
       for (unsigned int i = 0; i < ixSize; i++) {
-          threads.emplace_back(CopySingleFile, ix_from[i], ix_to[i], std::ref(task_state));
+        batch.emplace_back(ix_from[i], ix_to[i]);
+        if(batch.size() == batchSize) {
+          threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));      
+        }
       }
+  }  
+  if(!batch.empty()) {
+    threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));
   }
 
+//等待线程结束
   for(auto& thread : threads) {
     if(thread.joinable()) {
       thread.join();
     }
   }
  
+ //保证所有任务完成
   if (task_state == exSize + ixSize) {
       rc = 1;
   } else {
@@ -1447,6 +1475,12 @@ void subway_app::AppendRecordCopyFromPath(std::string xx, bool is_internal,
         int cur_count = cur_hour * 60 + cur_min;
 
         if (cur_count < st_count | cur_count > et_count) continue;
+
+        std::string filename = name_list[n]->d_name;
+        if(is_video && filename.find(".avi")==std::string::npos && filename.find(".mp4")==std::string::npos) {
+          free(namelist[n]);
+          continue;
+        }
 
         std::string full_path = path_list[i] + namelist[n]->d_name;
         if (is_internal) copy_task.ix_from.push_back(full_path);

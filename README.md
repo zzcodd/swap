@@ -31,3 +31,4 @@ $ git push origin/master
 6. 如果做了第2步中的git stash，那这个时候需要执行 git stash pop将之前临时保存的修改提取出来，继续第1步
 
 
+curl -d '{"cmd_type":"record_range_copy","date":"20240729154300|20240729154300","username":"zy","password":"21f3d99c69e2f2fe16d29a04846bc1ed"}' http://172.16.133.63:8081/apiserver/cmd
