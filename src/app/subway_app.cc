@@ -1266,7 +1266,6 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
 }
 #endif
 
-
 int subway_app::RealCopy(int type, int client_type, int &rc,
     std::string &usb_path, long &usb_free, std::vector<std::string> &name_list)
 {
@@ -1274,65 +1273,62 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   copy_task.percent = 0;
   copy_task.total_size = 0L;
   copy_task.start_ts = time(NULL);
-
-  std::string ex_camera, ex_log, ix_bag, ix_log;
-  ex_camera = ex_log = ix_bag = ix_log = "";
-
+  
   std::string path = "";
   long size, free_s;
   size = free_s = 0L;
-  bool usrdisk_rec = false;
   bool rec;
-  // record
-  if (0 == type) {
-    usrdisk_rec = GetRecordPathAndSize(LOCAL_RECORD_PATH, path, size, free_s);
-    if (usrdisk_rec) {
-      if (CLIENT_ADMIN == client_type)
-        AppendRecordCopyFromPath(path + "/bag/", true, name_list, false);
-      AppendRecordCopyFromPath(path + "/camera/full/", false, name_list, true);
-      AppendRecordCopyFromPath(path + "/camera/key/", false, name_list, true);
-    }
-  }
-  // log
-  else if (1 == type) {
-    size = free_s = 0L;
-    rec = GetLogPathAndSize(LOCAL_LOG_PATH, path, size, free_s);
-    if (rec) {
-      AppendCopyFromPath(path + "/ips/", false, name_list);
-      AppendCopyFromPath(path + "/lte/", false, name_list);
-    }
-  }
 
-  for (int i = 0; i < copy_task.ex_from.size(); i++)
-    AppendCopyToPath(copy_task.ex_from[i], false, usb_path);
-
-  if (CLIENT_ADMIN == client_type || CLIENT_CIDI == client_type) {
-    path = "";
-    if (0 == type) {
+  //record copy logic
+  if(0 == type) {
+    if(client_type == CLIENT_ADMIN || client_type == CLIENT_CIDI) {
+      rec = GetRecordPathAndSize(LOCAL_RECORD_PATH, path, size, free_s);
+      if(rec) {
+        if(client_type == CLIENT_ADMIN) {
+          AppendRecordCopyFromPath(path + "/bag/", false, name_list, false);
+        }
+        AppendRecordCopyFromPath(path + "/camera/full/", false, name_list, true);
+        //AppendRecordCopyFromPath(path + "/camera/key/", false, name_list, true);
+      }
+    }
+    if(client_type == CLIENT_ADMIN) {
       size = free_s = 0L;
       rec = GetRecordPathAndSize("internaldisk", path, size, free_s);
-      if (rec) {
-        if (!usrdisk_rec) {
+      if(rec) {
           AppendRecordCopyFromPath(path + "/bag/", true, name_list, false);
-          AppendRecordCopyFromPath(path + "/camera/full/", true, name_list,
-              true);
-          AppendRecordCopyFromPath(path + "/camera/key/", true, name_list,
-              true);
+          AppendRecordCopyFromPath(path + "/camera/full/", true, name_list, true);
+          //AppendRecordCopyFromPath(path + "/camera/key/", true, name_list, true);
         }
       }
     }
-    else if (1 == type) {
-      size = free_s = 0L;
+  //log copy logic
+  else if(1 == type) {
+    if(client_type == CLIENT_ADMIN || client_type == CLIENT_CIDI) {
+      rec = GetLogPathAndSize(LOCAL_LOG_PATH, path, size, free_s);
+      if(rec) {
+        AppendCopyFromPath(path + "/ips/", false, name_list);
+        AppendCopyFromPath(path + "/lte/", false, name_list);
+      }
+    }
+    if(client_type == CLIENT_ADMIN) {
+      size = free_s = 0L; 
       rec = GetLogPathAndSize("internaldisk", path, size, free_s);
       if (rec) {
         AppendCopyFromPath(path + "/ips/", true, name_list);
         AppendCopyFromPath(path + "/lte/", true, name_list);
       }
     }
-    for (int i = 0; i < copy_task.ix_from.size(); i++)
+  }
+
+  for (int i = 0; i < copy_task.ex_from.size(); i++) {
+    AppendCopyToPath(copy_task.ex_from[i], false, usb_path);
+  }
+
+  for (int i = 0; i < copy_task.ix_from.size(); i++) {
       AppendCopyToPath(copy_task.ix_from[i], true, usb_path);
   }
-#if 1
+
+  #if 1
   for (int i = 0; i < copy_task.ex_from.size(); i++)
     AINFO << "ex_from: i " << i << " v " <<copy_task.ex_from[i]<<"\n";
   for (int i = 0; i < copy_task.ex_to.size(); i++)
@@ -1342,7 +1338,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   for (int i = 0; i < copy_task.ix_to.size(); i++)
     AINFO << "ix_to: i " << i << " v " << copy_task.ix_to[i]<<"\n";
   AINFO << "total_size: " << copy_task.total_size << " usb_free: " << usb_free << std::endl;
-#endif
+  #endif
 
   if (copy_task.ix_from.size() < 1 && copy_task.ex_from.size() < 1) {
     copy_task.state = rc = 4;
@@ -1371,6 +1367,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   remove("/tmp/copying_file");
   return rc;
 }
+
 
 static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>>& files, std::atomic<int>& task_state) {
   for(const auto& file : files) {
@@ -1527,9 +1524,16 @@ void subway_app::AppendRecordCopyFromPath(std::string xx, bool is_internal,
         if (cur_count < st_count | cur_count > et_count) continue;
 
         std::string filename = namelist[n]->d_name;
-        if(is_video && filename.find(".avi")==std::string::npos && filename.find(".mp4")==std::string::npos) {
-          free(namelist[n]);
-          continue;
+        if(is_video) {
+          if(filename.find(".avi") == std::string ::npos && filename.find("mp4") == std::string::npos) {
+            free(namelist[n]);
+            continue;
+          }
+        } else {
+          if(filename.find(".bag") == std::string::npos) {
+            free(name_to_handle_at[n]);
+            continue;
+          }
         }
 
         std::string full_path = path_list[i] + namelist[n]->d_name;
