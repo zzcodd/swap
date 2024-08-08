@@ -1399,6 +1399,7 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
   }
   if(!batch.empty()) {
     threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));
+    batch.clear();
   }
 
 //内部文件
@@ -1413,6 +1414,7 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
   }  
   if(!batch.empty()) {
     threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));
+    batch.clear();
   }
 
 //等待线程结束
