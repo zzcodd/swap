@@ -66,7 +66,7 @@ class subway_app : public base_app {
 
     int IdentifyClient(Command &cmd);
 
-    int PickHandle(Command &cmd, Json::Value &map, std::string &out_msg);
+    int PickHandle(Command &cmd, Json::Value &map, std::string &out_msg, int client_type);
 
     int Login(Command &cmd, Json::Value &map, std::string &out_msg);
 
@@ -75,6 +75,8 @@ class subway_app : public base_app {
     int ResetPassword(Command &cmd, Json::Value &map, std::string &out_msg);
 
     int Logout(Command &cmd, Json::Value &map, std::string &out_msg);
+
+    int DeleteUser(Command &cmd, Json::value &map, std::string &out_msg);
 
     int QueryStatus(Command &cmd, Json::Value &map, std::string &out_msg);
 

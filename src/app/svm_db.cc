@@ -232,3 +232,41 @@ int svm_db::Logout(const char *token)
   }
   return 0;
 }
+
+// 删除用户
+int svm_db::DeleteUser(const char *username)
+{
+  char sql_string[256] = {0};
+
+  if (!username || strlen(username) < 1) {
+    AINFO << "DeleteUser: invalid username.";
+    return -1;
+  }
+
+  // 检查用户是否存在
+  if (!IsUsernameExist(username)) {
+    AINFO << "DeleteUser: username does not exist.";
+    return -1;
+  }
+
+  // 删除用户记录
+  snprintf(sql_string, sizeof(sql_string), "DELETE FROM users WHERE username='%s'", username);
+  int rc = MysqlAccess::Instance()->UpdateSQL(sql_string, nullptr);
+
+  if (rc != 0) {
+    AINFO << __func__ << " error, sql " << sql_string;
+    return -2;
+  }
+
+  // 删除与用户相关的会话
+  snprintf(sql_string, sizeof(sql_string), "DELETE FROM sessions WHERE user_id IN (SELECT user_id FROM users WHERE username='%s')", username);
+  rc = MysqlAccess::Instance()->UpdateSQL(sql_string, nullptr);
+
+  if (rc != 0) {
+    AINFO << __func__ << " error, sql " << sql_string;
+    return -3;
+  }
+
+  AINFO << "DeleteUser: user " << username << " deleted successfully.";
+  return 0;
+}

@@ -20,6 +20,7 @@
 #include "src/utils/disk.h"
 #include "src/utils/utils.h"
 #include "src/utils/log.h"
+#include <unordered_set>
 
 #include "db_api/include/MysqlAccess.h"
 #include "data_shadow/include/data_translate.h"
@@ -149,7 +150,8 @@ std::string subway_app::Handle(Command &cmd)
       
       Json::FastWriter writer;
       return writer.write(root);
-    } else 
+    } 
+    else 
     {
       AINFO << "Invalid session token, prompting login";
       root["result_code"] = -1;
@@ -161,19 +163,9 @@ std::string subway_app::Handle(Command &cmd)
   else 
   {
     AINFO << "Session token valid.";
+
     //处理命令
-    if(CLIENT_UNKNOWN == type) {
-      AINFO << "Handling as CLIENT_UNKNOWN.";
-      code = PickHandle(cmd, map, out_msg);
-    } else if(CLIENT_ADMIN == type) {
-      AINFO << "Handling as CLIENT_ADMIN.";
-      //TODO
-      code = PickHandle(cmd, map, out_msg);
-    } else if(CLIENT_CIDI == type) {
-      AINFO << "Handling as CLIENT_CIDI.";
-      //TODO
-      code = PickHandle(cmd, map, out_msg);
-    }
+    code = PickHandle(cmd, map, out_msg, type);
   
     AINFO << "Command handling result: " << code << ", message: " << out_msg;
     root["result_code"] = code;
@@ -187,9 +179,23 @@ std::string subway_app::Handle(Command &cmd)
 
 
 int subway_app::PickHandle(Command &cmd, Json::Value &map,
-    std::string &out_msg)
+    std::string &out_msg, int client_type)
 {
   int code = 404;
+
+  std::string cmd_type = BufferParser::Instance()->FindValueByKey(cmd, "cmd_type");
+  //无权限指令集合
+  static const std::unordered_set<std::string> cidi_no_permissions = {
+    "delete_user",
+    "reset_password"
+  }
+  if(cmd_type == CLIENT_CIDI && cidi_no_permissions.find(cmd_type) != cidi_no_permissions.end())
+  {
+    out_msg = "Permission denied."
+    AINFO << "Permission denied for CIDI user on cmmmand: " << cmd_type;
+    return -1;
+  }
+  
 
   HANDLE_CMD("login", Login);
 
@@ -198,6 +204,8 @@ int subway_app::PickHandle(Command &cmd, Json::Value &map,
   HANDLE_CMD("reset_password", ResetPassword);
 
   HANDLE_CMD("logout", Logout);
+
+  HANDLE_CMD("delete_user", DeleteUser);
 
   HANDLE_CMD("query_status", QueryStatus);
 
@@ -287,7 +295,7 @@ int subway_app::IdentifyClient(Command &cmd)
   if (usrname_admin == input_usrname && password_admin == input_password)
     return CLIENT_ADMIN;
   else if (username_cidi == input_usrname && password_cidi == input_password)
-    return CLIENT_ADMIN;
+    return CLIENT_CIDI;
   return CLIENT_CIDI;
 }
 
@@ -448,6 +456,49 @@ int subway_app::Logout(Command &cmd, Json::Value &map, std::string &out_msg)
   AINFO << out_msg;
   return 0;
 }
+
+int subway_app::DeleteUser(Command &cmd, Json::Value &map, std::string &out_msg)
+{
+  AINFO << __func__ << " enter ";
+
+  std::string input_username = BufferParser::Instance()->FindValueByKey(cmd, "username");
+
+  if (input_username.empty())
+  {
+    out_msg = "Username cannot be empty.";
+    AINFO << "Delete user failed. " << out_msg;
+    return -1;
+  }
+
+  // 检查用户是否存在
+  if (!svm_db::Instance()->IsUsernameExist(input_username.c_str()))
+  {
+    out_msg = "Username does not exist.";
+    AINFO << "Delete user failed. " << out_msg;
+    return -1;
+  }
+
+  // 删除用户
+  int rc = svm_db::Instance()->DeleteUser(input_username.c_str());
+  if (rc != 0)
+  {
+    if (rc == -1)
+      out_msg = "Error finding username.";
+    else if (rc == -2)
+      out_msg = "Error deleting user.";
+    else if (rc == -3)
+      out_msg = "Error deleting user's sessions.";
+    else
+      out_msg = "Failed to delete user.";
+    AINFO << "Delete user failed. " << out_msg;
+    return rc;
+  }
+
+  out_msg = "User has been deleted successfully.";
+  AINFO << out_msg;
+  return 0;
+}
+
 
 
 int subway_app::QueryStatus(Command &cmd, Json::Value &map,
@@ -1256,7 +1307,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   for (int i = 0; i < copy_task.ex_from.size(); i++)
     AppendCopyToPath(copy_task.ex_from[i], false, usb_path);
 
-  if (CLIENT_ADMIN == client_type) {
+  if (CLIENT_ADMIN == client_type || CLIENT_CIDI == client_type) {
     path = "";
     if (0 == type) {
       size = free_s = 0L;

@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: zy
  * @Date: 2024-06-18 15:48:44
- * @LastEditTime: 2024-07-11 15:38:36
+ * @LastEditTime: 2024-08-08 09:58:26
  * @LastEditors: zy
  */
 #pragma once
@@ -39,6 +39,8 @@ public:
   int UpdatePassword(const char *username, const char *new_passwd_hash);
   //退出会话 非注销
   int Logout(const char *token);
+
+  int DeleteUser(const char *username);
 
   bool ValidateSession(const char *token);
   bool IsUsernameExist(const char *username);
