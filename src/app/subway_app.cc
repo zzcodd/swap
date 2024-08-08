@@ -1387,12 +1387,13 @@ void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
 static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>>& files, std::atomic<int>& task_state) 
 {
   for (const auto& file : files) {
-
     // 检查并创建目标目录
     bool is_allow = false;
-    std::string target_dir = file.second.substr(0, file.second.find_last_of('/'));
+//    std::string target_dir = file.second.substr(0, file.second.find_last_of('/'));
+    std::string target_dir = file.second;
+
     AINFO << "Checking if target directory exists: " << target_dir;
-    
+
     if (access(target_dir.c_str(), F_OK) != 0) {
       AINFO << "Target directory does not exist, creating: " << target_dir;
       is_allow = makeDir(target_dir);
