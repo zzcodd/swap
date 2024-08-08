@@ -143,7 +143,7 @@ class subway_app : public base_app {
     bool AppendCopyToPath_COMMON(std::string xx, bool yy,
         std::string &usb_path, std::string media_root);
 
-    void ExecuteCopyCommand(std::string xx, std::string yy);
+    //void ExecuteCopyCommand(std::string xx, std::string yy);
 
     int ParallelRealCopy(int type, int client_type, int& rc, const std::string& usb_path, long usb_free, std::vector<std::string>& ex_from, std::vector<std::string>& ex_to, std::vector<std::string>& ix_from, std::vector<std::string>& ix_to);
 

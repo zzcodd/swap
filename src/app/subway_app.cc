@@ -1368,6 +1368,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   return rc;
 }
 
+/*
 void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
 {
   bool is_allow = false;
@@ -1387,14 +1388,32 @@ void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
   }
 
 }
-
+*/
 
 static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>>& files, std::atomic<int>& task_state) {
-  for(const auto& file : files) {
-    subway_app::ExecuteCopyCommand(file.second, file.first);
+  for (const auto& file : files) {
+    std::string target_dir = file.second.substr(0, file.second.find_last_of('/'));
+
+    // 检查并创建目标目录
+    bool is_allow = false;
+    if (access(target_dir.c_str(), F_OK) != 0) {
+      is_allow = makeDir(target_dir);
+    } else {
+      is_allow = true;
+    }
+
+    // 执行 rsync 命令
+    if (is_allow) {
+      std::string rtnString;
+      std::string cmd = "rsync -a " + file.first + " " + file.second;
+      AINFO << __func__ << " will execute cmd: " << cmd;
+      vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
+    }
+
     task_state++;
   }
 }
+
 
 int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::string& usb_path, 
     long usb_free, std::vector<std::string>& ex_from, std::vector<std::string>& ex_to, std::vector<std::string>& ix_from, std::vector<std::string>& ix_to)
