@@ -76,7 +76,7 @@ class subway_app : public base_app {
 
     int Logout(Command &cmd, Json::Value &map, std::string &out_msg);
 
-    int DeleteUser(Command &cmd, Json::value &map, std::string &out_msg);
+    int DeleteUser(Command &cmd, Json::Value &map, std::string &out_msg);
 
     int QueryStatus(Command &cmd, Json::Value &map, std::string &out_msg);
 

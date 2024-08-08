@@ -188,10 +188,10 @@ int subway_app::PickHandle(Command &cmd, Json::Value &map,
   static const std::unordered_set<std::string> cidi_no_permissions = {
     "delete_user",
     "reset_password"
-  }
+  };
   if(cmd_type == CLIENT_CIDI && cidi_no_permissions.find(cmd_type) != cidi_no_permissions.end())
   {
-    out_msg = "Permission denied."
+    out_msg = "Permission denied.";
     AINFO << "Permission denied for CIDI user on cmmmand: " << cmd_type;
     return -1;
   }
