@@ -1470,11 +1470,11 @@ void subway_app::AppendRecordCopyFromPath(std::string xx, bool is_internal,
 
   std::vector<std::string> path_list;
   path_list.clear();
-  std::string data_path = xx + "/" + date_str + "/";
+  std::string data_path = xx + date_str + "/";
   if (is_video) {
-    data_path = xx + "/" + date_str + "/6mm/";
+    data_path = xx + date_str + "/6mm/";
     path_list.push_back(data_path);
-    data_path = xx + "/" + date_str + "/.res/";
+    data_path = xx + date_str + "/.res/";
     path_list.push_back(data_path);
   }
   else {
@@ -1496,49 +1496,54 @@ void subway_app::AppendRecordCopyFromPath(std::string xx, bool is_internal,
         //printf("%s\n", namelist[n]->d_name);
         if ('.' == namelist[n]->d_name[0]) continue;
 
-        // bag have over day, so check day
-        memset(buf, 0x0, sizeof(buf));
-        if (is_video)
-          strncpy(buf, namelist[n]->d_name + 6, 2);
-        else
-          strncpy(buf, namelist[n]->d_name + 15, 2);
-        int cur_day = atoi(buf);
-        if (cur_day < st_day | cur_day > et_day) continue;
-
-        // hour
-        memset(buf, 0x0, sizeof(buf));
-        if (is_video)
-          strncpy(buf, namelist[n]->d_name + 8, 2);
-        else
-          strncpy(buf, namelist[n]->d_name + 18, 2);
-        int cur_hour = atoi(buf);
-        // minute
-        memset(buf, 0x0, sizeof(buf));
-        if (is_video)
-          strncpy(buf, namelist[n]->d_name + 10, 2);
-        else
-          strncpy(buf, namelist[n]->d_name + 21, 2);
-        int cur_min = atoi(buf);
-        int cur_count = cur_hour * 60 + cur_min;
-
-        if (cur_count < st_count | cur_count > et_count) continue;
-
         std::string filename = namelist[n]->d_name;
+        bool valid = false;
+        int cur_day = 0, cur_hour = 0, cur_min = 0;
+
         if(is_video) {
-          if(filename.find(".avi") == std::string ::npos && filename.find("mp4") == std::string::npos) {
-            free(namelist[n]);
-            continue;
+          //视频文件的日期时间处理
+          if(filename.find(".avi") != std::string::npos || filename.find(".mp4") != std::string::npos) {
+            std::string time_part = filename.substr(6,15);
+            cur_day = std::stoi(time_part.substr(0,2));
+            cur_hour = std::stoi(time_part.substr(2,2));
+            cur_min = std::stoi(time_part.substr(4,2));
+            valid = true;
           }
         } else {
-          if(filename.find(".bag") == std::string::npos) {
-            free(namelist[n]);
-            continue;
+          // .bag文件的处理
+          // subway_2024-08-08-14-22-17_483.bag
+          if(filename.find(".bag") != std::string::npos) {
+            size_t start_pos = filename.find('_') + 1;
+            std::string time_part = filename.substr(start_pos,19);
+            cur_day = std::stoi(time_part.substr(8,2));
+            cur_hour = std::stoi(time_part.substr(11,2));
+            cur_min = std::stoi(time_part.substr(14,2));
+            valid = true;
           }
         }
 
+        if(!valid) {
+          free(namelist[n]);
+          continue;
+        }
+
+        int cur_count = cur_hour * 60 + cur_min;
+
+        if(cur_day < st_day || cur_day > et_day) {
+          free(namelist[n]);
+          continue;
+        }
+
+        if (cur_count < st_count | cur_count > et_count) {
+          free(namelist[n]);
+          continue;
+        }
+
         std::string full_path = path_list[i] + namelist[n]->d_name;
+        
         if (is_internal) copy_task.ix_from.push_back(full_path);
         else copy_task.ex_from.push_back(full_path);
+        
         copy_task.total_size += GetFolderSize(full_path);
 
         free(namelist[n]);
