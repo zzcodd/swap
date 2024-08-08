@@ -187,7 +187,6 @@ int subway_app::PickHandle(Command &cmd, Json::Value &map,
   //无权限指令集合
   static const std::unordered_set<std::string> cidi_no_permissions = {
     "delete_user",
-    "reset_password"
   };
   if(client_type == CLIENT_CIDI && cidi_no_permissions.find(cmd_type) != cidi_no_permissions.end())
   {
@@ -461,7 +460,7 @@ int subway_app::DeleteUser(Command &cmd, Json::Value &map, std::string &out_msg)
 {
   AINFO << __func__ << " enter ";
 
-  std::string input_username = BufferParser::Instance()->FindValueByKey(cmd, "username");
+  std::string input_username = BufferParser::Instance()->FindValueByKey(cmd, "delete_username");
 
   if (input_username.empty())
   {
