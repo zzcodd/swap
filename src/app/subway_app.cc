@@ -1389,8 +1389,8 @@ static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>
   for (const auto& file : files) {
     // 检查并创建目标目录
     bool is_allow = false;
-//    std::string target_dir = file.second.substr(0, file.second.find_last_of('/'));
-    std::string target_dir = file.second;
+    std::string target_dir = file.second.substr(0, file.second.find_last_of('/')+1);
+//    std::string target_dir = file.second;
 
     AINFO << "Checking if target directory exists: " << target_dir;
 
