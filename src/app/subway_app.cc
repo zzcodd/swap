@@ -1531,7 +1531,7 @@ void subway_app::AppendRecordCopyFromPath(std::string xx, bool is_internal,
           }
         } else {
           if(filename.find(".bag") == std::string::npos) {
-            free(name_to_handle_at[n]);
+            free(namelist[n]);
             continue;
           }
         }
