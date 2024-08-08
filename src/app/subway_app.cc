@@ -1390,23 +1390,37 @@ static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>
 
     // 检查并创建目标目录
     bool is_allow = false;
-    if (access(file.second.c_str(), F_OK) != 0) {
-      is_allow = makeDir(file.second.c_str());
+    std::string target_dir = file.second.substr(0, file.second.find_last_of('/'));
+    AINFO << "Checking if target directory exists: " << target_dir;
+    
+    if (access(target_dir.c_str(), F_OK) != 0) {
+      AINFO << "Target directory does not exist, creating: " << target_dir;
+      is_allow = makeDir(target_dir);
+      if (is_allow) {
+        AINFO << "Successfully created target directory: " << target_dir;
+      } else {
+        AERROR << "Failed to create target directory: " << target_dir;
+      }
     } else {
+      AINFO << "Target directory already exists: " << target_dir;
       is_allow = true;
     }
 
     // 执行 rsync 命令
     if (is_allow) {
       std::string rtnString;
-      std::string cmd = "rsync -a " + file.first + " to " + file.second;
-      AINFO << __func__ << " will execute cmd: " << cmd;
+      std::string cmd = "rsync -a " + file.first + " " + file.second;
+      AINFO << "Executing command: " << cmd;
       vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
+      AINFO << "Command result: " << rtnString;
+    } else {
+      AERROR << "Skipping rsync command due to directory creation failure.";
     }
 
     task_state++;
   }
 }
+
 
 
 int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::string& usb_path, 
