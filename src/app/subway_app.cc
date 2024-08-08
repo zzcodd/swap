@@ -1372,32 +1372,26 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
 void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
 {
   bool is_allow = false;
-  std::string target_dir = xx.substr(0, xx.find_last_of('/'));
-
-  if (access(target_dir.c_str(), F_OK) != 0) {
-    is_allow = makeDir(xx.c_str());
-  } else {
-    is_allow = true;
-  }
-  
+  if (access(xx.c_str(), F_OK) != 0)
+  is_allow = makeDir(xx.c_str());
+  else is_allow = true;
   if (is_allow) {
     std::string rtnString;
     std::string cmd = "rsync -a " + yy + " " + xx;
     AINFO << __func__ << " will execute cmd: " << cmd;
     vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
   }
-
 }
 */
 
-static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>>& files, std::atomic<int>& task_state) {
+static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>>& files, std::atomic<int>& task_state) 
+{
   for (const auto& file : files) {
-    std::string target_dir = file.second.substr(0, file.second.find_last_of('/'));
 
     // 检查并创建目标目录
     bool is_allow = false;
-    if (access(target_dir.c_str(), F_OK) != 0) {
-      is_allow = makeDir(target_dir);
+    if (access(file.second.c_str(), F_OK) != 0) {
+      is_allow = makeDir(file.second.c_str());
     } else {
       is_allow = true;
     }
@@ -1405,7 +1399,7 @@ static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>
     // 执行 rsync 命令
     if (is_allow) {
       std::string rtnString;
-      std::string cmd = "rsync -a " + file.first + " " + file.second;
+      std::string cmd = "rsync -a " + file.first + " to " + file.second;
       AINFO << __func__ << " will execute cmd: " << cmd;
       vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
     }
