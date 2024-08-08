@@ -189,7 +189,7 @@ int subway_app::PickHandle(Command &cmd, Json::Value &map,
     "delete_user",
     "reset_password"
   };
-  if(cmd_type == CLIENT_CIDI && cidi_no_permissions.find(cmd_type) != cidi_no_permissions.end())
+  if(client_type == CLIENT_CIDI && cidi_no_permissions.find(cmd_type) != cidi_no_permissions.end())
   {
     out_msg = "Permission denied.";
     AINFO << "Permission denied for CIDI user on cmmmand: " << cmd_type;
