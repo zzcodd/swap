@@ -1368,13 +1368,30 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   return rc;
 }
 
+void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
+{
+  bool is_allow = false;
+  std::string target_dir = xx.substr(0, xx.find_last_of('/'));
+
+  if (access(target_dir.c_str(), F_OK) != 0) {
+    is_allow = makeDir(xx.c_str());
+  } else {
+    is_allow = true;
+  }
+  
+  if (is_allow) {
+    std::string rtnString;
+    std::string cmd = "rsync -a " + yy + " " + xx;
+    AINFO << __func__ << " will execute cmd: " << cmd;
+    vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
+  }
+
+}
+
 
 static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>>& files, std::atomic<int>& task_state) {
   for(const auto& file : files) {
-    std::string cmd = "rsync -a " + file.first + " " + file.second;
-    std::string rtnString;
-    AINFO << __func__ << " will execute cmd: " << cmd;
-    vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
+    subway_app::ExecuteCopyCommand(file.second, file.first);
     task_state++;
   }
 }
@@ -1408,7 +1425,8 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
       for (unsigned int i = 0; i < ixSize; i++) {
         batch.emplace_back(ix_from[i], ix_to[i]);
         if(batch.size() == batchSize) {
-          threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));      
+          threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));    
+          batch.clear();
         }
       }
   }  
@@ -1434,8 +1452,6 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
   return rc; 
 
 }
-
-
 
 
 void subway_app::AppendCopyFromPath(std::string xx, bool yy,
@@ -1593,21 +1609,7 @@ void subway_app::AppendCopyToPath(std::string xx, bool yy,
         SUBWAY_MEDIA_CIDI_ROOT_HEAD);
 }
 
-void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
-{
 
-  bool is_allow = false;
-  if (access(xx.c_str(), F_OK) != 0)
-  is_allow = makeDir(xx.c_str());
-  else is_allow = true;
-  if (is_allow) {
-    std::string rtnString;
-    std::string cmd = "rsync -a " + yy + " " + xx;
-    AINFO << __func__ << " will execute cmd: " << cmd;
-    vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
-  }
-
-}
 
 int subway_app::QueryCopyProgress(Command &cmd, Json::Value &map,
     std::string &out_msg)
