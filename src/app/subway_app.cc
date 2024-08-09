@@ -1332,11 +1332,11 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   }
 
   for(const auto& file : copy_task.ex_from) {
-    ex_total_size += (get_file_sz_KB(file) * 1024);
+    ex_total_size += (get_file_sz_KB(file));
   }
 
   for(const auto& file : copy_task.ix_from) {
-    ix_total_size += (get_file_sz_KB(file) * 1024);
+    ix_total_size += (get_file_sz_KB(file));
   }
 
   // 打印内部和外部磁盘的大小及文件总大小
