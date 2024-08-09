@@ -1411,7 +1411,7 @@ static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>
     // 执行 rsync 命令
     if (is_allow) {
       std::string rtnString;
-      std::string cmd = "rsync -a " + file.first + " to " + file.second;
+      std::string cmd = "rsync -av " + file.first + " to " + file.second;
       AINFO << "Executing command: " << cmd;
       vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
       AINFO << "Command result: " << rtnString;
