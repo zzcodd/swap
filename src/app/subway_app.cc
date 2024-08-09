@@ -1338,7 +1338,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
     ex_total_size += (get_file_sz_KB(file));
   }
 
-  for(const auto& file : copy_task.ix_from_copy) {
+  for(const auto& file : ix_from_copy) {
     ix_total_size += (get_file_sz_KB(file));
   }
 
