@@ -1331,14 +1331,12 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
       AppendCopyToPath(copy_task.ix_from[i], true, usb_path);
   }
 
-  std::vector<std::string> ex_from_copy = copy_task.ex_from;
-  std::vector<std::string> ix_from_copy = copy_task.ix_from;
 
-  for(const auto& file : ex_from_copy) {
+  for(const auto& file : copy_task.ex_from) {
     ex_total_size += (get_file_sz_KB(file));
   }
 
-  for(const auto& file : ix_from_copy) {
+  for(const auto& file : copy_task.ix_from) {
     ix_total_size += (get_file_sz_KB(file));
   }
 
@@ -1421,6 +1419,8 @@ static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>
 
     if (access(target_dir.c_str(), F_OK) != 0) {
       is_allow = makeDir(target_dir);
+    } else {
+      is_allow = true;
     }
 
     // 执行 rsync 命令
