@@ -1345,6 +1345,12 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   AINFO << "Total file size to copy (external): " << ex_total_size << " bytes";
   AINFO << "Total file size to copy (internal): " << ix_total_size << " bytes";
 
+  //调试
+  AERROR << "Internal disk available space: " << free_s << " bytes";
+  AERROR << "USB disk available space: " << usb_free << " bytes";
+  AERROR << "Total file size to copy (external): " << ex_total_size << " bytes";
+  AERROR << "Total file size to copy (internal): " << ix_total_size << " bytes";
+
   
   #if 1
   for (int i = 0; i < copy_task.ex_from.size(); i++)
@@ -1355,7 +1361,6 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
     AINFO << "ix_from: i " << i << " v " <<copy_task.ix_from[i]<<"\n";
   for (int i = 0; i < copy_task.ix_to.size(); i++)
     AINFO << "ix_to: i " << i << " v " << copy_task.ix_to[i]<<"\n";
-  AINFO << "total_size: " << copy_task.total_size << " usb_free: " << usb_free << std::endl;
   #endif
 
   if(ex_total_size > usb_free) {
@@ -1410,21 +1415,9 @@ static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>
     // 检查并创建目标目录
     bool is_allow = false;
     std::string target_dir = file.second ;
-//    std::string target_dir = file.second;
-
-    AINFO << "Checking if target directory exists: " << target_dir;
 
     if (access(target_dir.c_str(), F_OK) != 0) {
-      AINFO << "Target directory does not exist, creating: " << target_dir;
       is_allow = makeDir(target_dir);
-      if (is_allow) {
-        AINFO << "Successfully created target directory: " << target_dir;
-      } else {
-        AERROR << "Failed to create target directory: " << target_dir;
-      }
-    } else {
-      AINFO << "Target directory already exists: " << target_dir;
-      is_allow = true;
     }
 
     // 执行 rsync 命令
