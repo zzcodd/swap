@@ -1446,7 +1446,7 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
   std::vector<std::thread> threads;
   unsigned int exSize = ex_from.size();
   unsigned int ixSize = ix_from.size();
-  size_t batchSize = 75; //批量处理10个文件
+  size_t batchSize = 100; //批量处理文件
   AERROR << "current batchSize " << batchSize ;
 
 //外部文件
