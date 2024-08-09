@@ -1331,11 +1331,11 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
       AppendCopyToPath(copy_task.ix_from[i], true, usb_path);
   }
 
-  for(const auto& file : copy_task.ex_from) {
+  for(const auto file : copy_task.ex_from) {
     ex_total_size += (get_file_sz_KB(file));
   }
 
-  for(const auto& file : copy_task.ix_from) {
+  for(const auto file : copy_task.ix_from) {
     ix_total_size += (get_file_sz_KB(file));
   }
 
@@ -1375,8 +1375,8 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
     rc = ParallelRealCopy(type, client_type, rc, usb_path, usb_free, 
         copy_task.ex_from, copy_task.ex_to, copy_task.ix_from, copy_task.ix_to);
 
-  // 同步操作
-  for (int i = 0; i < copy_task.ix_to.size(); i++) {
+    // 同步操作
+    for (int i = 0; i < copy_task.ix_to.size(); i++) {
       if (copy_task.ix_to.size() <= i + 1 || copy_task.ix_to[i] != copy_task.ix_to[i + 1]) {
         std::string cmdString = "sync";
         std::string rtnString;
