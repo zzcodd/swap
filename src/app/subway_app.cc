@@ -1384,12 +1384,13 @@ void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
 }
 */
 
+//first-src second-dst
 static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>>& files, std::atomic<int>& task_state) 
 {
   for (const auto& file : files) {
     // 检查并创建目标目录
     bool is_allow = false;
-    std::string target_dir = file.second.substr(0, file.second.find_last_of('/')+1);
+    std::string target_dir = file.second ;
 //    std::string target_dir = file.second;
 
     AINFO << "Checking if target directory exists: " << target_dir;
@@ -1410,7 +1411,7 @@ static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>
     // 执行 rsync 命令
     if (is_allow) {
       std::string rtnString;
-      std::string cmd = "rsync -a " + file.first + " " + file.second;
+      std::string cmd = "rsync -a " + file.first + " to " + file.second;
       AINFO << "Executing command: " << cmd;
       vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
       AINFO << "Command result: " << rtnString;
