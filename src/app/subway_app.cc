@@ -1277,6 +1277,8 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   std::string path = "";
   long size, free_s;
   size = free_s = 0L;
+  uint64_t ex_total_size = 0L;
+  uint64_t ix_total_size = 0L;
   bool rec;
 
   //record copy logic
@@ -1289,6 +1291,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
         }
         AppendRecordCopyFromPath(path + "/camera/full/", false, name_list, true);
         //AppendRecordCopyFromPath(path + "/camera/key/", false, name_list, true);
+        copy_task.total_size += size;
       }
     }
     if(client_type == CLIENT_ADMIN) {
@@ -1328,6 +1331,21 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
       AppendCopyToPath(copy_task.ix_from[i], true, usb_path);
   }
 
+  for(const auto& file : copy_task.ex_from) {
+    ex_total_size += (get_file_sz_KB(file) * 1024);
+  }
+
+  for(const auto& file : copy_task.ix_from) {
+    ix_total_size += (get_file_sz_KB(file) * 1024);
+  }
+
+  // 打印内部和外部磁盘的大小及文件总大小
+  AINFO << "Internal disk available space: " << free_s << " bytes";
+  AINFO << "USB disk available space: " << usb_free << " bytes";
+  AINFO << "Total file size to copy (external): " << ex_total_size << " bytes";
+  AINFO << "Total file size to copy (internal): " << ix_total_size << " bytes";
+
+  
   #if 1
   for (int i = 0; i < copy_task.ex_from.size(); i++)
     AINFO << "ex_from: i " << i << " v " <<copy_task.ex_from[i]<<"\n";
@@ -1340,26 +1358,27 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   AINFO << "total_size: " << copy_task.total_size << " usb_free: " << usb_free << std::endl;
   #endif
 
-  if (copy_task.ix_from.size() < 1 && copy_task.ex_from.size() < 1) {
-    copy_task.state = rc = 4;
+  if(ex_total_size > usb_free) {
+    copy_task.state = rc = 3;
+    AERROR << "Not enough space on USB for ex_from files." ;
   }
-  else if(copy_task.total_size < usb_free) {
-    AINFO << "Copying...";
-    rc = ParallelRealCopy(type, client_type, rc, usb_path, usb_free, copy_task.ex_from, copy_task.ex_to, 
-        copy_task.ix_from, copy_task.ix_to);
+  else if(ix_total_size > free_s) {
+    copy_task.state = rc = 3;
+    AERROR << "Not enough space on USB for ex_from files." ;
+  }else {
+    AINFO << "Sufficient space available. Starting copy...";
+    rc = ParallelRealCopy(type, client_type, rc, usb_path, usb_free, 
+        copy_task.ex_from, copy_task.ex_to, copy_task.ix_from, copy_task.ix_to);
 
-    //同步操作
-    for(int i = 0; i < copy_task.ix_to.size(); i++) {
-      if(copy_task.ix_to.size()<= i+1 || copy_task.ix_to[i] != copy_task.ix_to[i+1]){
+  // 同步操作
+  for (int i = 0; i < copy_task.ix_to.size(); i++) {
+      if (copy_task.ix_to.size() <= i + 1 || copy_task.ix_to[i] != copy_task.ix_to[i + 1]) {
         std::string cmdString = "sync";
         std::string rtnString;
         cmdString += copy_task.ix_to[i];
         vpSystem::Instance()->call_cmd(cmdString.data(), rtnString, 1);
       }    
-    }  
-  }
-  else {
-    copy_task.state = rc =3;
+    }
   }
   
   AINFO << "Copy and sync done, code " << rc;
