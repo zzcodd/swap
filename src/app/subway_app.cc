@@ -1331,11 +1331,14 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
       AppendCopyToPath(copy_task.ix_from[i], true, usb_path);
   }
 
-  for(const auto file : copy_task.ex_from) {
+  std::vector<std::string> ex_from_copy = copy_task.ex_from;
+  std::vector<std::string> ix_from_copy = copy_task.ix_from;
+
+  for(const auto& file : ex_from_copy) {
     ex_total_size += (get_file_sz_KB(file));
   }
 
-  for(const auto file : copy_task.ix_from) {
+  for(const auto& file : copy_task.ix_from_copy) {
     ix_total_size += (get_file_sz_KB(file));
   }
 
