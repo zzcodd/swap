@@ -1747,15 +1747,16 @@ int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
     // 已经使用的时间
     int elapsed_time = current_time - copy_task.start_ts;
     // 计算估算的时间
+    int extimated_remaining_time = -1;
     if(copied_file_count > 0){
-      int extimated_remaining_time = elapsed_time * (total_file_count - copied_file_count) / copied_file_count;
+      extimated_remaining_time = elapsed_time * (total_file_count - copied_file_count) / copied_file_count;
     }
 
     // 调整查询间隔 初始100ms
     int interval = 100;
     if(elapsed_time >= 60){
       interval = 2000;
-    } else if(elapsed_time_time >= 30) {
+    } else if(elapsed_time >= 30) {
       interval = 1000;
     } else if(elapsed_time >= 10) {
       interval = 500;
