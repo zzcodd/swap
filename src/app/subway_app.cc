@@ -1433,7 +1433,7 @@ static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>
       AINFO << "Executing command: " << cmd;
       vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
       task_state++;
-
+      AERROR << "Rile copied successfully, task_state incremented, current value : " << task_state.load();
     } else {
       AERROR << "Skipping rsync command due to directory creation failure.";
     }
@@ -1491,7 +1491,7 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
  
 // 更新已拷贝的文件数
   copy_task.copied_file_count = task_state.load();
-
+  AERROR << "Total copied files: " << copy_task.copied_file_count;
  //保证所有任务完成
   if (task_state == exSize + ixSize) {
       rc = 1;
