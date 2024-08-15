@@ -1753,7 +1753,8 @@ int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
     map["copied_files"] = copied_file_count;
     map["percent"] = 100;
     if(copy_task.start_ts > 0 && copy_task.end_ts > 0) {
-      map["seconds"] = copy_task.end_ts - copy_task.start_ts;
+      Json::Int64 value = time(NULL) - copy_task.start_ts;
+    map["seconds"] = value;
     } else {
       map["seconds"] = 0;
     }
