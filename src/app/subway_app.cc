@@ -1735,6 +1735,7 @@ int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
   int client_type = IdentifyClient(cmd);
   int total_file_count = copy_task.total_file_count;
   int copied_file_count = copy_task.copied_file_count;
+  time_t current_time = time(NULL);
 
   if(is_copying && copy_task.percent <= 100) {
     int percent = (copied_file_count * 100) / total_file_count;
@@ -1742,21 +1743,42 @@ int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
     if(percent >copy_task.percent) {
       copy_task.percent = percent;
     }
-      
+
+    // 已经使用的时间
+    int elapsed_time = current_time - copy_task.start_ts;
+    // 计算估算的时间
+    if(copied_file_count > 0){
+      int extimated_remaining_time = elapsed_time * (total_file_count - copied_file_count) / copied_file_count;
+    }
+
+    // 调整查询间隔 初始100ms
+    int interval = 100;
+    if(elapsed_time >= 60){
+      interval = 2000;
+    } else if(elapsed_time_time >= 30) {
+      interval = 1000;
+    } else if(elapsed_time >= 10) {
+      interval = 500;
+    }
+
     map["total_files"] = total_file_count;
     map["copied_files"] = copied_file_count;
     map["percent"] = copy_task.percent;
     Json::Int64 value = time(NULL) - copy_task.start_ts;
     map["seconds"] = value;
+    map["estimated_remaining_time"] = extimated_remaining_time;
+    map["interval"] = interval;
   } else {
     map["total_files"] = total_file_count;
     map["copied_files"] = copied_file_count;
     map["percent"] = 100;
+    map["estimated_remaining_time"] = 0;
     if(copy_task.start_ts > 0 && copy_task.end_ts > 0) {
       Json::Int64 value = time(NULL) - copy_task.start_ts;
-    map["seconds"] = value;
+      map["seconds"] = value;
     } else {
       map["seconds"] = 0;
+      map["interval"] = 2000; // 查询拷贝完成后设置一个比较大的时间间隔
     }
   }
   int rc = copy_task.state;
