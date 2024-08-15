@@ -12,6 +12,8 @@
 #include "request_handler.h"
 #include "config.h"
 
+#include "utils/log.h"
+
 using namespace hv;
 
 /*
@@ -33,12 +35,15 @@ extern MainConfig config;
 
 void HVWebServer::Initialize(void)
 {
+  ADEBUG << "HVWebServer 开始初始化 " ;
 }
 
 static std::string DataHandler(std::string &data)
 {
   Command cmd;
-//  AINFO << "Incoming: " << body.data() << std::endl;
+  
+  ADEBUG << "Incoming: " << data << std::endl;
+  
   BufferParser::Instance()->ParseHttpPostData((char*)data.data(), data.size(),
       cmd);
 

@@ -1291,7 +1291,6 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
         }
         AppendRecordCopyFromPath(path + "/camera/full/", false, name_list, true);
         //AppendRecordCopyFromPath(path + "/camera/key/", false, name_list, true);
-        copy_task.total_size += size;
       }
     }
     if(client_type == CLIENT_ADMIN) {
@@ -1352,7 +1351,8 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   AERROR << "Total file size to copy (external): " << ex_total_size << " bytes";
   AERROR << "Total file size to copy (internal): " << ix_total_size << " bytes";
 
-  
+  copy_task.total_size = ex_total_size + ix_total_size;
+
   #if 1
   for (int i = 0; i < copy_task.ex_from.size(); i++)
     AINFO << "ex_from: i " << i << " v " <<copy_task.ex_from[i]<<"\n";
@@ -1667,6 +1667,7 @@ int subway_app::QueryLogCopyProgress(Command &cmd, Json::Value &map,
   return QueryRealProgress(cmd, map, out_msg);
 }
 
+# if 0
 int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
     std::string &out_msg)
 {
@@ -1718,6 +1719,8 @@ int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
     out_msg = "无对应数据";
   return rc;
 }
+#endif
+
 
 int subway_app::GetVersionInfo(Command &cmd, Json::Value &map,
     std::string &out_msg)
