@@ -1413,7 +1413,7 @@ void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
 */
 
 //first-src second-dst
-static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>>& files, std::atomic<int>& task_state) 
+static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>>& files, std::atomic<int>& task_state, int& copied_file_count) 
 {
   for (const auto& file : files) {
     // 检查并创建目标目录
@@ -1433,6 +1433,7 @@ static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>
       AINFO << "Executing command: " << cmd;
       vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
       task_state++;
+      copied_file_count = task_state.load();
       AERROR << "Rile copied successfully, task_state incremented, current value : " << task_state.load();
     } else {
       AERROR << "Skipping rsync command due to directory creation failure.";
@@ -1457,12 +1458,12 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
   for (unsigned int i = 0; i < exSize; i++) {
       batch.emplace_back(ex_from[i], ex_to[i]);
       if(batch.size() == batchSize) {
-        threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));
+        threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state), std::ref(copy_task.copied_file_count));
         batch.clear();
       }
   }
   if(!batch.empty()) {
-    threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));
+    threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state), std::ref(copy_task.copied_file_count));
     batch.clear();
   }
 
@@ -1472,13 +1473,13 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
       for (unsigned int i = 0; i < ixSize; i++) {
         batch.emplace_back(ix_from[i], ix_to[i]);
         if(batch.size() == batchSize) {
-          threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));    
+          threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state), std::ref(copy_task.copied_file_count));    
           batch.clear();
         }
       }
   }  
   if(!batch.empty()) {
-    threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state));
+    threads.emplace_back(CopyBatchFiles, batch, std::ref(task_state), std::ref(copy_task.copied_file_count));
     batch.clear();
   }
 
@@ -1489,8 +1490,7 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
     }
   }
  
-// 更新已拷贝的文件数
-  copy_task.copied_file_count = task_state.load();
+
   AERROR << "Total copied files: " << copy_task.copied_file_count;
  //保证所有任务完成
   if (task_state == exSize + ixSize) {
@@ -1749,13 +1749,20 @@ int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
     Json::Int64 value = time(NULL) - copy_task.start_ts;
     map["seconds"] = value;
   } else {
-    map["total_files"] = 1;
-    map["copied_files"] = 1;
+    map["total_files"] = total_file_count;
+    map["copied_files"] = copied_file_count;
     map["percent"] = 100;
-    map["seconds"] = 0;
+    if(copy_task.start_ts > 0 && copy_task.end_ts > 0) {
+      map["seconds"] = copy_task.end_ts - copy_task.start_ts;
+    } else {
+      map["seconds"] = 0;
+    }
   }
   int rc = copy_task.state;
-  if (!is_copying) copy_task.state = 1;
+  if (!is_copying && copy_task.state == 0) {
+    copy_task.state = 1;
+    copy_task.end_ts = time(NULL);
+  }
 
   if (0 == rc)
     out_msg = "正在拷贝";

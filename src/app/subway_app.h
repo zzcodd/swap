@@ -40,6 +40,7 @@ typedef struct {
 
   int total_file_count;
   int copied_file_count;
+  time_t end_ts;
 } CopyTask;
 
 typedef struct {
