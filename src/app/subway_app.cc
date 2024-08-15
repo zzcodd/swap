@@ -1667,7 +1667,7 @@ int subway_app::QueryLogCopyProgress(Command &cmd, Json::Value &map,
   return QueryRealProgress(cmd, map, out_msg);
 }
 
-# if 0
+
 int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
     std::string &out_msg)
 {
@@ -1719,7 +1719,7 @@ int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
     out_msg = "无对应数据";
   return rc;
 }
-#endif
+
 
 
 int subway_app::GetVersionInfo(Command &cmd, Json::Value &map,
