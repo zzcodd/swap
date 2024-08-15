@@ -1273,6 +1273,8 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   copy_task.percent = 0;
   copy_task.total_size = 0L;
   copy_task.start_ts = time(NULL);
+  copy_task.total_file_count = 0;
+  copy_task.copied_file_count = 0;
   
   std::string path = "";
   long size, free_s;
@@ -1327,7 +1329,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   }
 
   for (int i = 0; i < copy_task.ix_from.size(); i++) {
-      AppendCopyToPath(copy_task.ix_from[i], true, usb_path);
+    AppendCopyToPath(copy_task.ix_from[i], true, usb_path);
   }
 
 
@@ -1352,6 +1354,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   AERROR << "Total file size to copy (internal): " << ix_total_size << " bytes";
 
   copy_task.total_size = ex_total_size + ix_total_size;
+  copy_task.total_file_count = copy_task.ex_from.size() + (client_type == CLIENT_ADMIN ? copy_task.ix_from.size() : 0);
 
   #if 1
   for (int i = 0; i < copy_task.ex_from.size(); i++)
@@ -1429,11 +1432,11 @@ static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>
       std::string cmd = "rsync -a " + file.first + " " + file.second;
       AINFO << "Executing command: " << cmd;
       vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
+      task_state++;
+
     } else {
       AERROR << "Skipping rsync command due to directory creation failure.";
     }
-
-    task_state++;
   }
 }
 
@@ -1486,6 +1489,9 @@ int subway_app::ParallelRealCopy(int type, int client_type, int& rc, const std::
     }
   }
  
+// 更新已拷贝的文件数
+  copy_task.copied_file_count = task_state.load();
+
  //保证所有任务完成
   if (task_state == exSize + ixSize) {
       rc = 1;
@@ -1667,7 +1673,7 @@ int subway_app::QueryLogCopyProgress(Command &cmd, Json::Value &map,
   return QueryRealProgress(cmd, map, out_msg);
 }
 
-
+#if 0
 int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
     std::string &out_msg)
 {
@@ -1719,6 +1725,58 @@ int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
     out_msg = "无对应数据";
   return rc;
 }
+#endif
+
+int subway_app::QueryRealProgress(Command &cmd, Json::Value &map,
+    std::string &out_msg)
+{
+  AINFO << __func__ << " enter" << std::endl;
+  
+  int client_type = IdentifyClient(cmd);
+  int total_file_count = copy_task.total_file_count;
+  int copied_file_count = copy_task.copied_file_count;
+
+  if(is_copying && copy_task.percent <= 100) {
+    int percent = (copied_file_count * 100) / total_file_count;
+    if(percent > 100 || percent < 0) percent = 100;
+    if(percent >copy_task.percent) {
+      copy_task.percent = percent;
+    }
+      
+    map["total_files"] = total_file_count;
+    map["copied_files"] = copied_file_count;
+    map["percent"] = copy_task.percent;
+    Json::Int64 value = time(NULL) - copy_task.start_ts;
+    map["seconds"] = value;
+  } else {
+    map["total_files"] = 1;
+    map["copied_files"] = 1;
+    map["percent"] = 100;
+    map["seconds"] = 0;
+  }
+  int rc = copy_task.state;
+  if (!is_copying) copy_task.state = 1;
+
+  if (0 == rc)
+    out_msg = "正在拷贝";
+  else if (1 == rc)
+    out_msg = "未在拷贝";
+  else if (2 == rc)
+    out_msg = "USB写入失败";
+  else if (3 == rc)
+    out_msg = "USB空间不够";
+  else if (4 == rc)
+    out_msg = "无对应数据";
+  return rc;
+}
+
+
+
+
+
+
+
+
 
 
 

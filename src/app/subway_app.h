@@ -37,6 +37,9 @@ typedef struct {
   int state;
   long total_size;
   int percent; // x%
+
+  int total_file_count;
+  int copied_file_count;
 } CopyTask;
 
 typedef struct {
