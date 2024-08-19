@@ -2108,6 +2108,7 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
       char data[32] = {0};
       fread(data, 1, sizeof(data), fp);
       int code = atoi(data);
+      AINFO << "data code = " << code;
       if (code >= 0 && code < 10) {
         ret = code;
       } 
