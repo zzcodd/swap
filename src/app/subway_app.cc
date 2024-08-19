@@ -2003,7 +2003,7 @@ int subway_app::GetVersionInfo(Command &cmd, Json::Value &map,
   return ret;
 }
 
-#if 0
+#if 1
 int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
     std::string &out_msg)
 {
@@ -2054,7 +2054,7 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
   return ret;
 }
 #endif
-
+#if 0
 int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
     std::string &out_msg)
 {
@@ -2127,7 +2127,7 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
   AINFO << __func__ << " ret " << ret;
   return ret;
 }
-
+#endif
 
 
 int GetPreviousVersion(std::string &date_folder, std::string &version)
