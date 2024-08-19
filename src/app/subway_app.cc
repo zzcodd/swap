@@ -2090,7 +2090,7 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
 
   std::string cmd_str = "rm -rf /tmp/C*T0*; unzip -o -d /tmp/ " + file_path;
   std::string cmd_output;
-  ret = vpSystem::call_cmd(cmd_str, cmd_output, 0);
+  ret = vpSystem::Instance()->call_cmd(cmd_str, cmd_output, 0);
 
   if (ret < 0) {
     ret = 5;
@@ -2102,7 +2102,7 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
   is_upgrading = true;
   cmd_str = "cd /tmp/; bash ./C*T0*/update.sh";
   cmd_output.clear();
-  ret = vpSystem::call_cmd(cmd_str, cmd_output, 0);
+  ret = vpSystem::Instance()->call_cmd(cmd_str, cmd_output, 0);
 
   if (ret < 0) {
     ret = 6;
