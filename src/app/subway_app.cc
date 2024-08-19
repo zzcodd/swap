@@ -2066,7 +2066,6 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
 
   if (usb_root.empty()) {
     ret = 2;
-    out_msg = "USB device not found.";
     AERROR << __func__ << " USB device not found.";
     return ret;
   }
@@ -2076,42 +2075,41 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
 
   if (access(file_path.data(), F_OK) != 0) {
     ret = 1;
-    out_msg = "Firmware file not found.";
     AERROR << __func__ << " Firmware file not found.";
     return ret;
   }
 
   if (test_disk_full()) {
     ret = 4;
-    out_msg = "Disk is full.";
     AERROR << __func__ << " Disk is full.";
     return ret;
   }
 
+  // 解压固件文件
   std::string cmd_str = "rm -rf /tmp/C*T0*; unzip -o -d /tmp/ " + file_path;
-  std::string cmd_output;
-  ret = vpSystem::Instance()->call_cmd(cmd_str, cmd_output, 0);
+  ret = system(cmd_str.data());
 
-  if (ret < 0) {
+  if (ret != 0) {
     ret = 5;
-    out_msg = "Failed to unzip firmware. System command returned: " + std::to_string(ret);
-    AERROR << __func__ << " Failed to unzip firmware. System command output: " << cmd_output;
+    AERROR << __func__ << " Failed to unzip firmware. System command returned: " << ret;
     return ret;
   }
 
   is_upgrading = true;
-  cmd_str = "cd /tmp/; bash ./C*T0*/update.sh";
-  cmd_output.clear();
-  ret = vpSystem::Instance()->call_cmd(cmd_str, cmd_output, 0);
+  AINFO << "解压成功，开始执行固件升级脚本";
 
-  if (ret < 0) {
+  // 执行升级脚本
+  cmd_str = "cd /tmp/; bash ./C*T0*/update.sh";
+  ret = system(cmd_str.data());
+
+  if (ret != 0) {
     ret = 6;
-    out_msg = "Firmware upgrade script execution failed. System command returned: " + std::to_string(ret);
-    AERROR << __func__ << " Firmware upgrade script execution failed. System command output: " << cmd_output;
+    AERROR << __func__ << " Firmware upgrade script execution failed. System command returned: " << ret;
     is_upgrading = false;
     return ret;
   }
 
+  // 检查升级结果代码
   FILE *fp = fopen("/tmp/.fw_up_code", "r");
   if (fp) {
     char data[32] = {0};
@@ -2121,28 +2119,21 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
       ret = code;
     } else {
       ret = 6;
-      out_msg = "Invalid firmware upgrade code.";
       AERROR << __func__ << " Invalid firmware upgrade code: " << code;
     }
     fclose(fp);
     remove("/tmp/.fw_up_code");
   } else {
     ret = 6;
-    out_msg = "Firmware upgrade code file not found.";
     AERROR << __func__ << " Firmware upgrade code file not found.";
   }
 
   is_upgrading = false;
 
-  if (ret == 0) {
-    out_msg = "Firmware upgrade successful.";
-  } else {
-    out_msg = "Firmware upgrade failed with error code " + std::to_string(ret) + ".";
-  }
-
-  AINFO << __func__ << " ret " << ret << ", message: " << out_msg;
+  AINFO << __func__ << " ret " << ret;
   return ret;
 }
+
 
 
 int GetPreviousVersion(std::string &date_folder, std::string &version)
