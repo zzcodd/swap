@@ -2089,46 +2089,43 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
   std::string cmd_str = "rm -rf /tmp/C*T0*; unzip -o -d /tmp/ " + file_path;
   ret = system(cmd_str.data());
 
-  if (ret != 0) {
+  if (ret < 0) {
     ret = 5;
     AERROR << __func__ << " Failed to unzip firmware. System command returned: " << ret;
-    return ret;
-  }
-
-  is_upgrading = true;
-  AINFO << "解压成功，开始执行固件升级脚本";
-
-  // 执行升级脚本
-  cmd_str = "cd /tmp/; bash ./C*T0*/update.sh";
-  ret = system(cmd_str.data());
-
-  if (ret != 0) {
-    ret = 6;
-    AERROR << __func__ << " Firmware upgrade script execution failed. System command returned: " << ret;
-    is_upgrading = false;
-    return ret;
-  }
-
-  // 检查升级结果代码
-  FILE *fp = fopen("/tmp/.fw_up_code", "r");
-  if (fp) {
-    char data[32] = {0};
-    fread(data, 1, sizeof(data), fp);
-    int code = atoi(data);
-    if (code >= 0 && code < 10) {
-      ret = code;
-    } else {
-      ret = 6;
-      AERROR << __func__ << " Invalid firmware upgrade code: " << code;
-    }
-    fclose(fp);
-    remove("/tmp/.fw_up_code");
   } else {
-    ret = 6;
-    AERROR << __func__ << " Firmware upgrade code file not found.";
-  }
+    is_upgrading = true;
+    AINFO << "解压成功，开始执行固件升级脚本";
 
-  is_upgrading = false;
+    // 执行升级脚本
+    cmd_str = "cd /tmp/; bash ./C*T0*/update.sh";
+    ret = system(cmd_str.data());
+
+    if (ret < 0) {
+      ret = 6;
+      AERROR << __func__ << " Firmware upgrade script execution failed. System command returned: " << ret;
+    } else {
+      // 检查升级结果代码
+      FILE *fp = fopen("/tmp/.fw_up_code", "r");
+      if (fp) {
+        char data[32] = {0};
+        fread(data, 1, sizeof(data), fp);
+        int code = atoi(data);
+        if (code >= 0 && code < 10) {
+          ret = code;
+        } else {
+          ret = 6;
+          AERROR << __func__ << " Invalid firmware upgrade code: " << code;
+        }
+        fclose(fp);
+        remove("/tmp/.fw_up_code");
+      } else {
+        ret = 6;
+        AERROR << __func__ << " Firmware upgrade code file not found.";
+      }
+    }
+
+    is_upgrading = false;
+  }
 
   AINFO << __func__ << " ret " << ret;
   return ret;
