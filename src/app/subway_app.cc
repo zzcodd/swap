@@ -1399,7 +1399,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
 #endif
 // 初始化和准备阶段：负责之前RealCopy中初始化设置
 void InitializeAndPreparePaths(int type, int client_type, std::string &path,
-    long &size, long &free_s, std::vector<std::string> &name_list)
+    long &size, long &free_s, std::vector<std::string> &name_list, CopyTask &copy_task)
 {
   system("touch /tmp/copying_file");
   copy_task.percent = 0;
@@ -1451,7 +1451,8 @@ void InitializeAndPreparePaths(int type, int client_type, std::string &path,
   }
 }
 // 执行拷贝任务
-int ExecuteCopyAndSync(int type, int client_type, int &rc, std::string &usb_path, long &usb_free,long &free_s)
+int ExecuteCopyAndSync(int type, int client_type, int &rc, std::string &usb_path, 
+    long &usb_free,long &free_s, CopyTask &copy_task)
 {
   uint64_t ex_total_size = 0L;
   uint64_t ix_total_size = 0L;
@@ -1517,7 +1518,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   std::string path = "";
   long size, free_s;
 
-  InitializeAndPreparePaths(type, client_type, path, size, free_s, name_list);
+  InitializeAndPreparePaths(type, client_type, path, size, free_s, name_list, copy_task);
 
   for (int i = 0; i < copy_task.ex_from.size(); i++) {
     AppendCopyToPath(copy_task.ex_from[i], false, usb_path);
@@ -1527,7 +1528,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
     AppendCopyToPath(copy_task.ix_from[i], true, usb_path);
   }  
 
-  rc = ExecuteCopyAndSync(type, client_type, rc, usb_path, usb_free, free_s);
+  rc = ExecuteCopyAndSync(type, client_type, rc, usb_path, usb_free, free_s, copy_task);
 
   copy_task.percent = 100;
   remove("/tmp/copying_file");
