@@ -1398,8 +1398,8 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
 }
 #endif
 // 初始化和准备阶段：负责之前RealCopy中初始化设置
-void InitializeAndPreparePaths(int type, int client_type, std::string &path,
-    long &size, long &free_s, std::vector<std::string> &name_list, CopyTask &copy_task)
+void subway_app::InitializeAndPreparePaths(int type, int client_type, std::string &path,
+    long &size, long &free_s, std::vector<std::string> &name_list)
 {
   system("touch /tmp/copying_file");
   copy_task.percent = 0;
@@ -1517,7 +1517,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   std::string path = "";
   long size, free_s;
 
-  InitializeAndPreparePaths(type, client_type, path, size, free_s, name_list, copy_task);
+  InitializeAndPreparePaths(type, client_type, path, size, free_s, name_list);
 
   for (int i = 0; i < copy_task.ex_from.size(); i++) {
     AppendCopyToPath(copy_task.ex_from[i], false, usb_path);

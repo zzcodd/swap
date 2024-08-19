@@ -133,6 +133,8 @@ class subway_app : public base_app {
     Command copy_command;
     bool is_copying = false;
 
+    void InitializeAndPreparePaths(int type, int client_type, std::string &path,
+        long &size, long &free_s, std::vector<std::string> &name_list);
     int ExecuteCopyAndSync(int type, int client_type, int &rc, std::string &usb_path, long &usb_free,long &free_s);
 
     int RealCopy(int type, int client_type, int &rc, std::string &usb_path, 
