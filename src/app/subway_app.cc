@@ -2050,10 +2050,13 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
       }
     }
   }
+
+
   AINFO << __func__ << " ret " << ret << std::endl;
   return ret;
 }
 #endif
+
 #if 1
 int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
     std::string &out_msg)
@@ -2063,83 +2066,79 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
 
     std::string usb_root = GetUsbRootPath();
     AINFO << __func__ << " usbroot " << usb_root;
-
+    
     if (usb_root.empty()) {
         ret = 2;
-        AERROR << __func__ << " USB device not found.";
         out_msg = "USB device not found.";
-        return ret;
     }
-
-    std::string file_path = usb_root + "/" + SUBWAY_IPS_FW_FILENAME;
-    AINFO << __func__ << " file_path " << file_path;
-
-    if (access(file_path.data(), F_OK) != 0) {
-        ret = 1;
-        AERROR << __func__ << " Firmware file not found.";
-        out_msg = "Firmware file not found.";
-        return ret;
-    }
-
-    if (test_disk_full()) {
-        ret = 4;
-        AERROR << __func__ << " Disk is full.";
-        out_msg = "Disk is full.";
-        return ret;
-    }
-
-    // 解压固件文件
-    std::string cmd_str = "rm -rf /tmp/C*T0*; unzip -o -d /tmp/ " + file_path;
-    ret = system(cmd_str.data());
-
-    if (ret < 0) {
-        ret = 5;
-        AERROR << __func__ << " Failed to unzip firmware. System command returned: " << ret;
-        out_msg = "Failed to unzip firmware.";
-    } else {
-        is_upgrading = true;
-        AINFO << "解压成功，开始执行固件升级脚本";
-
-        // 执行升级脚本
-        cmd_str = "cd /tmp/; bash ./C*T0*/update.sh";
-        ret = system(cmd_str.data());
-
-        if (ret < 0) {
-            ret = 6;
-            AERROR << __func__ << " Firmware upgrade script execution failed. System command returned: " << ret;
-            out_msg = "Firmware upgrade script execution failed.";
-        } else {
-            // 检查升级结果代码
-            FILE *fp = fopen("/tmp/.fw_up_code", "r");
-            if (fp) {
-                char data[32] = {0};
-                fread(data, 1, sizeof(data), fp);
-                int code = atoi(data);
-                if (code >= 0 && code < 10) {
-                    ret = code;
-                } 
-                fclose(fp);
-                remove("/tmp/.fw_up_code");
-            } else {
-                ret = 6;
-                AERROR << __func__ << " Firmware upgrade code file not found.";
-                out_msg = "Firmware upgrade code file not found.";
+    
+    if (!ret) {
+        std::string file_path = usb_root + "/" + SUBWAY_IPS_FW_FILENAME;
+        AINFO << __func__ << " file_path " << file_path;
+        
+        if (access(file_path.data(), F_OK) != 0) {
+            ret = 1;
+            out_msg = "Firmware file not found.";
+        }
+        
+        if (!ret) {
+            if (test_disk_full()) {
+                ret = 4;
+                out_msg = "Disk is full.";
             }
+            
+            if (!ret) {
+                std::string cmd_str = "rm -rf /tmp/C*T0*; unzip -o -d /tmp/ " + file_path;
+                std::string buf = "";
 
-            if (ret == 0) {
-                out_msg = "Firmware upgrade successful.";
-            } else {
-                AERROR << __func__ << " Firmware upgrade failed with code: " << ret;
-                out_msg = "Firmware upgrade failed with code: " + std::to_string(ret);
+                // 执行解压命令
+                ret = system(cmd_str.data());
+                
+                if (ret < 0) {
+                    ret = 5;
+                    out_msg = "Failed to unzip firmware.";
+                }
+                
+                if (ret != 5) {
+                    is_upgrading = true;
+                    AINFO << "解压成功，开始执行固件升级脚本";
+                    
+                    cmd_str = "cd /tmp/; bash ./C*T0*/update.sh";
+                    buf = "";
+
+                    // 执行固件升级脚本
+                    ret = system(cmd_str.data());
+
+                    // 检查升级结果代码
+                    FILE *fp = fopen("/tmp/.fw_up_code", "r");
+                    if (fp) {
+                        char data[32] = {0};
+                        fread(data, 1, sizeof(data), fp);
+                        int code = atoi(data);
+                        if (code >= 0 && code < 10) ret = code;
+                        fclose(fp);
+                        remove("/tmp/.fw_up_code");
+                    } else {
+                        ret = 6;
+                    }
+                    is_upgrading = false;
+                    
+                    if (ret < 0) ret = 6;
+                }
             }
         }
-
-        is_upgrading = false;
     }
 
-    AINFO << __func__ << " ret " << ret << ", message: " << out_msg;
+    if (ret == 0) {
+        out_msg = "Firmware upgrade completed successfully.";
+    } else {
+        out_msg = "Firmware upgrade failed with error code: " + std::to_string(ret);
+    }
+
+    AINFO << __func__ << " ret " << ret;
     return ret;
 }
+
 
 #endif
 
