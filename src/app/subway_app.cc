@@ -1451,8 +1451,7 @@ void InitializeAndPreparePaths(int type, int client_type, std::string &path,
   }
 }
 // 执行拷贝任务
-int ExecuteCopyAndSync(int type, int client_type, int &rc, std::string &usb_path, 
-    long &usb_free,long &free_s, CopyTask &copy_task)
+int subway_app::ExecuteCopyAndSync(int type, int client_type, int &rc, std::string &usb_path, long &usb_free,long &free_s)
 {
   uint64_t ex_total_size = 0L;
   uint64_t ix_total_size = 0L;
@@ -1528,7 +1527,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
     AppendCopyToPath(copy_task.ix_from[i], true, usb_path);
   }  
 
-  rc = ExecuteCopyAndSync(type, client_type, rc, usb_path, usb_free, free_s, copy_task);
+  rc = ExecuteCopyAndSync(type, client_type, rc, usb_path, usb_free, free_s);
 
   copy_task.percent = 100;
   remove("/tmp/copying_file");
