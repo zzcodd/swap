@@ -1266,6 +1266,7 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
 }
 #endif
 
+#if 0
 int subway_app::RealCopy(int type, int client_type, int &rc,
     std::string &usb_path, long &usb_free, std::vector<std::string> &name_list)
 {
@@ -1395,7 +1396,143 @@ int subway_app::RealCopy(int type, int client_type, int &rc,
   remove("/tmp/copying_file");
   return rc;
 }
+#endif
+// 初始化和准备阶段：负责之前RealCopy中初始化设置
+void InitializeAndPreparePaths(int type, int client_type, std::string &path,
+    long &size, long &free_s, std::vector<std::string> &name_list)
+{
+  system("touch /tmp/copying_file");
+  copy_task.percent = 0;
+  copy_task.total_size = 0L;
+  copy_task.start_ts = time(NULL);
+  copy_task.total_file_count = 0;
+  copy_task.copied_file_count = 0;
 
+  size = free_s = 0L;
+  bool rec;
+  
+  //record copy logic
+  if(0 == type) {
+    if(client_type == CLIENT_ADMIN || client_type == CLIENT_CIDI) {
+      rec = GetRecordPathAndSize(LOCAL_RECORD_PATH, path, size, free_s);
+      if(rec) {
+        if(client_type == CLIENT_ADMIN) {
+          AppendRecordCopyFromPath(path + "/bag/", false, name_list, false);
+        }
+        AppendRecordCopyFromPath(path + "/camera/full/", false, name_list, true);
+      }
+    }
+    if(client_type == CLIENT_ADMIN) {
+      size = free_s = 0L;
+      rec = GetRecordPathAndSize("internaldisk", path, size, free_s);
+      if(rec) {
+          AppendRecordCopyFromPath(path + "/bag/", true, name_list, false);
+          AppendRecordCopyFromPath(path + "/camera/full/", true, name_list, true);
+        }
+      }
+    }
+  //log copy logic
+  else if(1 == type) {
+    if(client_type == CLIENT_ADMIN || client_type == CLIENT_CIDI) {
+      rec = GetLogPathAndSize(LOCAL_LOG_PATH, path, size, free_s);
+      if(rec) {
+        AppendCopyFromPath(path + "/ips/", false, name_list);
+        AppendCopyFromPath(path + "/lte/", false, name_list);
+      }
+    }
+    if(client_type == CLIENT_ADMIN) {
+      size = free_s = 0L; 
+      rec = GetLogPathAndSize("internaldisk", path, size, free_s);
+      if (rec) {
+        AppendCopyFromPath(path + "/ips/", true, name_list);
+        AppendCopyFromPath(path + "/lte/", true, name_list);
+      }
+    }
+  }
+}
+// 执行拷贝任务
+int ExecuteCopyAndSync(int type, int client_type, int &rc, std::string &usb_path, long &usb_free,long &free_s)
+{
+  uint64_t ex_total_size = 0L;
+  uint64_t ix_total_size = 0L;
+
+  for(const auto& file : copy_task.ex_from) {
+    ex_total_size += (get_file_sz_KB(file));
+  }
+
+  for(const auto& file : copy_task.ix_from) {
+    ix_total_size += (get_file_sz_KB(file));
+  }
+
+  // 打印内部和外部磁盘的大小及文件总大小
+  AINFO << "Internal disk available space: " << free_s << " bytes";
+  AINFO << "USB disk available space: " << usb_free << " bytes";
+  AINFO << "Total file size to copy (external): " << ex_total_size << " bytes";
+  AINFO << "Total file size to copy (internal): " << ix_total_size << " bytes";
+
+  copy_task.total_size = ex_total_size + ix_total_size;
+  copy_task.total_file_count = copy_task.ex_from.size() + (client_type == CLIENT_ADMIN ? copy_task.ix_from.size() : 0);
+
+  #if 1
+  for (int i = 0; i < copy_task.ex_from.size(); i++)
+    AINFO << "ex_from: i " << i << " v " <<copy_task.ex_from[i]<<"\n";
+  for (int i = 0; i < copy_task.ex_to.size(); i++)
+    AINFO << "ex_to: i " << i << " v " << copy_task.ex_to[i]<<"\n";
+  for (int i = 0; i < copy_task.ix_from.size(); i++)
+    AINFO << "ix_from: i " << i << " v " <<copy_task.ix_from[i]<<"\n";
+  for (int i = 0; i < copy_task.ix_to.size(); i++)
+    AINFO << "ix_to: i " << i << " v " << copy_task.ix_to[i]<<"\n";
+  #endif
+
+  if(ex_total_size > usb_free) {
+    copy_task.state = rc = 3;
+    AERROR << "Not enough space on USB for ex_from files." ;
+  }
+  else if(ix_total_size > free_s) {
+    copy_task.state = rc = 3;
+    AERROR << "Not enough space on USB for ex_from files." ;
+  }else {
+    AINFO << "Sufficient space available. Starting copy...";
+    rc = ParallelRealCopy(type, client_type, rc, usb_path, usb_free, 
+        copy_task.ex_from, copy_task.ex_to, copy_task.ix_from, copy_task.ix_to);
+
+    // 同步操作
+    for (int i = 0; i < copy_task.ix_to.size(); i++) {
+      if (copy_task.ix_to.size() <= i + 1 || copy_task.ix_to[i] != copy_task.ix_to[i + 1]) {
+        std::string cmdString = "sync";
+        std::string rtnString;
+        cmdString += copy_task.ix_to[i];
+        vpSystem::Instance()->call_cmd(cmdString.data(), rtnString, 1);
+      }    
+    }
+  }
+  
+  AINFO << "Copy and sync done, code " << rc;
+  return rc;
+}
+
+int subway_app::RealCopy(int type, int client_type, int &rc,
+    std::string &usb_path, long &usb_free, std::vector<std::string> &name_list)
+{
+  std::string path = "";
+  long size, free_s;
+
+  InitializeAndPreparePaths(type, client_type, path, size, free_s, name_list);
+
+  for (int i = 0; i < copy_task.ex_from.size(); i++) {
+    AppendCopyToPath(copy_task.ex_from[i], false, usb_path);
+  }
+
+  for (int i = 0; i < copy_task.ix_from.size(); i++) {
+    AppendCopyToPath(copy_task.ix_from[i], true, usb_path);
+  }  
+
+  rc = ExecuteCopyAndSync(type, client_type, rc, usb_path, usb_free, free_s);
+
+  copy_task.percent = 100;
+  remove("/tmp/copying_file");
+  return rc;
+}
 /*
 void subway_app::ExecuteCopyCommand(std::string xx, std::string yy)
 {
@@ -1432,7 +1569,7 @@ static void CopyBatchFiles(const std::vector<std::pair<std::string, std::string>
       std::string cmd = "rsync -a " + file.first + " " + file.second;
       AINFO << "Executing command: " << cmd;
       vpSystem::Instance()->call_cmd(cmd, rtnString, 1);
-      task_state++;
+      task_state.fetch_add(1);
       copied_file_count = task_state.load();
       AERROR << "Rile copied successfully, task_state incremented, current value : " << task_state.load();
     } else {
