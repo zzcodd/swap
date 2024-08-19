@@ -2092,9 +2092,9 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
   std::string buf = "";
   ret = system(cmd_str.data());
 
-  if (ret < 0) {
-    ret = 5;
-    out_msg = "Failed to unzip firmware.";
+  if (ret != 0) {
+    ret = 5;  // 如果 `system` 返回不为 0 的值，设置错误代码为 5
+    out_msg = "Failed to unzip firmware. System command returned: " + std::to_string(ret);
     AERROR << __func__ << " Failed to unzip firmware. System command returned: " << ret;
     return ret;
   }
@@ -2103,9 +2103,9 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
   cmd_str = "cd /tmp/; bash ./C*T0*/update.sh";
   ret = system(cmd_str.data());
 
-  if (ret < 0) {
-    ret = 6;
-    out_msg = "Firmware upgrade script execution failed.";
+  if (ret != 0) {
+    ret = 6;  // 如果 `system` 返回不为 0 的值，设置错误代码为 6
+    out_msg = "Firmware upgrade script execution failed. System command returned: " + std::to_string(ret);
     AERROR << __func__ << " Firmware upgrade script execution failed. System command returned: " << ret;
     is_upgrading = false;
     return ret;
@@ -2135,14 +2135,16 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
 
   if (ret == 0) {
     out_msg = "Firmware upgrade successful.";
-  } else {
+  } else if (ret >= 1 && ret <= 6) {
     out_msg = "Firmware upgrade failed with error code " + std::to_string(ret) + ".";
+  } else {
+    out_msg = "Firmware upgrade failed with undefined error code.";
+    AERROR << __func__ << " Undefined error code returned: " << ret;
   }
 
   AINFO << __func__ << " ret " << ret << ", message: " << out_msg;
   return ret;
 }
-
 
 int GetPreviousVersion(std::string &date_folder, std::string &version)
 {
