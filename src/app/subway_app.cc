@@ -94,88 +94,22 @@ std::string subway_app::Handle(Command &cmd)
   int type = IdentifyClient(cmd);
   AINFO << "type: " << type ;
 
-  //获取会话令牌
-  std::string session_token = BufferParser::Instance()->FindValueByKey(cmd, "session_token");
-  AINFO << "session_token: " << session_token;
-
-  if(!svm_db::Instance()->ValidateSession(session_token.c_str())) 
-  {
-    AINFO << "Session token invalid, checking user registration ";
-
-    std::string input_username = BufferParser::Instance()->FindValueByKey(cmd, "username");
-    AINFO << "input_username: " << input_username;
-
-    if(!svm_db::Instance()->IsUsernameExist(input_username.c_str())) {
-      AINFO << "User not registered, requesting registration";
-      if(BufferParser::Instance()->FindValueByKey(cmd, "cmd_type") != "register") {
-        //用户不存在且不是注册指令：提示用户进行注册 
-        AINFO << "Not a register command, prompting registration";
-        root["result_code"] = -1;
-        root["result_msg"] = "User not registered, please register.";
-        root["data_map"] = map.empty()? "{}" : map;
-        Json::FastWriter writer;
-        return writer.write(root);
-      } else {
-        code = Register(cmd, map, out_msg);
-        AINFO << "Register command result: " << code << ", message: " << out_msg;
-        root["result_code"] = code;
-        root["result_msg"] = out_msg;
-        root["data_map"] = map.empty()? "{}" : map;
-        Json::FastWriter writer;
-        return writer.write(root);
-      }
-    }
-
-    //已注册，尝试登录
-    AINFO << "User registered, trying to login";
-    if(BufferParser::Instance()->FindValueByKey(cmd, "cmd_type") == "login") 
-    {
-      code = Login(cmd, map, out_msg);
-      AINFO << "Login command result: " << code << ", message: " << out_msg;
-      if(code != 0) 
-      {
-        root["result_code"] = code;
-        root["result_msg"] = out_msg;
-        root["data_map"] = map.empty()? "{}" : map;
-        Json::FastWriter writer;
-        return writer.write(root);
-      }
-      
-      root["result_code"] = code;
-      root["result_msg"] = out_msg;
-      root["data_map"] = map.empty()? "{}" : map;
-      //生成新令牌
-      session_token = map["session_token"].asString();
-      AINFO << "Login successful, new session token: " << session_token;
-      
-      Json::FastWriter writer;
-      return writer.write(root);
-    } 
-    else 
-    {
-      AINFO << "Invalid session token, prompting login";
-      root["result_code"] = -1;
-      root["result_msg"] = "Session token invalid, please login.";
-      Json::FastWriter writer;
-      return writer.write(root);
-    }
-  }
-  else 
-  {
-    AINFO << "Session token valid.";
-
-    //处理命令
+  if(CLIENT_ADMIN == type || CLIENT_CIDI == type) {
     code = PickHandle(cmd, map, out_msg, type);
-  
     AINFO << "Command handling result: " << code << ", message: " << out_msg;
-    root["result_code"] = code;
-    root["result_msg"] = out_msg != "" ? out_msg : msg;
-    root["data_map"] = map.empty() ? "{}" : map;
-    
-    Json::FastWriter writer;
-    return writer.write(root);
+
+  } else {
+    out_msg = "Unauthorized. Access denied.";
   }
+
+  root["result_code"] = code;
+  root["result_msg"] = out_msg != "" ? out_msg : msg;
+  root["data_map"] = map.empty() ? "{}" : map;
+
+  Json::FastWriter writer;
+  return writer.write(root);
 }
+
 
 
 int subway_app::PickHandle(Command &cmd, Json::Value &map,
@@ -187,8 +121,9 @@ int subway_app::PickHandle(Command &cmd, Json::Value &map,
   //无权限指令集合
   static const std::unordered_set<std::string> cidi_no_permissions = {
     "delete_user",
+    "display_all_users",
   };
-  if(client_type == CLIENT_CIDI && cidi_no_permissions.find(cmd_type) != cidi_no_permissions.end())
+  if(client_type != CLIENT_ADMIN && cidi_no_permissions.find(cmd_type) != cidi_no_permissions.end())
   {
     out_msg = "Permission denied.";
     AINFO << "Permission denied for CIDI user on cmmmand: " << cmd_type;
@@ -205,6 +140,8 @@ int subway_app::PickHandle(Command &cmd, Json::Value &map,
   HANDLE_CMD("logout", Logout);
 
   HANDLE_CMD("delete_user", DeleteUser);
+
+  HANDLE_CMD("display_all_users", DisplayAllUsers);
 
   HANDLE_CMD("query_status", QueryStatus);
 
@@ -276,26 +213,20 @@ int subway_app::PickHandle(Command &cmd, Json::Value &map,
 
 int subway_app::IdentifyClient(Command &cmd)
 {
-  std::string usrname_admin = "admin";
-  // admin123
-  //  std::string password_admin = "0192023a7bbd73250516f069df18b500";
+  std::string username_admin = "admin";
   std::string password_admin = "c4ca4238a0b923820dcc509a6f75849b";
 
-  std::string username_cidi = "cidi";
-  // admin@cidi
-  //  std::string password_cidi = "579888e426913d27cf6f0dbc514d0bc7";
-  std::string password_cidi = "c4ca4238a0b923820dcc509a6f75849b";
-
-  std::string input_usrname =
+  std::string input_username =
     BufferParser::Instance()->FindValueByKey(cmd,"username");
   std::string input_password =
     BufferParser::Instance()->FindValueByKey(cmd,"password");
 
-  if (usrname_admin == input_usrname && password_admin == input_password)
+  if (username_admin == input_username && password_admin == input_password)
     return CLIENT_ADMIN;
-  else if (username_cidi == input_usrname && password_cidi == input_password)
-    return CLIENT_CIDI;
-  return CLIENT_CIDI;
+  
+  int role = svm_db::Instance()->GetUserRole(input_username.c_str(), input_password.c_str());
+
+  return role;
 }
 
 
@@ -321,14 +252,14 @@ int subway_app::Login(Command &cmd, Json::Value &map, std::string &out_msg)
   }
   
   //token
-  char *token = generate_random_string(32);;
+  //char *token = generate_random_string(32);;
 
-  //更新会话令牌
-  int rc1 = svm_db::Instance()->UpdateToken((char*)input_username.c_str(), token);
-  if(rc1 != 0) {
-    out_msg = "Failed to update session token.";
-    return rc1;
-  }
+  // //更新会话令牌
+  // int rc1 = svm_db::Instance()->UpdateToken((char*)input_username.c_str(), token);
+  // if(rc1 != 0) {
+  //   out_msg = "Failed to update session token.";
+  //   return rc1;
+  // }
   //返回会话信息和用户角色
   switch(rc) {
     case CLIENT_ADMIN:
@@ -344,10 +275,10 @@ int subway_app::Login(Command &cmd, Json::Value &map, std::string &out_msg)
       map["role"] = "CLIENT_UNKNOWN";
       break;
   }
-  map["session_token"] = token;
-  map["stream_url"] = "ws://svm.pingtai.cidiserver.com:41001";
+ // map["session_token"] = token;
+  //map["stream_url"] = "ws://svm.pingtai.cidiserver.com:41001";
 
-  free(token);
+  //free(token);
 
   out_msg = "Login successful.";
   AINFO << "Login successful for user: " << input_username ;
@@ -359,12 +290,12 @@ int subway_app::Register(Command &cmd, Json::Value &map, std::string &out_msg)
 {
   AINFO << __func__ << "enter" ;
 
-  std::string input_username = BufferParser::Instance()->FindValueByKey(cmd, "username");
-  std::string input_password = BufferParser::Instance()->FindValueByKey(cmd, "password");
-  std::string input_email = BufferParser::Instance()->FindValueByKey(cmd, "email");
+  std::string input_username = BufferParser::Instance()->FindValueByKey(cmd, "new_username");
+  std::string input_password = BufferParser::Instance()->FindValueByKey(cmd, "new_password");
+  //std::string input_email = BufferParser::Instance()->FindValueByKey(cmd, "email");
 
   //判断输入是否为空
-  if(input_username.empty() || input_password.empty() || input_email.empty()) {
+  if(input_username.empty() || input_password.empty() ) {
     out_msg = "Username, Password, and Email can not be empty. ";
     AINFO << "Registration failed." << out_msg ;
     return -1;
@@ -374,64 +305,62 @@ int subway_app::Register(Command &cmd, Json::Value &map, std::string &out_msg)
   if(svm_db::Instance()->IsUsernameExist(input_username.c_str())) {
     out_msg = "Username already exists.";
     AINFO << "Registration failed." << out_msg ;
-    return -1;
+    return -2;
   }
 
-  if(svm_db::Instance()->IsEmailExist(input_email.c_str())) {    
-    out_msg = "Email already exists.";
-    AINFO << "Registration failed." << out_msg;
-    return -1;
-  }
+  // if(svm_db::Instance()->IsEmailExist(input_email.c_str())) {    
+  //   out_msg = "Email already exists.";
+  //   AINFO << "Registration failed." << out_msg;
+  //   return -3;
+  // }
 
   //保存信息到数据库
-  int rc = svm_db::Instance()->Register(input_username.c_str(), input_password.c_str(), input_email.c_str());
+  int rc = svm_db::Instance()->Register(input_username.c_str(), input_password.c_str());
   if(rc != 0) {
     out_msg = "Failed to register user.";
     AINFO << "Registration failed." << out_msg ;
-    return -1;
+    return -3;
   }
+  
 
   out_msg = "Registration successful.";
   AINFO << "Registration successful for user:" << input_username ;
   return 0;
 }
 
-//重置密码
+//修改密码
 int subway_app::ResetPassword(Command &cmd, Json::Value &map, std::string &out_msg)
 {
   std::string input_username = BufferParser::Instance()->FindValueByKey(cmd, "username");
-  std::string input_email = BufferParser::Instance()->FindValueByKey(cmd, "email");
+  //std::string input_email = BufferParser::Instance()->FindValueByKey(cmd, "email");
   std::string old_password = BufferParser::Instance()->FindValueByKey(cmd, "password");
   std::string new_password = BufferParser::Instance()->FindValueByKey(cmd, "new_password");
   
-  if(input_email.empty() || old_password.empty() || new_password.empty()) {
-    out_msg = "Email, old_password, and new_password cannot be empty.";
+  if(old_password.empty() || new_password.empty()) {
+    out_msg = "old_password, and new_password cannot be empty.";
     AINFO << "Password reset failed. " << out_msg;
     return -1;
   }
-
-  //哈希原密码和新密码
-  //此处直接假定传输过来的数据是加密的
 
   //验证密码
   if(!svm_db::Instance()->Login(input_username.c_str(), old_password.c_str())) {
     out_msg = "Old password is incorrect.";
     AINFO << "Password reset failed. " << out_msg;
-    return -1;
+    return -2;
   }
 
-  //验证邮箱是否存在
-  if(!svm_db::Instance()->IsEmailExist(input_email.c_str())) {
-    out_msg = "Email dose not exist.";
-    AINFO << "Password reset failed: " << out_msg ;
-    return -1;
-  }
+  // //验证邮箱是否存在
+  // if(!svm_db::Instance()->IsEmailExist(input_email.c_str())) {
+  //   out_msg = "Email dose not exist.";
+  //   AINFO << "Password reset failed: " << out_msg ;
+  //   return -3;
+  // }
 
   int rc = svm_db::Instance()->UpdatePassword(input_username.c_str(), new_password.c_str());
   if(rc != 0) {
     out_msg = "Failed to update password.";
     AINFO << "Password reset failed." << out_msg;
-    return -1;
+    return -3;
   }
 
   out_msg = "Password has been reset successfully.";
@@ -446,6 +375,7 @@ int subway_app::Logout(Command &cmd, Json::Value &map, std::string &out_msg)
   
   int rc = svm_db::Instance()->Logout(session_token.c_str());
   if(rc != 0) {
+    rc = -1;
     out_msg = "Failed to logout";
     AINFO << "Logout failed: " << out_msg;
     return rc;
@@ -490,6 +420,7 @@ int subway_app::DeleteUser(Command &cmd, Json::Value &map, std::string &out_msg)
     else
       out_msg = "Failed to delete user.";
     AINFO << "Delete user failed. " << out_msg;
+    rc = -1;
     return rc;
   }
 
@@ -498,10 +429,38 @@ int subway_app::DeleteUser(Command &cmd, Json::Value &map, std::string &out_msg)
   return 0;
 }
 
+int subway_app::DisplayAllUsers(Command &cmd, Json::Value &map, std::string &out_msg)
+{
+  AINFO << __func__ << "enter " ;
+
+  std::vector<std::string> users;
+  int rc = svm_db::Instance()->GetAllUsers(users);
+  if(rc != 0) {
+    out_msg = "Failed to retrieve user list from the database.";
+    return rc;
+  }
+
+  if(users.empty()) {
+    out_msg = "No registered user found.";
+    return 0;
+  }
+
+  // 将用户信息组织成表格形式显示
+  Json::Value user_table(Json::arrayValue);
+  for(const auto& username : users) {
+    Json::Value user_info;
+    user_info["username"] = username;
+    user_table.append(user_info);
+  }
+
+  map["users"] = user_table;
+  map["total_user_count"] = static_cast<int>(users.size());
+  out_msg = "User list retrieved successfully.";
+  return 0;
+}
 
 
-int subway_app::QueryStatus(Command &cmd, Json::Value &map,
-    std::string &out_msg)
+int subway_app::QueryStatus(Command &cmd, Json::Value &map, std::string &out_msg)
 {
   std::string data = "{";
   char *file_path = "/tmp/ips_system_state.txt";
@@ -846,6 +805,9 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value &map, std::stri
 
   std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, "date");
 
+  int page_size = std::stoi(BufferParser::Instance()->FindValueByKey(cmd, "page_size")); 
+  int page_number = std::stoi(BufferParser::Instance()->FindValueByKey(cmd, "page_number")); 
+
   std::vector<std::pair<std::string, std::string>> vec;
   vec.clear();
   std::string root_path;
@@ -882,16 +844,29 @@ int subway_app::ShowDateList(Command &cmd, int type, Json::Value &map, std::stri
     return a.first < b.first;
   });
 
+  // Pagination
+  int total_count = static_cast<int>(vec.size());
+  int total_pages = (total_count + page_size -1) / page_size;
+  int start_index = (page_number - 1) * page_size;
+  int end_index = std::min(start_index + page_size, total_count);
+
+  if(start_index >= total_count) {
+    out_msg = "Page number out of range";
+    return -1;
+  }
+
   Json::Value file_list(Json::arrayValue);
-  for (const auto& item : vec) {
+  for (int i = start_index; i< end_index; i++) {
     Json::Value file_info;
-    file_info["folder"] = item.first;
-    file_info["file"] = item.second;
+    file_info["folder"] = vec[i].first;
+    file_info["file"] = vec[i].second;
     file_list.append(file_info);
   }
 
   map["file_list"] = file_list;
-  map["file_count"] = static_cast<int>(vec.size());
+  map["file_count"] = total_count;
+  map["total_pages"] = total_pages;
+  map["current_page"] = page_number;
 
   out_msg = "Query success";
   return 0;
@@ -902,6 +877,10 @@ int subway_app::ShowDateListWithTimeFilter(Command &cmd, Json::Value &map, std::
   AINFO << __func__ << " enter ";
 
   std::string date_value = BufferParser::Instance()->FindValueByKey(cmd, "date");
+  int page_size = std::stoi(BufferParser::Instance()->FindValueByKey(cmd, "page_size")); 
+  int page_number = std::stoi(BufferParser::Instance()->FindValueByKey(cmd, "page_number"));
+
+  
   std::vector<std::string> name_list;
   split_string(date_value, date_value.size(), name_list, "|"); 
 
@@ -950,16 +929,29 @@ int subway_app::ShowDateListWithTimeFilter(Command &cmd, Json::Value &map, std::
     return a.first < b.first;
   });
 
+  // Pagination
+  int total_count = static_cast<int>(vec.size());
+  int total_pages = (total_count + page_size -1) / page_size;
+  int start_index = (page_number - 1) * page_size;
+  int end_index = std::min(start_index + page_size, total_count);
+
+  if(start_index >= total_count) {
+    out_msg = "Page number out of range";
+    return -1;
+  }
+
   Json::Value file_list(Json::arrayValue);
-  for (const auto& item : vec) {
+  for (int i = start_index; i< end_index; i++) {
     Json::Value file_info;
-    file_info["folder"] = item.first;
-    file_info["file"] = item.second;
+    file_info["folder"] = vec[i].first;
+    file_info["file"] = vec[i].second;
     file_list.append(file_info);
   }
 
   map["file_list"] = file_list;
-  map["file_count"] = static_cast<int>(vec.size());
+  map["file_count"] = total_count;
+  map["total_pages"] = total_pages;
+  map["current_page"] = page_number;
 
   out_msg = "Query success";
   return 0;
@@ -2114,6 +2106,7 @@ int subway_app::FirmwareImportAndUpgrade(Command &cmd, Json::Value &map,
                     if (fp) {
                         char data[32] = {0};
                         fread(data, 1, sizeof(data), fp);
+                        AINFO << "data = " << data ;
                         int code = atoi(data);
                         if (code >= 0 && code < 10) ret = code;
                         fclose(fp);

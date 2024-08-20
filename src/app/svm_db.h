@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: zy
  * @Date: 2024-06-18 15:48:44
- * @LastEditTime: 2024-08-08 09:58:26
+ * @LastEditTime: 2024-08-20 14:22:01
  * @LastEditors: zy
  */
 #pragma once
@@ -35,12 +35,17 @@ public:
   int FindAllVehicle(int project_id, std::vector<std::vector<std::string> > &result);
 
   //新增方法实现功能的声明 成功0 失败-1
-  int Register(const char *username, const char *passwd_hash, const char *email = nullptr);
+  int Register(const char *username, const char *passwd_hash);
   int UpdatePassword(const char *username, const char *new_passwd_hash);
   //退出会话 非注销
   int Logout(const char *token);
 
   int DeleteUser(const char *username);
+
+  //显示已注册用户
+  int GetAllUsers(std::vector<std::string> &users);
+  // 获取用户身份
+  int GetUserRole(const char *username, const char *passwd_hash);
 
   bool ValidateSession(const char *token);
   bool IsUsernameExist(const char *username);

@@ -1,0 +1,3 @@
+/home/nvidia/temp_zy/arm_temp/build/CMakeFiles/rebuild_cache.dir
+/home/nvidia/temp_zy/arm_temp/build/CMakeFiles/subway_app.dir
+/home/nvidia/temp_zy/arm_temp/build/CMakeFiles/edit_cache.dir

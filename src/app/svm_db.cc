@@ -106,13 +106,13 @@ svm_db *svm_db::Instance() {
 void svm_db::ReleaseInstance() { if (p_instance) delete p_instance; }
 
 //成功0 失败-1
-int svm_db::Register(const char *username, const char *passwd_hash, const char *email) 
+int svm_db::Register(const char *username, const char *passwd_hash) 
 {
   char sql_string[256] = {0};
-  int role = 2; //默认CLIENT_UNKNOWN
+  int role = 1; //默认CLIENT_CIDI
   sprintf(sql_string, 
-      "INSERT INTO users (username, password_hash, email, role) VALUES ('%s', '%s', '%s', '%d')",
-      username, passwd_hash, email, role);
+      "INSERT INTO users (username, password_hash, role) VALUES ('%s', '%s', '%d')",
+      username, passwd_hash, role);
   
   int rc = MysqlAccess::Instance()->UpdateSQL(sql_string, NULL);
   if(rc != 0) {
@@ -269,4 +269,45 @@ int svm_db::DeleteUser(const char *username)
 
   AINFO << "DeleteUser: user " << username << " deleted successfully.";
   return 0;
+}
+
+int svm_db::GetAllUsers(std::vector<std::string> &users)
+{
+  char sql_string[256] = {0};
+  std::vector<std::vector<std::string>> result;
+
+  snprintf(sql_string, sizeof(sql_string), "SELECT username FROM users");
+  int rc = MysqlAccess::Instance()->QuerySQL(sql_string, result, nullptr);
+
+  if(rc != 0){
+    AINFO << __func__ << "error, sql " << sql_string;
+    return -1;
+  }
+
+  for(const auto &row : result) {
+    if(!row.empty() ) {
+      users.push_back(row[0]);
+    }
+  }
+
+  AINFO << "GetAllUsers: retrieved " << users.size() << " users.";
+  return 0;
+
+}
+
+int svm_db::GetUserRole(const char *username, const char *passwd_hash)
+{
+  char sql_string[256] = {0};
+  std::vector<std::vector<std::string>> result;
+
+  snprintf(sql_string, sizeof(sql_string), "SELECT role FROM users WHERE username='%s' AND password_hash='%s'", username, passwd_hash);
+
+  int rc = MysqlAccess::Instance()->QuerySQL(sql_string, result, nullptr);
+  if(rc!=0 || result.empty()) {
+    AINFO << __func__ << "error or user not founf, sql: " << sql_string;
+    return 2;
+  }
+
+  int role = std::stoi(result[0][0]);
+  return role;
 }
